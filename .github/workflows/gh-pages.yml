@@ -12,8 +12,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
-      - run: npm run build:docs
+      - run: pnpm install
+      - run: pnpm run build:docs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
