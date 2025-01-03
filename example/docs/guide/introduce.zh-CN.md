@@ -17,6 +17,7 @@ title: 快速上手
 `dumi-theme-chaos` 是一款 [dumi][dumi-url] 主题包，主题风格参考 Antd Design 5.0 官网。基于 `dumi` 主题开发功能，深度定制开发了：
 
 - 首页
+- 公告栏
 - 导航栏
 - 侧边栏
 - 内容区
@@ -25,9 +26,22 @@ title: 快速上手
 
 ## 安装
 
-使用 pnpm 或 yarn 安装
+使用 pnpm 或 npm 或 yarn 安装
 
-<InstallDependencies npm='$ npm install dumi-theme-chaos ' yarn='$ yarn add dumi-theme-chaos' pnpm='$ pnpm install dumi-theme-chaos '></InstallDependencies>
+:::code-group
+
+```bash [pnpm]
+$ pnpm install dumi-theme-chaos
+```
+
+```bash [npm] 
+$ npm install dumi-theme-chaos
+```
+
+```bash [yarn]
+$ yarn add dumi-theme-chaos
+```
+:::
 
 ## 配置
 

@@ -16,31 +16,35 @@ title: 开发
 
 在你 clone 了 dumi-theme-chaos 的代码并且使用
 
-<InstallDependencies defaultActiveKey='pnpm' pnpm='$ pnpm install' npm='$ npm install' yarn='$ yarn'></InstallDependencies>
+:::code-group
+
+```bash [pnpm]
+$ pnpm install
+```
+
+```bash [npm] 
+$ npm install
+```
+
+```bash [yarn]
+$ yarn
+```
+:::
 
 安装完依赖后，运行以下命令即可启动开发模式
 
-<InstallDependencies defaultActiveKey='pnpm' pnpm='$ pnpm run start' npm='$ npm run start' yarn='$ yarn start'></InstallDependencies>
-
-<InstallDependencies
-  defaultActiveKey='pnpm'
-  pnpm='$ pnpm run start'
-  npm='$ npm run start'
-  yarn='$ yarn start'>
-</InstallDependencies>
-
 :::code-group
 
-```bash [npm] 
-npm install -D dumi
-```
-
-```bash [yarn] <img src="https://contrib.rocks/image?repo=chaos-design/dumi-theme-chaos" />
-yarn add -D dumi
-```
-
 ```bash [pnpm]
-pnpm add -D dumi
+$ pnpm run start
+```
+
+```bash [npm] 
+$ npm run start
+```
+
+```bash [yarn]
+$ yarn run start
 ```
 :::
 

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { Alert } from 'antd';
 import { useCallback, useEffect, useState, type FC } from 'react';
 import useAdditionalThemeConfig from '../../hooks/useAdditionalThemeConfig';
+import { AnnouncementBarProps } from 'dumi/dist/client/theme-api/types';
 // import useSiteToken from '../../hooks/useSiteToken';
 
 export const hexToHsl = (hex: string, decline = 0) => {
@@ -37,7 +38,7 @@ export const hexToHsl = (hex: string, decline = 0) => {
 }
 
 
-const useStyle = ({ backgroundColor = '#e8d7ff', textColor = '#091E42', align = 'center' }) => {
+const useStyle = ({ backgroundColor = '#e8d7ff', textColor = '#091E42', align = 'center' }: Partial<AnnouncementBarProps>) => {
   // const { token } = useSiteToken();
 
   return {
@@ -65,11 +66,11 @@ const CHAOS_ANNOUNCEMENT_BAR_DISMISS = 'chaos.announcement.dismiss';
 
 const AnnouncementBar: FC = () => {
   const [isClosed, setClosed] = useState(true);
-  const { announcementBar } = useAdditionalThemeConfig();
+  const { announcementBar } = useAdditionalThemeConfig() || {};
   const s = useStyle(announcementBar);
 
   useEffect(() => {
-    if (announcementBar.id && localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) === announcementBar.id) {
+    if (announcementBar?.id && localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) === announcementBar.id) {
       setClosed(true);
     } else {
       setClosed(false);
@@ -77,7 +78,7 @@ const AnnouncementBar: FC = () => {
   }, [announcementBar]);
 
   const handleClose = useCallback(() => {
-    if (announcementBar.id) {
+    if (announcementBar?.id) {
       localStorage.setItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS, announcementBar.id);
     }
 
@@ -96,7 +97,7 @@ const AnnouncementBar: FC = () => {
         closable
         {...announcementBar}
         onClose={handleClose}
-        css={announcementBar.backgroundColor ? [
+        css={announcementBar?.backgroundColor ? [
           s.container
         ] : []}
       />

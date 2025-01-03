@@ -84,7 +84,7 @@ title: {
 
 Configure the title of the first screen area on the home page.
 
-### theme <Badge>0.2.6+</Badge>
+### theme <Badge>0.0.1+</Badge>
 
 - type：`Omit<ThemeConfig, 'algorithm'>`
 - default：`undefined`
@@ -124,7 +124,29 @@ docVersions: {
 
 Display the current document version or multi-document drop-down selection box in the navigation bar, and the default first attribute is the current document version.
 
-### footerLinks <Badge>0.2.12+</Badge>
+### announcementBar <Badge>0.0.1+</Badge>
+
+- Type: `Omit<ThemeConfig, 'AnnouncementBarProps'>`
+- Default: `undefined`
+
+```ts
+announcementBar: {
+  id: "announcementBar", // update announcementBar id
+  type: "info", // bar type, options info, success, warning, error
+  align: "left", // align, options left, center right
+  message: "🎉 Welcome dumi-theme-chaos", // message
+  description: "chaos description", // description
+  backgroundColor: '#69b1ff', // background color
+  textColor: '#fff', // text color
+  showIcon: false, // show icon
+  closable: true, // is closable
+}
+```
+
+Site announcement bar.
+
+
+### footerLinks <Badge>0.0.1+</Badge>
 
 - Type: `FooterColumn[] | Record<string, FooterColumn[]>`
 - Default: `null`

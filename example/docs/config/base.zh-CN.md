@@ -84,7 +84,7 @@ title: {
 
 配置首页首屏区域的大标题。
 
-### theme <Badge>0.2.6+</Badge>
+### theme <Badge>0.0.1+</Badge>
 
 - 类型：`Omit<ThemeConfig, 'algorithm'>`
 - 默认值：`undefined`
@@ -124,7 +124,28 @@ docVersions: {
 
 在导航栏中显示当前文档版本或者多文档本下拉选择框，默认第一个属性为当前文档版本。
 
-### footerLinks <Badge>0.2.12+</Badge>
+### announcementBar <Badge>0.0.1+</Badge>
+
+- 类型：`Omit<ThemeConfig, 'AnnouncementBarProps'>`
+- 默认值：`undefined`
+
+```ts
+announcementBar: {
+  id: "announcementBar", // 新公告id
+  type: "info", // 类型，可选 info, success, warning, error
+  align: "left", // 对齐方式，可选 left, center, right
+  message: "🎉 欢迎使用 dumi-theme-chaos", // 内容
+  description: "chaos description", // 描述
+  backgroundColor: '#69b1ff', // 背景颜色
+  textColor: '#fff', // 文字颜色
+  showIcon: false, // 是否展示 icon
+  closable: true, // 是否可关闭
+}
+```
+
+用于定制站点公告。
+
+### footerLinks <Badge>0.0.1+</Badge>
 
 - 类型：`FooterColumn[] | Record<string, FooterColumn[]>`
 - 默认值：`null`

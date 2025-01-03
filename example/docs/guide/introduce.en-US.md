@@ -17,6 +17,7 @@ title: Getting Started
 `dumi-theme-chaos` is a [dumi][dumi-url] theme package, the theme style refers to Antd Design 5.0 official website. Based on `dumi` theme development function, deeply customized and developed:
 
 - HomePage
+- Announcement Bar
 - Navigation
 - Sidebar
 - Content
@@ -25,9 +26,24 @@ title: Getting Started
 
 ## Install
 
-Install using pnpm or yarn
+Install using pnpm or npm or yarn
 
-<InstallDependencies npm='$ npm install dumi-theme-chaos ' yarn='$ yarn add dumi-theme-chaos' pnpm='$ pnpm install dumi-theme-chaos '></InstallDependencies>
+
+:::code-group
+
+```bash [pnpm]
+$ pnpm install dumi-theme-chaos
+```
+
+```bash [npm] 
+$ npm install dumi-theme-chaos
+```
+
+```bash [yarn]
+$ yarn add dumi-theme-chaos
+```
+:::
+
 
 ## Usage
 

@@ -10,5 +10,3 @@ title: 概览
 
 - [Alert](./builtins-alert.zh-CN.md) <Badge>0.0.1</Badge>
 - [ImagePreview](./builtins-image-preview.zh-CN.md) <Badge>0.0.1</Badge>
-- [InstallDependencies](./builtins-install-dependencies.zh-CN.md) <Badge>0.0.1</Badge>
-- [BashOSPlatform](./builtins-bash-OS-platform.zh-CN.md) <Badge>0.0.1</Badge>
