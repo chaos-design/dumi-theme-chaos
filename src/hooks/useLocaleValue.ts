@@ -1,5 +1,5 @@
-import { useLocale, useSiteData } from 'dumi';
-import type { IAllThemeConfig } from '../types';
+import { useLocale, useSiteData } from "dumi";
+import { IAllThemeConfig } from "../types";
 
 export default function useLocaleValue(key: string) {
   const { themeConfig } = useSiteData();

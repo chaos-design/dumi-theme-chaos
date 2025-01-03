@@ -1,7 +1,7 @@
-import type { SerializedStyles } from '@emotion/react';
-import type { IThemeConfig } from 'dumi/dist/client/theme-api/types';
-import type { ThemeConfig } from 'antd';
-import type { FooterColumn } from 'rc-footer/lib/column';
+import type { SerializedStyles } from "@emotion/react";
+import type { IThemeConfig } from "dumi/dist/client/theme-api/types";
+import type { ThemeConfig } from "antd";
+import type { FooterColumn } from "rc-footer/lib/column";
 
 export type ISidebarGroupModePathItem = string;
 
@@ -18,8 +18,8 @@ interface IAction {
   /** 按钮链接 */
   link: string;
   /** 按钮类型 */
-  type?: 'primary' | 'default';
-  shape?: 'round' | 'circle' | 'default';
+  type?: "primary" | "default";
+  shape?: "round" | "circle" | "default";
 }
 
 export interface IMoreLink {
@@ -58,7 +58,7 @@ export type SidebarEnhanceSubType = {
 // 增强模式的 sidebar 相关类型
 export type SidebarEnhanceGroupChildren = (SidebarEnhanceSubType | SidebarEnhanceChildrenType)[];
 export type SidebarEnhanceGroupType = {
-  type: 'group';
+  type: "group";
   title: string;
   children: SidebarEnhanceGroupChildren;
 };
@@ -109,7 +109,7 @@ interface IAdditionalThemeConfig {
   /** 增强模式的 sidebar */
   sidebarEnhance?: Record<string, SidebarEnhanceItems>;
   /** antd 主题定制，同 `ConfigProvider` 中 `theme` */
-  theme?: Omit<ThemeConfig, 'algorithm'>;
+  theme?: Omit<ThemeConfig, "algorithm">;
   /** 是否展示页面加载状态 */
   loading?: ILoading;
   /** footer 上方展示友情链接 */
@@ -118,6 +118,21 @@ interface IAdditionalThemeConfig {
   ssr?: boolean | Record<string, unknown>;
 }
 
-export interface IAllThemeConfig extends IThemeConfig, IAdditionalThemeConfig {}
+export interface AnnouncementBarProps {
+  id: string;
+  align?: "left" | "center" | "right";
+  type?: "info" | "success" | "warning" | "error";
+  message: string;
+  description?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  showIcon?: boolean;
+  closable?: boolean;
+  [key: string]: any;
+}
+
+export interface IAllThemeConfig extends IThemeConfig, IAdditionalThemeConfig {
+  announcementBar?: Partial<AnnouncementBarProps>;
+}
 
 export { IAdditionalThemeConfig, ILocaleEnhance, IFeature, IAction };
