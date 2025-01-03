@@ -20,7 +20,7 @@ jobs:
           version: latest
 
       - name: Install & Build Docs
-        run:
+        run: |
           pnpm install
           pnpm run build:docs
 
