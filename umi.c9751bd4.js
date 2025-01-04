@@ -19107,7 +19107,7 @@ var customize_theme_en_USwatch_parent = __webpack_require__(55469);
 
     
     const customize_theme_en_UStype_frontmatter_toc = [];
-const customize_theme_en_UStype_frontmatter_frontmatter = {"title":"Customize Theme","toc":"menu","filename":"docs/demo/advanced-use/customize-theme.en-US.md","lastUpdated":1735985613000,"nav":{"second":{"title":"Secondary Directory","order":4}},"description":"Ant Design allows you to customize our design tokens to satisfy UI diversity from business or brand requirements, including primary color, border radius, border color, etc."};
+const customize_theme_en_UStype_frontmatter_frontmatter = {"title":"Customize Theme","toc":"menu","filename":"docs/demo/advanced-use/customize-theme.en-US.md","lastUpdated":1735986989000,"nav":{"second":{"title":"Secondary Directory","order":4}},"description":"Ant Design allows you to customize our design tokens to satisfy UI diversity from business or brand requirements, including primary color, border radius, border color, etc."};
 ;// CONCATENATED MODULE: ./example/docs/demo/advanced-use/customize-theme.en-US.md?type=demo-index
 
     
@@ -19121,7 +19121,7 @@ var customize_theme_zh_CNwatch_parent = __webpack_require__(30994);
 
     
     const customize_theme_zh_CNtype_frontmatter_toc = [];
-const customize_theme_zh_CNtype_frontmatter_frontmatter = {"title":"定制主题","toc":"menu","filename":"docs/demo/advanced-use/customize-theme.zh-CN.md","lastUpdated":1735985613000,"nav":{"second":{"title":"二级目录","order":4}},"description":"Ant Design 设计规范和技术上支持灵活的样式定制，以满足业务和品牌上多样化的视觉需求，包括但不限于全局样式（主色、圆角、边框）和指定组件的视觉定制。"};
+const customize_theme_zh_CNtype_frontmatter_frontmatter = {"title":"定制主题","toc":"menu","filename":"docs/demo/advanced-use/customize-theme.zh-CN.md","lastUpdated":1735986989000,"nav":{"second":{"title":"二级目录","order":4}},"description":"Ant Design 设计规范和技术上支持灵活的样式定制，以满足业务和品牌上多样化的视觉需求，包括但不限于全局样式（主色、圆角、边框）和指定组件的视觉定制。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/advanced-use/customize-theme.zh-CN.md?type=demo-index
 
     
@@ -19135,7 +19135,7 @@ var level_3_sidebar_navigation_en_USwatch_parent = __webpack_require__(49861);
 
     
     const level_3_sidebar_navigation_en_UStype_frontmatter_toc = [];
-const level_3_sidebar_navigation_en_UStype_frontmatter_frontmatter = {"title":"Navigation","toc":"menu","filename":"docs/demo/level-3-sidebar-navigation.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":"Level 3 Sidebar","type":{"title":"Global Rules","order":2},"description":"Broadly speaking, anything telling users where they are, where to go and how to get there can be called navigation. When using navigation or customizing navigational structures, please pay attention to following common pitfalls:"};
+const level_3_sidebar_navigation_en_UStype_frontmatter_frontmatter = {"title":"Navigation","toc":"menu","filename":"docs/demo/level-3-sidebar-navigation.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":"Level 3 Sidebar","type":{"title":"Global Rules","order":2},"description":"Broadly speaking, anything telling users where they are, where to go and how to get there can be called navigation. When using navigation or customizing navigational structures, please pay attention to following common pitfalls:"};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-navigation.en-US.md?type=demo-index
 
     
@@ -19149,7 +19149,7 @@ var level_3_sidebar_navigation_zh_CNwatch_parent = __webpack_require__(51044);
 
     
     const level_3_sidebar_navigation_zh_CNtype_frontmatter_toc = [];
-const level_3_sidebar_navigation_zh_CNtype_frontmatter_frontmatter = {"title":"导航","toc":"menu","filename":"docs/demo/level-3-sidebar-navigation.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":"三级侧边栏","type":{"title":"全局规则","order":2},"description":"在广义上，任何告知用户他在哪里，他能去什么地方以及如何到达那里的方式，都可以称之为导航。当设计者使用导航或者自定义一些导航结构时，请注意："};
+const level_3_sidebar_navigation_zh_CNtype_frontmatter_frontmatter = {"title":"导航","toc":"menu","filename":"docs/demo/level-3-sidebar-navigation.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":"三级侧边栏","type":{"title":"全局规则","order":2},"description":"在广义上，任何告知用户他在哪里，他能去什么地方以及如何到达那里的方式，都可以称之为导航。当设计者使用导航或者自定义一些导航结构时，请注意："};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-navigation.zh-CN.md?type=demo-index
 
     
@@ -19163,7 +19163,7 @@ var level_3_sidebar_proximity_en_USwatch_parent = __webpack_require__(13889);
 
     
     const level_3_sidebar_proximity_en_UStype_frontmatter_toc = [];
-const level_3_sidebar_proximity_en_UStype_frontmatter_frontmatter = {"title":"Proximity","toc":"menu","filename":"docs/demo/level-3-sidebar-proximity.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":"Level 3 Sidebar","type":{"title":"Principles","order":1},"description":"When several items are in close proximity to each other, they become one visual unit rather than several separate units. Otherwise, their distance should be larger and look more like several visual units. The basic purpose of proximity is to organize. To give an apparent view of the page structure and the hierarchy of information to users."};
+const level_3_sidebar_proximity_en_UStype_frontmatter_frontmatter = {"title":"Proximity","toc":"menu","filename":"docs/demo/level-3-sidebar-proximity.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":"Level 3 Sidebar","type":{"title":"Principles","order":1},"description":"When several items are in close proximity to each other, they become one visual unit rather than several separate units. Otherwise, their distance should be larger and look more like several visual units. The basic purpose of proximity is to organize. To give an apparent view of the page structure and the hierarchy of information to users."};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-proximity.en-US.md?type=demo-index
 
     
@@ -19177,7 +19177,7 @@ var level_3_sidebar_proximity_zh_CNwatch_parent = __webpack_require__(56144);
 
     
     const level_3_sidebar_proximity_zh_CNtype_frontmatter_toc = [];
-const level_3_sidebar_proximity_zh_CNtype_frontmatter_frontmatter = {"title":"亲密性","toc":"menu","filename":"docs/demo/level-3-sidebar-proximity.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":"三级侧边栏","type":{"title":"原则","order":1},"description":"如果信息之间关联性越高，它们之间的距离就应该越接近，也越像一个视觉单元；反之，则它们的距离就应该越远，也越像多个视觉单元。亲密性的根本目的是实现组织性，让用户对页面结构和信息层次一目了然。"};
+const level_3_sidebar_proximity_zh_CNtype_frontmatter_frontmatter = {"title":"亲密性","toc":"menu","filename":"docs/demo/level-3-sidebar-proximity.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":"三级侧边栏","type":{"title":"原则","order":1},"description":"如果信息之间关联性越高，它们之间的距离就应该越接近，也越像一个视觉单元；反之，则它们的距离就应该越远，也越像多个视觉单元。亲密性的根本目的是实现组织性，让用户对页面结构和信息层次一目了然。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-proximity.zh-CN.md?type=demo-index
 
     
@@ -19191,7 +19191,7 @@ var level_3_sidebar_feedback_en_USwatch_parent = __webpack_require__(31667);
 
     
     const level_3_sidebar_feedback_en_UStype_frontmatter_toc = [];
-const level_3_sidebar_feedback_en_UStype_frontmatter_frontmatter = {"title":"Feedback","toc":"menu","filename":"docs/demo/level-3-sidebar-feedback.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":"Level 3 Sidebar","type":"Global Rules","description":"In order to help users understand what the application is currently doing, and to refer to the user's next behavior, and to understand the results of the operation, when the user need to interact with the system , use different modes to feedback information or results. When the designer uses feedback or customizes some feedback, please note:"};
+const level_3_sidebar_feedback_en_UStype_frontmatter_frontmatter = {"title":"Feedback","toc":"menu","filename":"docs/demo/level-3-sidebar-feedback.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":"Level 3 Sidebar","type":"Global Rules","description":"In order to help users understand what the application is currently doing, and to refer to the user's next behavior, and to understand the results of the operation, when the user need to interact with the system , use different modes to feedback information or results. When the designer uses feedback or customizes some feedback, please note:"};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-feedback.en-US.md?type=demo-index
 
     
@@ -19205,7 +19205,7 @@ var level_3_sidebar_feedback_zh_CNwatch_parent = __webpack_require__(51556);
 
     
     const level_3_sidebar_feedback_zh_CNtype_frontmatter_toc = [];
-const level_3_sidebar_feedback_zh_CNtype_frontmatter_frontmatter = {"title":"反馈","toc":"menu","filename":"docs/demo/level-3-sidebar-feedback.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":"三级侧边栏","type":"全局规则","description":"为了帮助用户了解应用当前要做什么，也给用户的下一步行为做参考，以及了解操作后所产生的结果 ，当用户和系统需要交互时，使用不同的模式来反馈信息或结果。当设计者使用反馈或者自定义一些反馈时，请注意："};
+const level_3_sidebar_feedback_zh_CNtype_frontmatter_frontmatter = {"title":"反馈","toc":"menu","filename":"docs/demo/level-3-sidebar-feedback.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":"三级侧边栏","type":"全局规则","description":"为了帮助用户了解应用当前要做什么，也给用户的下一步行为做参考，以及了解操作后所产生的结果 ，当用户和系统需要交互时，使用不同的模式来反馈信息或结果。当设计者使用反馈或者自定义一些反馈时，请注意："};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-feedback.zh-CN.md?type=demo-index
 
     
@@ -19219,7 +19219,7 @@ var level_3_sidebar_overview_en_USwatch_parent = __webpack_require__(80596);
 
     
     const level_3_sidebar_overview_en_UStype_frontmatter_toc = [];
-const level_3_sidebar_overview_en_UStype_frontmatter_frontmatter = {"title":"Overview","toc":"menu","filename":"docs/demo/level-3-sidebar-overview.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":{"title":"Level 3 Sidebar","order":2},"order":3,"description":"The use of design patterns in enterprise-level businesses can significantly increase the certainty of the R&D team, save unnecessary design and maintain system consistency, allowing designers to focus on creativity where it is most needed."};
+const level_3_sidebar_overview_en_UStype_frontmatter_frontmatter = {"title":"Overview","toc":"menu","filename":"docs/demo/level-3-sidebar-overview.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":{"title":"Level 3 Sidebar","order":2},"order":3,"description":"The use of design patterns in enterprise-level businesses can significantly increase the certainty of the R&D team, save unnecessary design and maintain system consistency, allowing designers to focus on creativity where it is most needed."};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-overview.en-US.md?type=demo-index
 
     
@@ -19233,7 +19233,7 @@ var level_3_sidebar_overview_zh_CNwatch_parent = __webpack_require__(72090);
 
     
     const level_3_sidebar_overview_zh_CNtype_frontmatter_toc = [];
-const level_3_sidebar_overview_zh_CNtype_frontmatter_frontmatter = {"title":"概览","toc":"menu","filename":"docs/demo/level-3-sidebar-overview.zh-CN.md","lastUpdated":1735985613000,"nav":{"title":"示例"},"group":{"title":"三级侧边栏","order":1},"order":3,"description":"这是一份动态更新的设计文档，你的阅读和反馈是我们前进的动力。"};
+const level_3_sidebar_overview_zh_CNtype_frontmatter_frontmatter = {"title":"概览","toc":"menu","filename":"docs/demo/level-3-sidebar-overview.zh-CN.md","lastUpdated":1735986989000,"nav":{"title":"示例"},"group":{"title":"三级侧边栏","order":1},"order":3,"description":"这是一份动态更新的设计文档，你的阅读和反馈是我们前进的动力。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/level-3-sidebar-overview.zh-CN.md?type=demo-index
 
     
@@ -19247,7 +19247,7 @@ var secondary_sidebar_colors_en_USwatch_parent = __webpack_require__(50458);
 
     
     const secondary_sidebar_colors_en_UStype_frontmatter_toc = [];
-const secondary_sidebar_colors_en_UStype_frontmatter_frontmatter = {"title":"Colors","toc":"menu","filename":"docs/demo/secondary-sidebar-colors.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":{"title":"Secondary Sidebar","order":1},"order":1,"description":"Ant Design interprets the color system into two levels: a system-level color system and a product-level color system."};
+const secondary_sidebar_colors_en_UStype_frontmatter_frontmatter = {"title":"Colors","toc":"menu","filename":"docs/demo/secondary-sidebar-colors.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":{"title":"Secondary Sidebar","order":1},"order":1,"description":"Ant Design interprets the color system into two levels: a system-level color system and a product-level color system."};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-colors.en-US.md?type=demo-index
 
     
@@ -19261,7 +19261,7 @@ var secondary_sidebar_colors_zh_CNwatch_parent = __webpack_require__(19770);
 
     
     const secondary_sidebar_colors_zh_CNtype_frontmatter_toc = [];
-const secondary_sidebar_colors_zh_CNtype_frontmatter_frontmatter = {"title":"色彩","toc":"menu","filename":"docs/demo/secondary-sidebar-colors.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":{"title":"二级侧边栏","order":1},"order":1,"description":"Ant Design 将色彩体系解读成两个层面：系统级色彩体系和产品级色彩体系。"};
+const secondary_sidebar_colors_zh_CNtype_frontmatter_frontmatter = {"title":"色彩","toc":"menu","filename":"docs/demo/secondary-sidebar-colors.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":{"title":"二级侧边栏","order":1},"order":1,"description":"Ant Design 将色彩体系解读成两个层面：系统级色彩体系和产品级色彩体系。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-colors.zh-CN.md?type=demo-index
 
     
@@ -19275,7 +19275,7 @@ var secondary_sidebar_layout_en_USwatch_parent = __webpack_require__(85607);
 
     
     const secondary_sidebar_layout_en_UStype_frontmatter_toc = [];
-const secondary_sidebar_layout_en_UStype_frontmatter_frontmatter = {"title":"Layout","toc":"menu","filename":"docs/demo/secondary-sidebar-layout.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":"Secondary Sidebar","order":3,"description":"Spatial layout is the starting point of systematic visual design. The difference from traditional graphic design is that the layout space of UI interface should be based on the dynamic and systematic perspective. We were inspired by the architectural ethic of the architect Le Corbusier and explored the dynamic spatial order in UI design and formed the interface layout of Ant Design based on the principle of 'beauty of order', making it possible for designers to create spatial layout that comes with rational beauty."};
+const secondary_sidebar_layout_en_UStype_frontmatter_frontmatter = {"title":"Layout","toc":"menu","filename":"docs/demo/secondary-sidebar-layout.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":"Secondary Sidebar","order":3,"description":"Spatial layout is the starting point of systematic visual design. The difference from traditional graphic design is that the layout space of UI interface should be based on the dynamic and systematic perspective. We were inspired by the architectural ethic of the architect Le Corbusier and explored the dynamic spatial order in UI design and formed the interface layout of Ant Design based on the principle of 'beauty of order', making it possible for designers to create spatial layout that comes with rational beauty."};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-layout.en-US.md?type=demo-index
 
     
@@ -19289,7 +19289,7 @@ var secondary_sidebar_layout_zh_CNwatch_parent = __webpack_require__(41467);
 
     
     const secondary_sidebar_layout_zh_CNtype_frontmatter_toc = [];
-const secondary_sidebar_layout_zh_CNtype_frontmatter_frontmatter = {"title":"布局","toc":"menu","filename":"docs/demo/secondary-sidebar-layout.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":"二级侧边栏","order":3,"description":"空间布局是体系化视觉设计的起点，和传统的平面设计的不同之处在于，UI 界面的布局空间要基于「动态、体系化」的角度出发展开。我们受到建筑界大师柯布西耶的模度思想的启发，基于「秩序之美」的原则，探索 UI 设计中的动态空间秩序，形成了 Ant Design 的界面布局方式，为设计者构筑具备理性之美的布局空间创造了条件。"};
+const secondary_sidebar_layout_zh_CNtype_frontmatter_frontmatter = {"title":"布局","toc":"menu","filename":"docs/demo/secondary-sidebar-layout.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":"二级侧边栏","order":3,"description":"空间布局是体系化视觉设计的起点，和传统的平面设计的不同之处在于，UI 界面的布局空间要基于「动态、体系化」的角度出发展开。我们受到建筑界大师柯布西耶的模度思想的启发，基于「秩序之美」的原则，探索 UI 设计中的动态空间秩序，形成了 Ant Design 的界面布局方式，为设计者构筑具备理性之美的布局空间创造了条件。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-layout.zh-CN.md?type=demo-index
 
     
@@ -19303,7 +19303,7 @@ var builtins_image_preview_en_USwatch_parent = __webpack_require__(90433);
 
     
     const builtins_image_preview_en_UStype_frontmatter_toc = [{"id":"basic-usage","depth":3,"title":"Basic usage"},{"id":"simple-mode","depth":3,"title":"Simple mode"},{"id":"surround-mode","depth":3,"title":"Surround Mode"},{"id":"display-side-by-side","depth":3,"title":"Display side by side"}];
-const builtins_image_preview_en_UStype_frontmatter_frontmatter = {"title":"ImagePreview","toc":"menu","filename":"docs/guide/builtins-image-preview.en-US.md","lastUpdated":1735985613000,"group":"Builtins Components","order":2,"description":"Image preview component, used when images need to be displayed. This component supports two parameters float and pure, which are used to control the image display effect."};
+const builtins_image_preview_en_UStype_frontmatter_frontmatter = {"title":"ImagePreview","toc":"menu","filename":"docs/guide/builtins-image-preview.en-US.md","lastUpdated":1735986989000,"group":"Builtins Components","order":2,"description":"Image preview component, used when images need to be displayed. This component supports two parameters float and pure, which are used to control the image display effect."};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-image-preview.en-US.md?type=demo-index
 
     
@@ -19317,7 +19317,7 @@ var builtins_image_preview_zh_CNwatch_parent = __webpack_require__(94567);
 
     
     const builtins_image_preview_zh_CNtype_frontmatter_toc = [{"id":"基础使用","depth":3,"title":"基础使用"},{"id":"简洁模式","depth":3,"title":"简洁模式"},{"id":"环绕模式","depth":3,"title":"环绕模式"},{"id":"并排展示","depth":3,"title":"并排展示"}];
-const builtins_image_preview_zh_CNtype_frontmatter_frontmatter = {"title":"图片预览","toc":"menu","filename":"docs/guide/builtins-image-preview.zh-CN.md","lastUpdated":1735985613000,"group":"内置组件","order":2,"description":"图片预览组件，需要展示图片时使用。该组件支持 float 以及 pure 两个参数，用于控制图片展示效果。"};
+const builtins_image_preview_zh_CNtype_frontmatter_frontmatter = {"title":"图片预览","toc":"menu","filename":"docs/guide/builtins-image-preview.zh-CN.md","lastUpdated":1735986989000,"group":"内置组件","order":2,"description":"图片预览组件，需要展示图片时使用。该组件支持 float 以及 pure 两个参数，用于控制图片展示效果。"};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-image-preview.zh-CN.md?type=demo-index
 
     
@@ -19331,7 +19331,7 @@ var secondary_sidebar_font_en_USwatch_parent = __webpack_require__(9926);
 
     
     const secondary_sidebar_font_en_UStype_frontmatter_toc = [];
-const secondary_sidebar_font_en_UStype_frontmatter_frontmatter = {"title":"Font","toc":"menu","filename":"docs/demo/secondary-sidebar-font.en-US.md","lastUpdated":1735985613000,"nav":"Demo","group":"Secondary Sidebar","order":2,"description":"The font system is one of the most foundational parts of any interface design."};
+const secondary_sidebar_font_en_UStype_frontmatter_frontmatter = {"title":"Font","toc":"menu","filename":"docs/demo/secondary-sidebar-font.en-US.md","lastUpdated":1735986989000,"nav":"Demo","group":"Secondary Sidebar","order":2,"description":"The font system is one of the most foundational parts of any interface design."};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-font.en-US.md?type=demo-index
 
     
@@ -19345,7 +19345,7 @@ var secondary_sidebar_font_zh_CNwatch_parent = __webpack_require__(46735);
 
     
     const secondary_sidebar_font_zh_CNtype_frontmatter_toc = [];
-const secondary_sidebar_font_zh_CNtype_frontmatter_frontmatter = {"title":"字体","toc":"menu","filename":"docs/demo/secondary-sidebar-font.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","group":"二级侧边栏","order":2,"description":"字体是体系化界面设计中最基本的构成之一。"};
+const secondary_sidebar_font_zh_CNtype_frontmatter_frontmatter = {"title":"字体","toc":"menu","filename":"docs/demo/secondary-sidebar-font.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","group":"二级侧边栏","order":2,"description":"字体是体系化界面设计中最基本的构成之一。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/secondary-sidebar-font.zh-CN.md?type=demo-index
 
     
@@ -19359,7 +19359,7 @@ var builtins_overview_en_USwatch_parent = __webpack_require__(66089);
 
     
     const builtins_overview_en_UStype_frontmatter_toc = [];
-const builtins_overview_en_UStype_frontmatter_frontmatter = {"title":"overview","toc":"menu","filename":"docs/guide/builtins-overview.en-US.md","lastUpdated":1735985613000,"group":{"title":"Builtins Components","order":4},"order":0,"description":"In order to use some components in Markdown more conveniently and enhance the display effect of Markdown, some common components are built into the theme, including the following components:"};
+const builtins_overview_en_UStype_frontmatter_frontmatter = {"title":"overview","toc":"menu","filename":"docs/guide/builtins-overview.en-US.md","lastUpdated":1735986989000,"group":{"title":"Builtins Components","order":4},"order":0,"description":"In order to use some components in Markdown more conveniently and enhance the display effect of Markdown, some common components are built into the theme, including the following components:"};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-overview.en-US.md?type=demo-index
 
     
@@ -19373,7 +19373,7 @@ var builtins_overview_zh_CNwatch_parent = __webpack_require__(37341);
 
     
     const builtins_overview_zh_CNtype_frontmatter_toc = [];
-const builtins_overview_zh_CNtype_frontmatter_frontmatter = {"title":"概览","toc":"menu","filename":"docs/guide/builtins-overview.zh-CN.md","lastUpdated":1735985613000,"group":{"title":"内置组件","order":4},"order":0,"description":"为了更加方便地在 Markdown 中使用一些组件，增强 Markdown 展示效果，主题内置一些常见组件，具体包含以下组件："};
+const builtins_overview_zh_CNtype_frontmatter_frontmatter = {"title":"概览","toc":"menu","filename":"docs/guide/builtins-overview.zh-CN.md","lastUpdated":1735986989000,"group":{"title":"内置组件","order":4},"order":0,"description":"为了更加方便地在 Markdown 中使用一些组件，增强 Markdown 展示效果，主题内置一些常见组件，具体包含以下组件："};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-overview.zh-CN.md?type=demo-index
 
     
@@ -19387,7 +19387,7 @@ var builtins_alert_en_USwatch_parent = __webpack_require__(47858);
 
     
     const builtins_alert_en_UStype_frontmatter_toc = [];
-const builtins_alert_en_UStype_frontmatter_frontmatter = {"title":"Alert","toc":"menu","filename":"docs/guide/builtins-alert.en-US.md","lastUpdated":1735985613000,"group":"Builtins Components","order":1,"description":"Warning prompt, showing the information that needs attention, using the same method as the antd Alert component, which supports type, closable and showIcon parameters , with the same type."};
+const builtins_alert_en_UStype_frontmatter_frontmatter = {"title":"Alert","toc":"menu","filename":"docs/guide/builtins-alert.en-US.md","lastUpdated":1735986989000,"group":"Builtins Components","order":1,"description":"Warning prompt, showing the information that needs attention, using the same method as the antd Alert component, which supports type, closable and showIcon parameters , with the same type."};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-alert.en-US.md?type=demo-index
 
     
@@ -19401,7 +19401,7 @@ var builtins_alert_zh_CNwatch_parent = __webpack_require__(28308);
 
     
     const builtins_alert_zh_CNtype_frontmatter_toc = [];
-const builtins_alert_zh_CNtype_frontmatter_frontmatter = {"title":"警告提示","toc":"menu","filename":"docs/guide/builtins-alert.zh-CN.md","lastUpdated":1735985613000,"group":"内置组件","order":1,"description":"警告提示，展现需要关注的信息，使用方法同 antd Alert 组件，该组件支持 type、closable以及showIcon参数，类型与之保持一致。"};
+const builtins_alert_zh_CNtype_frontmatter_frontmatter = {"title":"警告提示","toc":"menu","filename":"docs/guide/builtins-alert.zh-CN.md","lastUpdated":1735986989000,"group":"内置组件","order":1,"description":"警告提示，展现需要关注的信息，使用方法同 antd Alert 组件，该组件支持 type、closable以及showIcon参数，类型与之保持一致。"};
 ;// CONCATENATED MODULE: ./example/docs/guide/builtins-alert.zh-CN.md?type=demo-index
 
     
@@ -19415,7 +19415,7 @@ var hide_sidebar_en_USwatch_parent = __webpack_require__(37503);
 
     
     const hide_sidebar_en_UStype_frontmatter_toc = [];
-const hide_sidebar_en_UStype_frontmatter_frontmatter = {"title":"Hide Sidebar","toc":"menu","filename":"docs/demo/hide-sidebar.en-US.md","lastUpdated":1735985613000,"sidebar":false,"nav":"Demo","order":3,"description":"Ant Financial has a large number of enterprise-level products. With complex scenarios, designers and developers often need to respond fast due to frequent changes in product demands and concurrent R & D workflow. Many similar contents exist in the process. Through abstraction, we could obtain some stable and highly reusable components and pages."};
+const hide_sidebar_en_UStype_frontmatter_frontmatter = {"title":"Hide Sidebar","toc":"menu","filename":"docs/demo/hide-sidebar.en-US.md","lastUpdated":1735986989000,"sidebar":false,"nav":"Demo","order":3,"description":"Ant Financial has a large number of enterprise-level products. With complex scenarios, designers and developers often need to respond fast due to frequent changes in product demands and concurrent R & D workflow. Many similar contents exist in the process. Through abstraction, we could obtain some stable and highly reusable components and pages."};
 ;// CONCATENATED MODULE: ./example/docs/demo/hide-sidebar.en-US.md?type=demo-index
 
     
@@ -19429,7 +19429,7 @@ var hide_sidebar_zh_CNwatch_parent = __webpack_require__(16284);
 
     
     const hide_sidebar_zh_CNtype_frontmatter_toc = [];
-const hide_sidebar_zh_CNtype_frontmatter_frontmatter = {"title":"隐藏侧边栏","toc":"menu","filename":"docs/demo/hide-sidebar.zh-CN.md","lastUpdated":1735985613000,"sidebar":false,"nav":"示例","order":3,"description":"蚂蚁集团的企业级产品是一个庞大且复杂的系统，数量多且功能复杂，而且变动和并发频繁，常常需要设计者与开发者能快速做出响应。同时这类产品中有存在很多类似的页面以及组件，可以通过抽象得到一些稳定且高复用性的内容。"};
+const hide_sidebar_zh_CNtype_frontmatter_frontmatter = {"title":"隐藏侧边栏","toc":"menu","filename":"docs/demo/hide-sidebar.zh-CN.md","lastUpdated":1735986989000,"sidebar":false,"nav":"示例","order":3,"description":"蚂蚁集团的企业级产品是一个庞大且复杂的系统，数量多且功能复杂，而且变动和并发频繁，常常需要设计者与开发者能快速做出响应。同时这类产品中有存在很多类似的页面以及组件，可以通过抽象得到一些稳定且高复用性的内容。"};
 ;// CONCATENATED MODULE: ./example/docs/demo/hide-sidebar.zh-CN.md?type=demo-index
 
     
@@ -19443,7 +19443,7 @@ var markdown_en_USwatch_parent = __webpack_require__(90271);
 
     
     const markdown_en_UStype_frontmatter_toc = [{"id":"multi-level-sidebar","depth":2,"title":"Multi-level sidebar"},{"id":"hide-the-sidebar","depth":2,"title":"Hide the sidebar"},{"id":"menu-bar-tag-configuration","depth":2,"title":"Menu bar Tag configuration"}];
-const markdown_en_UStype_frontmatter_frontmatter = {"title":"Markdown Config","toc":"menu","filename":"docs/config/markdown.en-US.md","lastUpdated":1735985613000,"nav":{"title":"Config"},"order":2,"description":"All Markdown configurations are configured in the form of FrontMatter at the top of the Markdown file, for example"};
+const markdown_en_UStype_frontmatter_frontmatter = {"title":"Markdown Config","toc":"menu","filename":"docs/config/markdown.en-US.md","lastUpdated":1735986989000,"nav":{"title":"Config"},"order":2,"description":"All Markdown configurations are configured in the form of FrontMatter at the top of the Markdown file, for example"};
 ;// CONCATENATED MODULE: ./example/docs/config/markdown.en-US.md?type=demo-index
 
     
@@ -19457,7 +19457,7 @@ var markdown_zh_CNwatch_parent = __webpack_require__(422);
 
     
     const markdown_zh_CNtype_frontmatter_toc = [{"id":"多级侧边栏","depth":2,"title":"多级侧边栏"},{"id":"隐藏侧边栏","depth":2,"title":"隐藏侧边栏"},{"id":"菜单栏-tag-配置","depth":2,"title":"菜单栏 Tag 配置"}];
-const markdown_zh_CNtype_frontmatter_frontmatter = {"title":"Markdown 配置","toc":"menu","filename":"docs/config/markdown.zh-CN.md","lastUpdated":1735985613000,"nav":{"title":"配置"},"order":2,"description":"所有 Markdown 配置均以 FrontMatter 的形式配置在 Markdown 文件顶端，例如"};
+const markdown_zh_CNtype_frontmatter_frontmatter = {"title":"Markdown 配置","toc":"menu","filename":"docs/config/markdown.zh-CN.md","lastUpdated":1735986989000,"nav":{"title":"配置"},"order":2,"description":"所有 Markdown 配置均以 FrontMatter 的形式配置在 Markdown 文件顶端，例如"};
 ;// CONCATENATED MODULE: ./example/docs/config/markdown.zh-CN.md?type=demo-index
 
     
@@ -19471,7 +19471,7 @@ var introduce_en_USwatch_parent = __webpack_require__(34365);
 
     
     const introduce_en_UStype_frontmatter_toc = [{"id":"what-is-dumi-theme-chaos","depth":2,"title":"What is dumi-theme-chaos"},{"id":"install","depth":2,"title":"Install"},{"id":"usage","depth":2,"title":"Usage"}];
-const introduce_en_UStype_frontmatter_frontmatter = {"title":"Getting Started","toc":"menu","filename":"docs/guide/introduce.en-US.md","lastUpdated":1735985613000,"group":{"title":"Basic Usage","order":2},"order":1,"description":"dumi-theme-chaos is a dumi theme package, the theme style refers to Antd Design 5.0 official website. Based on dumi theme development function, deeply customized and developed:"};
+const introduce_en_UStype_frontmatter_frontmatter = {"title":"Getting Started","toc":"menu","filename":"docs/guide/introduce.en-US.md","lastUpdated":1735986989000,"group":{"title":"Basic Usage","order":2},"order":1,"description":"dumi-theme-chaos is a dumi theme package, the theme style refers to Antd Design 5.0 official website. Based on dumi theme development function, deeply customized and developed:"};
 ;// CONCATENATED MODULE: ./example/docs/guide/introduce.en-US.md?type=demo-index
 
     
@@ -19485,7 +19485,7 @@ var introduce_zh_CNwatch_parent = __webpack_require__(4134);
 
     
     const introduce_zh_CNtype_frontmatter_toc = [{"id":"什么是-dumi-theme-chaos","depth":2,"title":"什么是 dumi-theme-chaos"},{"id":"安装","depth":2,"title":"安装"},{"id":"配置","depth":2,"title":"配置"}];
-const introduce_zh_CNtype_frontmatter_frontmatter = {"title":"快速上手","toc":"menu","filename":"docs/guide/introduce.zh-CN.md","lastUpdated":1735985613000,"group":{"title":"如何使用","order":2},"order":1,"description":"dumi-theme-chaos 是一款 dumi 主题包，主题风格参考 Antd Design 5.0 官网。基于 dumi 主题开发功能，深度定制开发了："};
+const introduce_zh_CNtype_frontmatter_frontmatter = {"title":"快速上手","toc":"menu","filename":"docs/guide/introduce.zh-CN.md","lastUpdated":1735986989000,"group":{"title":"如何使用","order":2},"order":1,"description":"dumi-theme-chaos 是一款 dumi 主题包，主题风格参考 Antd Design 5.0 官网。基于 dumi 主题开发功能，深度定制开发了："};
 ;// CONCATENATED MODULE: ./example/docs/guide/introduce.zh-CN.md?type=demo-index
 
     
@@ -19499,7 +19499,7 @@ var base_en_USwatch_parent = __webpack_require__(45624);
 
     
     const base_en_UStype_frontmatter_toc = [{"id":"basic-configuration","depth":2,"title":"Basic Configuration"},{"id":"github","depth":3,"title":"github"},{"id":"bannerconfig","depth":3,"title":"bannerConfig"},{"id":"localesenhance","depth":3,"title":"localesEnhance"},{"id":"title","depth":3,"title":"title"},{"id":"theme","depth":3,"title":"theme"},{"id":"description","depth":3,"title":"description"},{"id":"docversions","depth":3,"title":"docVersions"},{"id":"announcementbar","depth":3,"title":"announcementBar"},{"id":"footerlinks","depth":3,"title":"footerLinks"},{"id":"morelinks","depth":3,"title":"moreLinks"},{"id":"rtl","depth":3,"title":"rtl"},{"id":"actions","depth":3,"title":"actions"},{"id":"features","depth":3,"title":"features"},{"id":"sidebargroupmodepath","depth":3,"title":"sidebarGroupModePath"},{"id":"sidebarenhance","depth":3,"title":"sidebarEnhance"},{"id":"extended-configuration","depth":2,"title":"Extended configuration"},{"id":"loading","depth":3,"title":"loading"}];
-const base_en_UStype_frontmatter_frontmatter = {"title":"Base","toc":"menu","filename":"docs/config/base.en-US.md","lastUpdated":1735985613000,"nav":{"title":"config"},"order":1,"description":"dumi-theme-chaos In order to better adapt to the theme style of the antd v5 official website, some unique fields have been added and placed in the themeConfig field of the dumi theme configuration item. The specific configuration fields are as follows:"};
+const base_en_UStype_frontmatter_frontmatter = {"title":"Base","toc":"menu","filename":"docs/config/base.en-US.md","lastUpdated":1735986989000,"nav":{"title":"config"},"order":1,"description":"dumi-theme-chaos In order to better adapt to the theme style of the antd v5 official website, some unique fields have been added and placed in the themeConfig field of the dumi theme configuration item. The specific configuration fields are as follows:"};
 ;// CONCATENATED MODULE: ./example/docs/config/base.en-US.md?type=demo-index
 
     
@@ -19513,7 +19513,7 @@ var base_zh_CNwatch_parent = __webpack_require__(42764);
 
     
     const base_zh_CNtype_frontmatter_toc = [{"id":"基础配置项","depth":2,"title":"基础配置项"},{"id":"github","depth":3,"title":"github"},{"id":"bannerconfig","depth":3,"title":"bannerConfig"},{"id":"localesenhance","depth":3,"title":"localesEnhance"},{"id":"title","depth":3,"title":"title"},{"id":"theme","depth":3,"title":"theme"},{"id":"description","depth":3,"title":"description"},{"id":"docversions","depth":3,"title":"docVersions"},{"id":"announcementbar","depth":3,"title":"announcementBar"},{"id":"footerlinks","depth":3,"title":"footerLinks"},{"id":"morelinks","depth":3,"title":"moreLinks"},{"id":"rtl","depth":3,"title":"rtl"},{"id":"actions","depth":3,"title":"actions"},{"id":"features","depth":3,"title":"features"},{"id":"sidebargroupmodepath","depth":3,"title":"sidebarGroupModePath"},{"id":"sidebarenhance","depth":3,"title":"sidebarEnhance"},{"id":"扩展配置项","depth":2,"title":"扩展配置项"},{"id":"loading","depth":3,"title":"loading"}];
-const base_zh_CNtype_frontmatter_frontmatter = {"title":"基础","toc":"menu","filename":"docs/config/base.zh-CN.md","lastUpdated":1735985613000,"nav":{"title":"配置"},"order":1,"description":"dumi-theme-chaos 为了更好地适配 antd v5 官网主题风格，增加了一些特有字段，并将其置于 dumi 主题配置项 themeConfig 字段中，具体配置字段如下："};
+const base_zh_CNtype_frontmatter_frontmatter = {"title":"基础","toc":"menu","filename":"docs/config/base.zh-CN.md","lastUpdated":1735986989000,"nav":{"title":"配置"},"order":1,"description":"dumi-theme-chaos 为了更好地适配 antd v5 官网主题风格，增加了一些特有字段，并将其置于 dumi 主题配置项 themeConfig 字段中，具体配置字段如下："};
 ;// CONCATENATED MODULE: ./example/docs/config/base.zh-CN.md?type=demo-index
 
     
@@ -19527,7 +19527,7 @@ var FAQ_en_USwatch_parent = __webpack_require__(28130);
 
     
     const FAQ_en_UStype_frontmatter_toc = [{"id":"how-to-fully-customize-the-homepage","depth":2,"title":"How to fully customize the homepage"},{"id":"conventional-secondary-navigation","depth":2,"title":"Conventional secondary navigation"},{"id":"how-the-component-library-documentation-adapts-to-the-dark-mode","depth":2,"title":"How the component library documentation adapts to the dark mode"},{"id":"ssr","depth":2,"title":"SSR"},{"id":"why-is-there-no-indexhtml-after-build","depth":2,"title":"Why is there no index.html after build"}];
-const FAQ_en_UStype_frontmatter_frontmatter = {"title":"FAQ","toc":"menu","filename":"docs/config/FAQ.en-US.md","lastUpdated":1735985613000,"nav":{"title":"DEMO"},"order":3,"tag":{"title":"New","color":"success"},"description":"Here are some dumi-theme-chaos common questions and official answers for your reference."};
+const FAQ_en_UStype_frontmatter_frontmatter = {"title":"FAQ","toc":"menu","filename":"docs/config/FAQ.en-US.md","lastUpdated":1735986989000,"nav":{"title":"DEMO"},"order":3,"tag":{"title":"New","color":"success"},"description":"Here are some dumi-theme-chaos common questions and official answers for your reference."};
 ;// CONCATENATED MODULE: ./example/docs/config/FAQ.en-US.md?type=demo-index
 
     
@@ -19541,7 +19541,7 @@ var FAQ_zh_CNwatch_parent = __webpack_require__(82899);
 
     
     const FAQ_zh_CNtype_frontmatter_toc = [{"id":"如何完全自定义首页","depth":2,"title":"如何完全自定义首页"},{"id":"约定式二级导航","depth":2,"title":"约定式二级导航"},{"id":"组件库文档如何适配暗黑模式","depth":2,"title":"组件库文档如何适配暗黑模式"},{"id":"ssr","depth":2,"title":"SSR"},{"id":"构建后为什么没有-indexhtml","depth":2,"title":"构建后为什么没有 index.html"}];
-const FAQ_zh_CNtype_frontmatter_frontmatter = {"title":"FAQ","toc":"menu","filename":"docs/config/FAQ.zh-CN.md","lastUpdated":1735985613000,"nav":{"title":"配置"},"order":3,"tag":{"title":"New","color":"success"},"description":"以下整理了一些 dumi-theme-chaos 常见的问题和官方答复，可供参考。"};
+const FAQ_zh_CNtype_frontmatter_frontmatter = {"title":"FAQ","toc":"menu","filename":"docs/config/FAQ.zh-CN.md","lastUpdated":1735986989000,"nav":{"title":"配置"},"order":3,"tag":{"title":"New","color":"success"},"description":"以下整理了一些 dumi-theme-chaos 常见的问题和官方答复，可供参考。"};
 ;// CONCATENATED MODULE: ./example/docs/config/FAQ.zh-CN.md?type=demo-index
 
     
@@ -19555,7 +19555,7 @@ var table_en_USwatch_parent = __webpack_require__(75666);
 
     
     const table_en_UStype_frontmatter_toc = [{"id":"button-api","depth":4,"title":"Button API"}];
-const table_en_UStype_frontmatter_frontmatter = {"title":"Table","toc":"menu","filename":"docs/demo/table.en-US.md","lastUpdated":1735985613000,"nav":"Demo","order":4,"tag":{"title":"New","color":"success"}};
+const table_en_UStype_frontmatter_frontmatter = {"title":"Table","toc":"menu","filename":"docs/demo/table.en-US.md","lastUpdated":1735986989000,"nav":"Demo","order":4,"tag":{"title":"New","color":"success"}};
 ;// CONCATENATED MODULE: ./example/docs/demo/table.en-US.md?type=demo-index
 
     
@@ -19569,7 +19569,7 @@ var table_zh_CNwatch_parent = __webpack_require__(29839);
 
     
     const table_zh_CNtype_frontmatter_toc = [{"id":"button-api","depth":4,"title":"Button API"}];
-const table_zh_CNtype_frontmatter_frontmatter = {"title":"表格","toc":"menu","filename":"docs/demo/table.zh-CN.md","lastUpdated":1735985613000,"nav":"示例","order":4,"tag":{"title":"New","color":"success"}};
+const table_zh_CNtype_frontmatter_frontmatter = {"title":"表格","toc":"menu","filename":"docs/demo/table.zh-CN.md","lastUpdated":1735986989000,"nav":"示例","order":4,"tag":{"title":"New","color":"success"}};
 ;// CONCATENATED MODULE: ./example/docs/demo/table.zh-CN.md?type=demo-index
 
     
@@ -19583,7 +19583,7 @@ var dev_en_USwatch_parent = __webpack_require__(74620);
 
     
     const dev_en_UStype_frontmatter_toc = [{"id":"development-status","depth":2,"title":"development status"},{"id":"contribute","depth":2,"title":"contribute"},{"id":"development-process","depth":3,"title":"Development Process"},{"id":"welcome-to-prs","depth":3,"title":"Welcome to PRS"}];
-const dev_en_UStype_frontmatter_frontmatter = {"title":"Development","toc":"menu","filename":"docs/guide/dev.en-US.md","lastUpdated":1735985613000,"group":"Basic Usage","order":2,"description":"The first version of dumi-theme-chaos has been developed, but it is not yet fully adapted to some features of the Antd Design 5.0 official website. This is a continuous process. If you have any questions, please contact [issues](https://github .com/chaos-design/dumi-theme-chaos/issues) form feedback."};
+const dev_en_UStype_frontmatter_frontmatter = {"title":"Development","toc":"menu","filename":"docs/guide/dev.en-US.md","lastUpdated":1735986989000,"group":"Basic Usage","order":2,"description":"The first version of dumi-theme-chaos has been developed, but it is not yet fully adapted to some features of the Antd Design 5.0 official website. This is a continuous process. If you have any questions, please contact [issues](https://github .com/chaos-design/dumi-theme-chaos/issues) form feedback."};
 ;// CONCATENATED MODULE: ./example/docs/guide/dev.en-US.md?type=demo-index
 
     
@@ -19597,7 +19597,7 @@ var dev_zh_CNwatch_parent = __webpack_require__(64154);
 
     
     const dev_zh_CNtype_frontmatter_toc = [{"id":"开发状态","depth":2,"title":"开发状态"},{"id":"贡献","depth":2,"title":"贡献"},{"id":"开发流程","depth":3,"title":"开发流程"},{"id":"欢迎-prs","depth":3,"title":"欢迎 PRS"}];
-const dev_zh_CNtype_frontmatter_frontmatter = {"title":"开发","toc":"menu","filename":"docs/guide/dev.zh-CN.md","lastUpdated":1735985613000,"group":"如何使用","order":2,"description":"dumi-theme-chaos 目前初版已开发完成， 但对 Antd Design 5.0 官网的一些特性还未完全适配，这是一个持续性的过程，如果相关问题可通过 issues形式反馈。"};
+const dev_zh_CNtype_frontmatter_frontmatter = {"title":"开发","toc":"menu","filename":"docs/guide/dev.zh-CN.md","lastUpdated":1735986989000,"group":"如何使用","order":2,"description":"dumi-theme-chaos 目前初版已开发完成， 但对 Antd Design 5.0 官网的一些特性还未完全适配，这是一个持续性的过程，如果相关问题可通过 issues形式反馈。"};
 ;// CONCATENATED MODULE: ./example/docs/guide/dev.zh-CN.md?type=demo-index
 
     
