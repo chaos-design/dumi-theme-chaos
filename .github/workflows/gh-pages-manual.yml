@@ -18,8 +18,9 @@ jobs:
           version: latest
 
       - name: Install & Build Docs
-        run:
+        run: |
           pnpm install
+          npx father link-dev-theme
           pnpm run build:docs
 
       - name: Deploy
