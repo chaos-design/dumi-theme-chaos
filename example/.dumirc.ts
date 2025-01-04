@@ -1,11 +1,11 @@
-import { defineConfig } from 'dumi';
-import pkgJSON from '../package.json';
-import { defineThemeConfig } from './.dumi/theme/defineThemeConfig';
+import { defineConfig } from "dumi";
+import pkgJSON from "../package.json";
+import { defineThemeConfig } from "./.dumi/theme/defineThemeConfig";
 
 export default defineConfig({
   mfsu: false,
   // mako: {},
-  ssr: process.env.NODE_ENV === 'development' ? false : {},
+  ssr: process.env.NODE_ENV === "development" ? false : {},
   publicPath: process.env.DEPLOY_SITE === "local" ? "/" : "/dumi-theme-chaos/",
   base: process.env.DEPLOY_SITE === "local" ? "/" : "/dumi-theme-chaos",
   favicons: ["https://rain120.github.io/study-notes/img/chao.png"],
@@ -13,6 +13,7 @@ export default defineConfig({
     { id: "zh-CN", name: "中文", suffix: "" },
     { id: "en-US", name: "English", suffix: "-en" },
   ],
+  jsMinifier: "none",
   extraBabelPresets: ["@emotion/babel-preset-css-prop"],
   // pass theme config
   themeConfig: defineThemeConfig({
@@ -22,8 +23,8 @@ export default defineConfig({
       id: "announcementBar",
       message: "🎉 欢迎使用 dumi-theme-chaos",
       description: "chaos description",
-      backgroundColor: '#69b1ff',
-      textColor: '#fff',
+      backgroundColor: "#69b1ff",
+      textColor: "#fff",
       showIcon: false,
       closable: true,
     },

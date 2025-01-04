@@ -20,7 +20,6 @@ jobs:
       - name: Install & Build Docs
         run: |
           pnpm install
-          npx father link-dev-theme
           pnpm run build:docs
 
       - name: Deploy
