@@ -28,6 +28,13 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+      
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
       - run: pnpm i
       - run: npm publish
         env:
