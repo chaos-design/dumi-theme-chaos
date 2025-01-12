@@ -3,6 +3,7 @@ import { Alert } from "antd";
 import { useCallback, useEffect, useState, type FC } from "react";
 import useUserThemeConfig from "../../hooks/useUserThemeConfig";
 import { AnnouncementBarProps } from "../../types";
+import { isLocalStorageNameSupported } from "../../utils";
 // import useSiteToken from '../../hooks/useSiteToken';
 
 export const hexToHsl = (hex: string, decline = 0) => {
@@ -89,7 +90,8 @@ const AnnouncementBar: FC = () => {
   useEffect(() => {
     if (
       announcementBar?.id &&
-      localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) === announcementBar.id
+      (!isLocalStorageNameSupported() ? true :
+        localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) === announcementBar.id)
     ) {
       setClosed(true);
     } else {
@@ -98,7 +100,7 @@ const AnnouncementBar: FC = () => {
   }, [announcementBar]);
 
   const handleClose = useCallback(() => {
-    if (announcementBar?.id) {
+    if (announcementBar?.id && isLocalStorageNameSupported()) {
       localStorage.setItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS, announcementBar.id);
     }
 

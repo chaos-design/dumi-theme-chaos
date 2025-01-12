@@ -199,7 +199,7 @@ export function ping(callback: (status: string) => void) {
 
 export function isLocalStorageNameSupported() {
   const testKey = 'test';
-  const storage = window.localStorage;
+  const storage = window?.localStorage;
   try {
     storage.setItem(testKey, '1');
     storage.removeItem(testKey);

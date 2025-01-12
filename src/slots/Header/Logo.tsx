@@ -5,6 +5,7 @@ import { useLocation, useSiteData } from 'dumi';
 import Link from '../../common/Link';
 import * as utils from '../../utils';
 import { Tooltip } from 'antd';
+import { isLocalStorageNameSupported } from '../../utils';
 
 const useStyle = createStyles(({ token, css }) => {
   const { headerHeight, colorTextHeading, fontFamily, mobileMaxWidth } = token;
@@ -61,7 +62,7 @@ export interface LogoProps {
 const CHAOS_LOGO_TOUR_DISMISS = "chaos.logo.tour.dismiss";
 
 const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
-  const [tour, setTour] = React.useState(!localStorage.getItem(CHAOS_LOGO_TOUR_DISMISS));
+  const [tour, setTour] = React.useState(!isLocalStorageNameSupported() ? true : !localStorage.getItem(CHAOS_LOGO_TOUR_DISMISS));
   const { themeConfig } = useSiteData();
   const { search } = useLocation();
   const { styles: s } = useStyle();
@@ -78,7 +79,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
           open={tour}
           onOpenChange={(v) => {
             setTour(v);
-            if (v) {
+            if (v && isLocalStorageNameSupported()) {
               localStorage.setItem(CHAOS_LOGO_TOUR_DISMISS, '1');
             }
           }}
