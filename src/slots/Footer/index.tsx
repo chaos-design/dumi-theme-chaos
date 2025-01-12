@@ -1,7 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor';
 import { css } from '@emotion/react';
 import RcFooter from 'rc-footer';
-import cloneDeep from 'lodash.clonedeep';
+import { cloneDeep } from 'lodash';
 import getAlphaColor from 'antd/lib/theme/util/getAlphaColor';
 import { useContext, useCallback } from 'react';
 import { type FC } from 'react';

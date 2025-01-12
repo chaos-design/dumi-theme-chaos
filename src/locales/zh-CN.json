@@ -3,7 +3,11 @@
   "app.not-found.subTitle": "你访问的页面貌似不存在？",
   "app.theme.switch.dark": "暗黑主题",
   "app.theme.switch.compact": "紧凑主题",
+  "app.header.lang": "中文",
   "app.header.menu.more": "更多",
+  "app.content.edit-page": "在 GitHub 上编辑此页！",
+  "app.content.contributors": "文档贡献者",
   "app.footer.last.updated": "最后更新时间：",
-  "app.footer.actions.edit": "帮助改进此文档"
+  "app.footer.actions.edit": "帮助改进此文档",
+  "app.components.overview.search": "搜索组件"
 }

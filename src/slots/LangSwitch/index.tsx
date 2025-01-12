@@ -2,15 +2,15 @@
 import { Select } from 'antd';
 import { history, useIntl, useLocale, useLocation, useSearchParams, useSiteData } from 'dumi';
 import { useCallback, type FC } from 'react';
-import useAdditionalThemeConfig from '../../hooks/useAdditionalThemeConfig';
 import { getTargetLocalePath } from '../../utils';
 import SwitchBtn from '../Header/SwitchBtn';
+import useUserThemeConfig from '../../hooks/useUserThemeConfig';
 
 const { Option } = Select;
 
 const LangSwitch: FC = () => {
   const [searchParams] = useSearchParams();
-  const { localesEnhance } = useAdditionalThemeConfig();
+  const { localesEnhance } = useUserThemeConfig();
   const { locales } = useSiteData();
   const { locale } = useIntl();
   const current = useLocale();

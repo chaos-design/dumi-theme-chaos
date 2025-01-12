@@ -1,10 +1,9 @@
-// 最后更新时间
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { FormattedMessage } from 'dumi';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import useSiteToken from '../hooks/useSiteToken';
-import useAdditionalThemeConfig from '../hooks/useAdditionalThemeConfig';
+import useUserThemeConfig from '../hooks/useUserThemeConfig';
 
 const useStyle = () => {
   const { token } = useSiteToken();
@@ -15,17 +14,21 @@ const useStyle = () => {
     lastUpdatedWrap: css`
       color: ${colorTextTertiary};
       display: flex;
+      align-items: center;
+      font-size: ${token.fontSizeSM}px;
     `,
     lastUpdatedLabel: css`
       margin-inline-start: ${marginXXS}px;
       margin-inline-end: ${marginXXS}px;
+    `,
+    lastUpdatedTime: css`
     `
   };
 };
 
 const LastUpdated: React.FC<{ time?: number }> = ({ time }) => {
   const styles = useStyle();
-  const { lastUpdated } = useAdditionalThemeConfig();
+  const { lastUpdated } = useUserThemeConfig();
   const [isoLastUpdated, setIsoLastUpdated] = useState('');
   const [lastUpdatedTime, setLastUpdatedTime] = useState('');
   const showLastUpdated = lastUpdated && time;
@@ -48,7 +51,7 @@ const LastUpdated: React.FC<{ time?: number }> = ({ time }) => {
       <span css={styles.lastUpdatedLabel}>
         <FormattedMessage id="content.footer.last.updated" />
       </span>
-      <time dateTime={isoLastUpdated}>{lastUpdatedTime}</time>
+      <time css={styles.lastUpdatedTime} dateTime={isoLastUpdated}>{lastUpdatedTime}</time>
     </div>
   ) : null;
 };

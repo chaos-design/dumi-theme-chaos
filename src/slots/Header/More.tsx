@@ -19,6 +19,7 @@ export const getMoreLinksGroup = (moreLinks: IMoreLink[]): MenuProps['items'] =>
 
 const More: React.FC = () => {
   const moreLinks = useLocaleValue('moreLinks') || [];
+
   return Array.isArray(moreLinks) && moreLinks.length > 0 ? (
     <Dropdown menu={{ items: getMoreLinksGroup(moreLinks) }} placement="bottomRight">
       <Button size="small">

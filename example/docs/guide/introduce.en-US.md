@@ -26,24 +26,13 @@ title: Getting Started
 
 ## Install
 
-Install using pnpm or npm or yarn
+Install using `pnpm` or `npm` or `yarn`
 
-
-:::code-group
-
-```bash [pnpm]
-$ pnpm install dumi-theme-chaos
-```
-
-```bash [npm] 
-$ npm install dumi-theme-chaos
-```
-
-```bash [yarn]
-$ yarn add dumi-theme-chaos
-```
-:::
-
+<InstallDependencies
+  pnpm='$ pnpm install dumi-theme-chaos'
+  npm='$ npm install dumi-theme-chaos'
+  yarn='$ yarn add dumi-theme-chaos'
+/>
 
 ## Usage
 

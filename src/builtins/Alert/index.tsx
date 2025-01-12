@@ -13,6 +13,7 @@ const getAlertComponentProps = (rawProps) => {
 
 const Alert: FC<AlertProps & { children?: ReactNode }> = (props) => {
   const { children, ...restProps } = props;
+
   return (
     <AntdAlert
       style={{ marginBottom: 16 }}

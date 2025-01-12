@@ -26,22 +26,13 @@ title: 快速上手
 
 ## 安装
 
-使用 pnpm 或 npm 或 yarn 安装
+使用 `pnpm` 或 `npm` 或 `yarn` 安装
 
-:::code-group
-
-```bash [pnpm]
-$ pnpm install dumi-theme-chaos
-```
-
-```bash [npm] 
-$ npm install dumi-theme-chaos
-```
-
-```bash [yarn]
-$ yarn add dumi-theme-chaos
-```
-:::
+<InstallDependencies
+  pnpm='$ pnpm install dumi-theme-chaos'
+  npm='$ npm install dumi-theme-chaos'
+  yarn='$ yarn add dumi-theme-chaos'
+/>
 
 ## 配置
 

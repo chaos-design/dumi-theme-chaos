@@ -1,60 +1,61 @@
-import { css } from '@emotion/react';
-import { Helmet, Outlet, useLocale, useLocation, useOutlet, useRouteMeta, useSiteData } from 'dumi';
-import React, { useEffect, useContext, useMemo, type FC } from 'react';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
+
+import 'dayjs/locale/zh-cn';
+
+import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
+import ConfigProvider from 'antd/es/config-provider';
+import zhCN from 'antd/es/locale/zh_CN';
+import { Helmet, useOutlet, useSiteData } from 'dumi';
+
+import useLocale from '../../hooks/useLocale';
+import useLocation from '../../hooks/useLocation';
 import GlobalStyles from '../../common/GlobalStyles';
-import useLocaleValue from '../../hooks/useLocaleValue';
-import Footer from '../../slots/Footer';
 import Header from '../../slots/Header';
-import Homepage from '../HomePageLayout';
-import SidebarLayout from '../SidebarLayout';
 import SiteContext from '../../slots/SiteContext';
+
 import '../../static/style';
 
-const useStyles = () => {
-  return {
-    layoutWrap: css`
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    `
-  };
+import IndexLayout from '../IndexLayout';
+import ResourceLayout from '../ResourceLayout';
+import SidebarLayout from '../SidebarLayout';
+
+const locales = {
+  cn: {
+    title: 'Ant Design - 一套企业级 UI 设计语言和 React 组件库',
+    description: '基于 Ant Design 设计体系的 React UI 组件库，用于研发企业级中后台产品。',
+  },
+  en: {
+    title: "Ant Design - The world's second most popular React UI framework",
+    description:
+      'An enterprise-class UI design language and React UI library with a set of high-quality React components, one of best React UI library for enterprises',
+  },
 };
 
-const DocLayout: FC = () => {
+const DocLayout: React.FC = () => {
   const outlet = useOutlet();
-  const locale = useLocale();
   const location = useLocation();
-  const styles = useStyles();
-  const routeMeta = useRouteMeta();
-  const title = useLocaleValue('title');
-  const description = useLocaleValue('description');
-  const { pathname, hash } = location;
-  const { loading } = useSiteData();
+  const { pathname, search, hash } = location;
+  const [locale, lang] = useLocale(locales);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
   const { direction } = useContext(SiteContext);
+  const { loading } = useSiteData();
 
-  const content = useMemo(() => {
-    if (
-      ['', '/'].some((path) => path === pathname) ||
-      ['/index'].some((path) => pathname.startsWith(path))
-    ) {
-      return (
-        <React.Fragment>
-          {outlet || <Homepage />}
-          <Footer />
-        </React.Fragment>
-      );
+  useLayoutEffect(() => {
+    if (lang === 'cn') {
+      dayjs.locale('zh-cn');
+    } else {
+      dayjs.locale('en');
     }
-    return routeMeta.frontmatter?.sidebar === false ? (
-      <div>
-        <Outlet />
-      </div>
-    ) : (
-      <SidebarLayout>
-        <Outlet />
-      </SidebarLayout>
-    );
-  }, [outlet, pathname, routeMeta]);
+  }, []);
+
+  useEffect(() => {
+    const nprogressHiddenStyle = document.getElementById('nprogress-style');
+    timerRef.current = setTimeout(() => {
+      nprogressHiddenStyle?.remove();
+    }, 0);
+    return () => clearTimeout(timerRef.current);
+  }, []);
 
   // handle hash change or visit page hash from Link component, and jump after async chunk loaded
   useEffect(() => {
@@ -64,31 +65,57 @@ const DocLayout: FC = () => {
     }
   }, [loading, hash]);
 
+  useEffect(() => {
+    if (typeof (window as any).ga !== 'undefined') {
+      (window as any).ga('send', 'pageview', pathname + search);
+    }
+  }, [location]);
+
+  const content = React.useMemo<React.ReactNode>(() => {
+    if (
+      ['', '/'].some((path) => path === pathname) ||
+      ['/index'].some((path) => pathname.startsWith(path))
+    ) {
+      return (
+        <IndexLayout title={locale.title} desc={locale.description}>
+          {outlet}
+        </IndexLayout>
+      );
+    }
+    if (pathname.startsWith('/docs/resource')) {
+      return <ResourceLayout>{outlet}</ResourceLayout>;
+    }
+    if (pathname.startsWith('/theme-editor')) {
+      return outlet;
+    }
+    return <SidebarLayout>{outlet}</SidebarLayout>;
+  }, [pathname, outlet]);
+
   return (
-    <div css={styles.layoutWrap}>
+    <>
       <Helmet encodeSpecialCharacters={false}>
         <html
-          lang={locale.id}
+          lang={lang === 'cn' ? 'zh-CN' : lang}
           data-direction={direction}
-          className={classNames(['dumi-theme-chaos-root', { rtl: direction === 'rtl' }])}
+          className={classNames({ rtl: direction === 'rtl' })}
         />
-        <title>{`${title || 'dumi-theme-chaos'}${description ? `-${description}` : ''}`}</title>
         <link
           sizes="144x144"
           href="https://gw.alipayobjects.com/zos/antfincdn/UmVnt3t4T0/antd.png"
         />
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
+        <meta property="og:description" content={locale.description} />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
           content="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
         />
       </Helmet>
-      <GlobalStyles />
-      <Header />
-      {content}
-    </div>
+      <ConfigProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+        <GlobalStyles />
+        <Header />
+        {content}
+      </ConfigProvider>
+    </>
   );
 };
 

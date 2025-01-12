@@ -1,1 +1,1 @@
-import 'rc-footer/assets/index.less';
+import 'rc-footer/assets/index.css';

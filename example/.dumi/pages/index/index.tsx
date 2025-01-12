@@ -4,7 +4,7 @@ import WhoAreUsing from './WhoAreUsing';
 
 const CustomHomePage = () => {
   return (
-    <div>
+    <div className='home-page'>
       <HomeBaseLayout />
       <WhoAreUsing />
     </div>

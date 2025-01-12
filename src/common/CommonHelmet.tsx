@@ -1,19 +1,21 @@
+import React from 'react';
 import { Helmet, useRouteMeta } from 'dumi';
-import { useMemo } from 'react';
-import useLocaleValue from '../hooks/useLocaleValue';
-import { removeTitleCode } from '../utils';
 
-const CommonHelmet = () => {
+const CommonHelmet: React.FC = () => {
   const meta = useRouteMeta();
-  const configTitle = useLocaleValue('title');
 
-  const [title, description] = useMemo(() => {
-    const helmetTitle = `${removeTitleCode(meta.frontmatter.subtitle) || ''} ${removeTitleCode(
-      meta.frontmatter?.title
-    )} - ${configTitle}`;
-    const helmetDescription = meta.frontmatter.description;
+  const [title, description] = React.useMemo<[string, string]>(() => {
+    let helmetTitle: string;
+    if (!meta.frontmatter.subtitle && !meta.frontmatter.title) {
+      helmetTitle = '404 Not Found - Ant Design';
+    } else {
+      helmetTitle = `${meta.frontmatter.subtitle || ''} ${
+        meta.frontmatter?.title || ''
+      } - Ant Design`;
+    }
+    const helmetDescription = meta.frontmatter.description || '';
     return [helmetTitle, helmetDescription];
-  }, [meta, configTitle]);
+  }, [meta]);
 
   return (
     <Helmet>

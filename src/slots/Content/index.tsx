@@ -1,204 +1,111 @@
-import { CalendarOutlined } from '@ant-design/icons';
-import { css } from '@emotion/react';
-import { Col, Space, Typography } from 'antd';
-import classNames from 'classnames';
-import DayJS from 'dayjs';
-import { useRouteMeta } from 'dumi';
-import type { FC, ReactNode } from 'react';
-import { useMemo, useContext } from 'react';
-import PrevAndNext from '../../common/PrevAndNext';
-import LastUpdated from '../../common/LastUpdated';
-import EditLink from '../../common/EditLink';
-import useSiteToken from '../../hooks/useSiteToken';
-import Footer from '../Footer';
+import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import { Col, Flex, Space, Typography } from 'antd';
+import c from 'classnames';
+import { FormattedMessage, useRouteMeta } from 'dumi';
+
+import useLayoutState from '../../hooks/useLayoutState';
+import useLocation from '../../hooks/useLocation';
+import ComponentMeta from '../../builtins/ComponentMeta';
+import type { DemoContextProps } from '../DemoContext';
+import DemoContext from '../DemoContext';
 import SiteContext from '../SiteContext';
 import InViewSuspense from './InViewSuspense';
-import DocAnchor from './DocAnchor';
+import { useStyle } from './DocAnchor';
 
-const useStyle = () => {
-  const { token } = useSiteToken();
+const Contributors = React.lazy(() => import('./Contributors'));
+const DocAnchor = React.lazy(() => import('./DocAnchor'));
+const DocMeta = React.lazy(() => import('./DocMeta'));
+const Footer = React.lazy(() => import('../Footer'));
+const PrevAndNext = React.lazy(() => import('../../common/PrevAndNext'));
+const EditButton = React.lazy(() => import('../../common/EditButton'));
+const LastUpdated = React.lazy(() => import('../../common/LastUpdated'));
+// const EditLink = React.lazy(() => import('../../common/EditLink'));
 
-  const { antCls } = token;
-
-  return {
-    contributorsList: css`
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 120px !important;
-
-      a,
-      ${antCls}-avatar + ${antCls}-avatar {
-        margin-bottom: 8px;
-        margin-inline-end: 8px;
-      }
-    `,
-    toc: css`
-      ${antCls}-anchor {
-        ${antCls}-anchor-link-title {
-          font-size: 12px;
-        }
-      }
-    `,
-    tocWrapper: css`
-      position: absolute;
-      top: 8px;
-      right: 0;
-      width: 160px;
-      margin: 12px 0;
-      padding: 8px 8px 8px 4px;
-      backdrop-filter: blur(8px);
-      border-radius: ${token.borderRadius}px;
-      box-sizing: border-box;
-
-      .toc-debug {
-        color: ${token['purple-6']};
-
-        &:hover {
-          color: ${token['purple-5']};
-        }
-      }
-
-      > div {
-        box-sizing: border-box;
-        width: 100%;
-        max-height: calc(100vh - 40px) !important;
-        margin: 0 auto;
-        overflow: auto;
-        padding-inline: 4px;
-      }
-
-      &.rtl {
-        right: auto;
-        left: 20px;
-      }
-
-      @media only screen and (max-width: ${token.screenLG}px) {
-        display: none;
-      }
-    `,
-    articleWrapper: css`
-      padding: 0 170px 32px 64px;
-      flex: 1;
-
-      &.rtl {
-        padding: 0 64px 144px 170px;
-      }
-
-      @media only screen and (max-width: ${token.screenLG}px) {
-        &,
-        &.rtl {
-          padding-right: 24px;
-          padding-left: 24px;
-        }
-      }
-    `,
-    bottomEditContent: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 12px;
-      flex: 0;
-    `,
-    colContent: css`
-      display: flex;
-      flex-direction: column;
-    `
-  };
-};
-
-const Content: FC<{ children: ReactNode }> = ({ children }) => {
+const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   const meta = useRouteMeta();
-  const styles = useStyle();
+  const { pathname, hash } = useLocation();
   const { direction } = useContext(SiteContext);
+  const { styles } = useStyle();
 
+  const [showDebug, setShowDebug] = useLayoutState(false);
+  const [codeType, setCodeType] = useState('tsx');
   const debugDemos = useMemo(
     () => meta.toc?.filter((item) => item._debug_demo).map((item) => item.id) || [],
-    [meta]
+    [meta],
   );
 
-  const isShowTitle = useMemo(() => {
-    const title = meta.frontmatter?.title || meta.frontmatter.subtitle;
-    if (!title) return false;
+  const isDebugDemo = debugDemos.includes(hash.slice(1));
 
-    // 避免 markdown 里有 h1 导致双标题
-    const firstToc = meta.toc[0];
-    if (firstToc && firstToc.depth === 1) return false;
+  useLayoutEffect(() => {
+    setShowDebug(process.env.NODE_ENV === 'development' || isDebugDemo);
+  }, []);
 
-    return true;
-  }, [meta.frontmatter?.title, meta.frontmatter.subtitle, meta.toc]);
+  const contextValue = useMemo<DemoContextProps>(
+    () => ({ showDebug, setShowDebug, codeType, setCodeType }),
+    [showDebug, codeType, debugDemos],
+  );
 
   const isRTL = direction === 'rtl';
 
   return (
-    <Col xxl={20} xl={19} lg={18} md={18} sm={24} xs={24} css={styles.colContent}>
-      {!!meta.frontmatter.toc && (
+    <DemoContext.Provider value={contextValue}>
+      <Col xxl={20} xl={19} lg={18} md={18} sm={24} xs={24}>
         <InViewSuspense fallback={null}>
-          <DocAnchor debugDemos={debugDemos} />
+          <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>
-      )}
+        <article className={c(styles.articleWrapper, { rtl: isRTL })}>
+          {meta.frontmatter?.title ? (
+            <Flex justify="space-between">
+              <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
+                <Space>
+                  <span>{meta.frontmatter?.title}</span>
+                  <span>{meta.frontmatter?.subtitle}</span>
+                  {!pathname.startsWith('/components/overview') && (
+                    <InViewSuspense fallback={null}>
+                      <EditButton
+                        title={<FormattedMessage id="app.content.edit-page" />}
+                        filename={meta.frontmatter.filename}
+                      />
+                    </InViewSuspense>
+                  )}
+                </Space>
+              </Typography.Title>
+            </Flex>
+          ) : null}
+          <InViewSuspense fallback={null}>
+            <DocMeta />
+          </InViewSuspense>
+          {!meta.frontmatter.__autoDescription && meta.frontmatter.description}
 
-      <article css={styles.articleWrapper} className={classNames({ rtl: isRTL })}>
-        {isShowTitle ? (
-          <Typography.Title
-            style={{
-              fontSize: 30
-            }}
-          >
-            {meta.frontmatter?.title}
-            {meta.frontmatter.subtitle && (
-              <span
-                style={{
-                  marginLeft: 12
-                }}
-              >
-                {meta.frontmatter.subtitle}
-              </span>
+          {/* Import Info */}
+          {meta.frontmatter.category === 'Components' &&
+            String(meta.frontmatter.showImport) !== 'false' && (
+              <ComponentMeta
+                source
+                component={meta.frontmatter.title}
+                filename={meta.frontmatter.filename}
+                version={meta.frontmatter.tag}
+              />
             )}
-          </Typography.Title>
-        ) : null}
-
-        {/* 添加作者、时间等信息 */}
-        {meta.frontmatter.date || meta.frontmatter.author ? (
-          <Typography.Paragraph
-            style={{
-              opacity: 0.65
-            }}
-          >
-            <Space>
-              {meta.frontmatter.date && (
-                <span>
-                  <CalendarOutlined />
-                  {DayJS(meta.frontmatter.date).format('YYYY-MM-DD')}
-                </span>
-              )}
-              {meta.frontmatter.author &&
-                (meta.frontmatter.author as string)?.split(',')?.map((author) => (
-                  <Typography.Link
-                    href={`https://github.com/${author}`}
-                    key={author}
-                    target="_blank"
-                  >
-                    {`@${author}`}
-                  </Typography.Link>
-                ))}
-            </Space>
-          </Typography.Paragraph>
-        ) : null}
-
-        {children}
-      </article>
-      <div
-        css={css`
-          ${styles.articleWrapper}
-          ${styles.bottomEditContent}
-        `}
-      >
-        <LastUpdated time={meta.frontmatter?.lastUpdated} />
-        <EditLink />
-      </div>
-      <PrevAndNext rtl={isRTL} />
-      <Footer />
-    </Col>
+          <div style={{ minHeight: 'calc(100vh - 64px)' }}>{children}</div>
+          <div style={{ marginTop: 120 }}>
+            <InViewSuspense fallback={<div style={{ height: 50 }} />}>
+              <Contributors filename={meta.frontmatter.filename} />
+            </InViewSuspense>
+            <InViewSuspense fallback={null}>
+              <div className={c(styles.bottomEditContent, { rtl: isRTL })}>
+                <LastUpdated time={meta.frontmatter?.lastUpdated} />
+                {/* <EditLink /> */}
+              </div>
+            </InViewSuspense>
+          </div>
+        </article>
+        <InViewSuspense fallback={null}>
+          <PrevAndNext rtl={isRTL} />
+        </InViewSuspense>
+        <Footer />
+      </Col>
+    </DemoContext.Provider >
   );
 };
 

@@ -16,37 +16,19 @@ title: 开发
 
 在你 clone 了 dumi-theme-chaos 的代码并且使用
 
-:::code-group
-
-```bash [pnpm]
-$ pnpm install
-```
-
-```bash [npm] 
-$ npm install
-```
-
-```bash [yarn]
-$ yarn
-```
-:::
+<InstallDependencies
+  pnpm='$ pnpm install'
+  npm='$ npm install'
+  yarn='$ yarn'
+/>
 
 安装完依赖后，运行以下命令即可启动开发模式
 
-:::code-group
-
-```bash [pnpm]
-$ pnpm run start
-```
-
-```bash [npm] 
-$ npm run start
-```
-
-```bash [yarn]
-$ yarn run start
-```
-:::
+<InstallDependencies
+  pnpm='$ pnpm run start'
+  npm='$ npm run start'
+  yarn='$ yarn run start'
+/>
 
 修改 `/src` 对于目录中文件，进行调试。
 

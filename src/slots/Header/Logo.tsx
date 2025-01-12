@@ -1,95 +1,92 @@
-/* eslint-disable react/jsx-closing-tag-location */
-import { css } from '@emotion/react';
-import { Link, useLocale, useLocation, useSiteData } from 'dumi';
-import { Fragment, useMemo } from 'react';
-import useSiteToken from '../../hooks/useSiteToken';
+import * as React from 'react';
+import { createStyles } from 'antd-style';
+import { useLocation, useSiteData } from 'dumi';
 
-const useStyle = () => {
-  const { token } = useSiteToken();
+import Link from '../../common/Link';
+import * as utils from '../../utils';
+import { Tooltip } from 'antd';
 
-  const { antCls, headerHeight, colorTextHeading, fontFamily, mobileMaxWidth } = token;
+const useStyle = createStyles(({ token, css }) => {
+  const { headerHeight, colorTextHeading, fontFamily, mobileMaxWidth } = token;
 
   return {
     logo: css`
       height: ${headerHeight}px;
-      padding-inline-start: 24px;
+      padding-inline-start: 40px;
       overflow: hidden;
       color: ${colorTextHeading};
       font-weight: bold;
-      font-size: 18px;
-      font-family: PuHuiTi, ${fontFamily}, sans-serif;
+      font-size: 24px;
+      font-family: AlibabaPuHuiTi, ${fontFamily}, sans-serif;
       line-height: ${headerHeight}px;
       letter-spacing: -0.18px;
       white-space: nowrap;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      column-gap: ${token.marginSM}px;
 
       &:hover {
         color: ${colorTextHeading};
       }
 
-      ${antCls}-row-rtl & {
-        float: right;
-        padding-right: 40px;
-        padding-left: 0;
-      }
-
       img {
-        height: 32px;
-        margin-inline-end: 12px;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
         vertical-align: middle;
-
-        ${antCls}-row-rtl & {
-          margin-right: 0;
-          margin-left: 16px;
-        }
       }
 
       @media only screen and (max-width: ${mobileMaxWidth}px) {
-        padding-right: 0;
-        padding-left: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
       }
     `,
+    title: css`
+      line-height: 40px;
+    `,
     logoImage: css`&:hover {
-        transform: rotate(666turn);
-        transition: 59s cubic-bezier(.34,0,.84,1) 1s;
-      }
-    `
+      transform: rotate(666turn);
+      transition: 59s cubic-bezier(.34,0,.84,1) 1s;
+    }
+  `
   };
-};
+});
 
-const Logo = () => {
-  const { logo, logoImage } = useStyle();
+export interface LogoProps {
+  isZhCN: boolean;
+  location: any;
+}
+
+const CHAOS_LOGO_TOUR_DISMISS = "chaos.logo.tour.dismiss";
+
+const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
+  const [tour, setTour] = React.useState(!localStorage.getItem(CHAOS_LOGO_TOUR_DISMISS));
   const { themeConfig } = useSiteData();
   const { search } = useLocation();
-  const locale = useLocale();
-  const logImgUrl =
-    themeConfig.logo || 'https://rain120.github.io/study-notes/img/chao.png';
-  const content = useMemo(
-    () => (
-      <Fragment>
-        {themeConfig.logo !== false && <img css={logoImage} alt="logo" src={logImgUrl} />}
-        <span style={{ lineHeight: '32px' }}>{themeConfig.name}</span>
-      </Fragment>
-    ),
-    [logImgUrl, themeConfig.name, themeConfig.logo]
-  );
+  const { styles: s } = useStyle();
 
-  const suffix = 'suffix' in locale ? locale.suffix : '';
-  const homePath = `/${suffix ? `index${suffix}` : ''}`;
+  const logoSrc =
+    themeConfig.logo || 'https://rain120.github.io/study-notes/img/chao.png';
 
   return (
     <h1>
-      {themeConfig.homeLink && themeConfig.homeLink.startsWith('http') ? (
-        <a href={themeConfig.homeLink} css={logo}>
-          {content}
-        </a>
-      ) : (
-        <Link to={themeConfig.homeLink || `${homePath}${search}`} css={logo}>
-          {content}
-        </Link>
-      )}
+      <Link to={utils.getLocalizedPathname('/', isZhCN, search)} className={s.logo}>
+        <Tooltip
+          title="Hover见证魔法 😉"
+          placement="right"
+          open={tour}
+          onOpenChange={(v) => {
+            setTour(v);
+            if (v) {
+              localStorage.setItem(CHAOS_LOGO_TOUR_DISMISS, '1');
+            }
+          }}
+        >
+          <img id="chaos-logo" className={s.logoImage} src={logoSrc} draggable={false} alt="logo" />
+        </Tooltip>
+        <span className={s.title}>Chaos</span>
+      </Link>
     </h1>
   );
 };

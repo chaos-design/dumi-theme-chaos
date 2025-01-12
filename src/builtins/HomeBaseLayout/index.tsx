@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { Button, Space, Typography } from 'antd';
 import { Link, useSearchParams } from 'dumi';
 import React, { useContext, type FC } from 'react';
-import useAdditionalThemeConfig from '../../hooks/useAdditionalThemeConfig';
+import useUserThemeConfig from '../../hooks/useUserThemeConfig';
 import useLocaleValue from '../../hooks/useLocaleValue';
 import useSiteToken from '../../hooks/useSiteToken';
 import SiteContext from '../../slots/SiteContext';
@@ -63,7 +63,7 @@ const HomeBaseLayout: FC = () => {
   const style = useStyle();
   const { token } = useSiteToken();
   const { isMobile, theme } = useContext<SiteContextProps>(SiteContext);
-  const { bannerConfig, name } = useAdditionalThemeConfig();
+  const { bannerConfig, name } = useUserThemeConfig();
   const actions: IAction[] = useLocaleValue('actions');
   const title = useLocaleValue('title');
   const description = useLocaleValue('description');

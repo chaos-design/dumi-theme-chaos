@@ -1,15 +1,27 @@
+import React from 'react';
 import { useRouteMeta, useIntl, FormattedMessage } from 'dumi';
 import { EditOutlined } from '@ant-design/icons';
-import useAdditionalThemeConfig from '../hooks/useAdditionalThemeConfig';
+import useUserThemeConfig from '../hooks/useUserThemeConfig';
+import { createStyles } from 'antd-style';
+
+export const useStyle = createStyles(({ token, css }) => {
+  return {
+    editLink: css`
+      font-size: ${token.fontSizeSM}px;
+    `,
+  };
+});
 
 const EditLink = () => {
   const { frontmatter } = useRouteMeta();
-  const { editLink } = useAdditionalThemeConfig();
+  const { editLink } = useUserThemeConfig();
   const intl = useIntl();
+  const { styles: s } = useStyle();
 
   const showEditLink = editLink && frontmatter.filename;
+
   return showEditLink ? (
-    <div>
+    <div className={s.editLink}>
       <a
         target="_blank"
         href={`${intl.formatMessage(

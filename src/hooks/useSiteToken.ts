@@ -66,7 +66,7 @@ const useSiteToken = (): IUseSiteToken => {
       siteTheme
     },
     /** dumi-theme-chaos 站点 class 前缀 */
-    siteCls: 'dumi-antd'
+    siteCls: 'dumi-theme-chaos'
   };
 };
 

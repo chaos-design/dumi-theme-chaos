@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Skeleton, Space, Spin } from 'antd';
 import { useLocation } from 'dumi';
 import type { IAllThemeConfig } from '../../types';
-import useAdditionalThemeConfig from '../../hooks/useAdditionalThemeConfig';
+import useUserThemeConfig from '../../hooks/useUserThemeConfig';
 
 const defaultLoadingConfig: IAllThemeConfig['loading'] = {
   skeleton: []
@@ -10,7 +10,7 @@ const defaultLoadingConfig: IAllThemeConfig['loading'] = {
 
 const Loading: React.FC = () => {
   const { pathname } = useLocation();
-  const { loading = defaultLoadingConfig } = useAdditionalThemeConfig();
+  const { loading = defaultLoadingConfig } = useUserThemeConfig();
 
   const skeletonLoadingRenderRule = useCallback(() => {
     const pathnameReg = loading.skeleton;

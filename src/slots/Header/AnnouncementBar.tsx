@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { Alert } from "antd";
 import { useCallback, useEffect, useState, type FC } from "react";
-import useAdditionalThemeConfig from "../../hooks/useAdditionalThemeConfig";
+import useUserThemeConfig from "../../hooks/useUserThemeConfig";
 import { AnnouncementBarProps } from "../../types";
 // import useSiteToken from '../../hooks/useSiteToken';
 
@@ -83,7 +83,7 @@ const CHAOS_ANNOUNCEMENT_BAR_DISMISS = "chaos.announcement.dismiss";
 
 const AnnouncementBar: FC = () => {
   const [isClosed, setClosed] = useState(true);
-  const { announcementBar } = useAdditionalThemeConfig() || {};
+  const { announcementBar } = useUserThemeConfig() || {};
   const s = useStyle(announcementBar || {});
 
   useEffect(() => {

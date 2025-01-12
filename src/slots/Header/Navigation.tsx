@@ -1,51 +1,39 @@
-import { MenuFoldOutlined } from '@ant-design/icons';
-import { css } from '@emotion/react';
+import React from 'react';
+import { MenuOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { Link, useLocale, useLocation, useNavData, useSiteData } from 'dumi';
-import { INavItem } from 'dumi/dist/client/theme-api/types';
-import { useCallback } from 'react';
-import useAdditionalThemeConfig from '../../hooks/useAdditionalThemeConfig';
-import useLocaleValue from '../../hooks/useLocaleValue';
-import useSiteToken from '../../hooks/useSiteToken';
-import { getTargetLocalePath, isExternalLinks } from '../../utils';
-import { type IResponsive } from './index';
+import { createStyles, css } from 'antd-style';
+import { FormattedMessage, useFullSidebarData, useLocale, useLocation, useNavData, useSiteData } from 'dumi';
+
+import Link from '../../common/Link';
+import * as utils from '../../utils';
+import type { SharedProps } from './interface';
+import { useThemeGithubConfig } from '../../hooks/useUserThemeConfig';
 import { getMoreLinksGroup } from './More';
+import useLocaleValue from '../../hooks/useLocaleValue';
+import { getTargetLocalePath, isExternalLinks } from '../../utils';
+import { INavItem } from 'dumi/dist/client/theme-api/types';
 
-export interface NavigationProps {
-  isMobile: boolean;
-  responsive: IResponsive;
-}
-
-const useStyle = () => {
-  const { token } = useSiteToken();
-
-  const { antCls, iconCls, fontFamily, headerHeight, menuItemBorder, colorPrimary } = token;
+// ============================= Style =============================
+const useStyle = createStyles(({ token }) => {
+  const { antCls, iconCls, fontFamily, fontSize, headerHeight, colorPrimary } = token;
 
   return {
     nav: css`
       height: 100%;
-      font-size: 14px;
+      font-size: ${fontSize}px;
       font-family: Avenir, ${fontFamily}, sans-serif;
-      border: 0;
+      border: 0 !important;
 
       &${antCls}-menu-horizontal {
         border-bottom: none;
 
         & > ${antCls}-menu-item, & > ${antCls}-menu-submenu {
-          min-width: (40px + 12px * 2);
+          min-width: ${40 + 12 * 2}px;
           height: ${headerHeight}px;
-          padding-right: 12px;
-          padding-left: 12px;
+          padding-inline-end: ${token.paddingSM}px;
+          padding-inline-start: ${token.paddingSM}px;
           line-height: ${headerHeight}px;
-
-          &::after {
-            top: 0;
-            right: 12px;
-            bottom: auto;
-            left: 12px;
-            border-width: ${menuItemBorder}px;
-          }
         }
 
         & ${antCls}-menu-submenu-title ${iconCls} {
@@ -63,42 +51,48 @@ const useStyle = () => {
         text-align: center;
       }
     `,
-    popoverMenuNav: css`
-      ${antCls}-menu-item,
-      ${antCls}-menu-submenu {
-        text-align: left;
-      }
-
-      ${antCls}-menu-item-group-title {
-        padding-left: 24px;
-      }
-
-      ${antCls}-menu-item-group-list {
-        padding: 0 16px;
-      }
-
-      ${antCls}-menu-item,
-      a {
-        color: #333;
-      }
-    `
   };
-};
+});
 
-export default function Navigation({ isMobile, responsive }: NavigationProps) {
+export interface NavigationProps extends SharedProps {
+  isMobile: boolean;
+  responsive: null | 'narrow' | 'crowded';
+  directionText: string;
+  onLangChange: () => void;
+  onDirectionChange: () => void;
+}
+
+
+const HeaderNavigation: React.FC<NavigationProps> = (props) => {
+  const { isZhCN, isMobile, responsive, directionText, onLangChange, onDirectionChange } = props;
+  const { github } = useThemeGithubConfig();
   const { pathname, search } = useLocation();
   const { locales } = useSiteData();
-  const { github, socialLinks } = useAdditionalThemeConfig();
-
   // 统一使用 themeConfig.nav，使用 useNavData，当存在自定义 pages 时，会导致 nav 混乱
   const navList = useNavData();
   const locale = useLocale();
   const moreLinks = useLocaleValue('moreLinks');
-  const activeMenuItem = pathname.split('/').slice(0, 2).join('/');
+
+  const sidebarData = useFullSidebarData();
+  const blogList = sidebarData['/docs/blog']?.[0]?.children || [];
+
+  const { styles } = useStyle();
+
+  const menuMode = isMobile ? 'inline' : 'horizontal';
+
+  const module = pathname.split('/').filter(Boolean).slice(0, -1).join('/');
+  let activeMenuItem = `/${module || 'home'}`;
+
+  if (pathname.startsWith('/changelog')) {
+    activeMenuItem = '/docs/react';
+  } else if (pathname.startsWith('/docs/resources')) {
+    activeMenuItem = '/docs/resources';
+  }
 
   const createMenuItems = (navs: INavItem[]) => {
     return navs.map((navItem: INavItem) => {
       const linkKeyValue = (navItem.link ?? '').split('/').slice(0, 2).join('/');
+
       return {
         // eslint-disable-next-line no-nested-ternary
         label: navItem.children ? (
@@ -115,16 +109,20 @@ export default function Navigation({ isMobile, responsive }: NavigationProps) {
       };
     });
   };
+
   const menuItems: MenuProps['items'] = createMenuItems(navList);
 
   // 获取小屏幕下多语言导航栏节点
-  const getLangNode = useCallback(() => {
+  const getLangNode = React.useCallback(() => {
     if (locales.length < 2) {
       return null;
     }
+
     if (locales.length === 2) {
-      const nextLang = locales.filter((item) => item.id !== locale.id)[0];
+      const nextLang = locales.filter((item) => item.id !== locale?.id)[0];
+
       const nextPath = getTargetLocalePath({
+        pathname,
         current: locale,
         target: nextLang
       });
@@ -144,6 +142,7 @@ export default function Navigation({ isMobile, responsive }: NavigationProps) {
         .filter((item) => item.id !== locale.id)
         .map((item) => {
           const nextPath = getTargetLocalePath({
+            pathname,
             current: locale,
             target: item
           });
@@ -159,19 +158,29 @@ export default function Navigation({ isMobile, responsive }: NavigationProps) {
     };
   }, [locale, locales]);
 
-  let additional: MenuProps['items'];
+  let additional: MenuProps['items'] = [];
   const additionalItems: MenuProps['items'] = [
-    github || socialLinks?.github
+    github
       ? {
-          label: (
-            <a rel="noopener noreferrer" href={github || socialLinks?.github} target="_blank">
-              GitHub
-            </a>
-          ),
-          key: 'github'
-        }
+        label: (
+          <a rel="noopener noreferrer" href={github} target="_blank">
+            GitHub
+          </a>
+        ),
+        key: 'github'
+      }
       : null,
     getLangNode(),
+    {
+      label: <FormattedMessage id="app.header.lang" />,
+      onClick: onLangChange,
+      key: 'switch-lang',
+    },
+    {
+      label: directionText,
+      onClick: onDirectionChange,
+      key: 'switch-direction',
+    },
     ...(getMoreLinksGroup(moreLinks) || [])
   ];
 
@@ -180,22 +189,44 @@ export default function Navigation({ isMobile, responsive }: NavigationProps) {
   } else if (responsive === 'crowded') {
     additional = [
       {
-        label: <MenuFoldOutlined />,
+        label: <MenuOutlined />,
         key: 'additional',
-        children: [...additionalItems]
-      }
+        children: [...additionalItems],
+      },
     ];
   }
-  const items: MenuProps['items'] = [...(menuItems ?? []), ...(additional ?? [])];
-  const menuMode = isMobile ? 'inline' : 'horizontal';
-  const style = useStyle();
+
+  const items: MenuProps['items'] = [
+    ...(menuItems ?? []),
+    blogList.length
+      ? {
+        label: (
+          <Link
+            to={utils.getLocalizedPathname(
+              blogList.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1))[0]
+                .link,
+              isZhCN,
+              search,
+            )}
+          >
+            {(locale as any)?.blog}
+          </Link>
+        ),
+        key: 'docs/blog',
+      }
+      : null,
+    ...(additional ?? []),
+  ].filter(Boolean);
+
   return (
     <Menu
-      items={items}
       mode={menuMode}
-      css={style.nav}
       selectedKeys={[activeMenuItem]}
+      className={styles.nav}
       disabledOverflow
+      items={items}
     />
   );
-}
+};
+
+export default HeaderNavigation;

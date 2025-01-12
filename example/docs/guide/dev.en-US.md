@@ -15,37 +15,20 @@ The first version of `dumi-theme-chaos` has been developed, but it is not yet fu
 It is recommended to use `pnpm` as a package management tool.
 
 After you clone the dumi-theme-chaos code and use:
-:::code-group
 
-```bash [pnpm]
-$ pnpm install
-```
-
-```bash [npm] 
-$ npm install
-```
-
-```bash [yarn]
-$ yarn
-```
-:::
+<InstallDependencies
+  pnpm='$ pnpm install'
+  npm='$ npm install'
+  yarn='$ yarn'
+/>
 
 After installing the dependencies, run the following command to start the development mode. 
 
-:::code-group
-
-```bash [pnpm]
-$ pnpm run start
-```
-
-```bash [npm] 
-$ npm run start
-```
-
-```bash [yarn]
-$ yarn run start
-```
-:::
+<InstallDependencies
+  pnpm='$ pnpm run start'
+  npm='$ npm run start'
+  yarn='$ yarn run start'
+/>
 
 Modify `/src` to debug the files in the directory.
 
