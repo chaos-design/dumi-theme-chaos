@@ -26,7 +26,8 @@ function extractEmotionStyle(html: string) {
       tag: `<style data-emotion="${cache.key} ${result.ids.join(' ')}">${result.css}</style>`,
     };
   });
-  return styles.filter(Boolean);
+
+  return styles?.filter(Boolean);
 }
 
 export const getHash = (str: string, length = 8) =>
