@@ -11,21 +11,22 @@ import { dependencies, devDependencies } from '../package.json';
 function extractEmotionStyle(html: string) {
   // copy from emotion ssr
   // https://github.com/vercel/next.js/blob/deprecated-main/examples/with-emotion-vanilla/pages/_document.js
-  const styles = global?.__ANTD_STYLE_CACHE_MANAGER_FOR_SSR__?.getCacheList?.()?.map((cache) => {
-    const result = createEmotionServer(cache).extractCritical(html);
-    if (!result.css) {
-      return null;
-    }
+  const styles = [];
+  // global?.__ANTD_STYLE_CACHE_MANAGER_FOR_SSR__?.getCacheList?.()?.map((cache) => {
+  //   const result = createEmotionServer(cache).extractCritical(html);
+  //   if (!result.css) {
+  //     return null;
+  //   }
 
-    const { css, ids } = result;
+  //   const { css, ids } = result;
 
-    return {
-      key: cache.key,
-      css,
-      ids,
-      tag: `<style data-emotion="${cache.key} ${result.ids.join(' ')}">${result.css}</style>`,
-    };
-  });
+  //   return {
+  //     key: cache.key,
+  //     css,
+  //     ids,
+  //     tag: `<style data-emotion="${cache.key} ${result.ids.join(' ')}">${result.css}</style>`,
+  //   };
+  // });
 
   return styles?.filter(Boolean);
 }
