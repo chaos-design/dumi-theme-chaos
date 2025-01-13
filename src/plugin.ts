@@ -192,7 +192,7 @@ const RoutesPlugin = async (api: IApi) => {
         const styles = extractEmotionStyle(file.content);
 
         // 2. 提取每个样式到独立 css 文件
-        styles.forEach((result) => {
+        styles.forEach((result: any) => {
           api.logger.event(
             `${chalk.yellow(file.path)} include ${chalk.blue`[${result!.key}]`} ${chalk.yellow(
               result!.ids.length,

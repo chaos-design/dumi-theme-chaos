@@ -1,9 +1,7 @@
 import { defineConfig } from 'dumi';
-import { resolve } from 'path';
+// import { resolve } from 'path';
 import pkgJSON from '../package.json';
-import { defineThemeConfig } from './.dumi/theme/defineThemeConfig';
-import rehypeAntd from './.dumi/theme/extra/rehypeAntd';
-import remarkAntd from './.dumi/theme/extra/remarkAntd';
+import { defineThemeConfig, rehypeAntd, remarkAntd } from './.dumi/theme';
 
 export default defineConfig({
   // mfsu: false,
