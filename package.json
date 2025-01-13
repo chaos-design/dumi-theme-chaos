@@ -1,6 +1,6 @@
 {
   "name": "dumi-theme-chaos",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "chaos",
   "keywords": [
     "dumi",
@@ -27,7 +27,8 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepare": "husky install && father link-dev-theme && APP_ROOT=example dumi setup",
+    "peer": "pnpm add antd dumi --save-peer",
+    "prepare": "npm run peer && husky install && father link-dev-theme && APP_ROOT=example dumi setup",
     "prepublishOnly": "father doctor && npm run build",
     "start": "cross-env APP_ROOT=example dumi dev"
   },
@@ -114,7 +115,8 @@
     "sylvanas": "^0.6.1"
   },
   "peerDependencies": {
-    "dumi": "^2.4.13",
+    "antd": "^5.23.0",
+    "dumi": "^2.4.17",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
