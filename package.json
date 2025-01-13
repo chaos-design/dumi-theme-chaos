@@ -70,6 +70,7 @@
     "antd": "^5.23.0",
     "antd-style": "^3.7.1",
     "antd-token-previewer": "2.0.8",
+    "chalk": "^5.0.0",
     "classnames": "2.5.1",
     "cross-fetch": "^4.0.0",
     "dayjs": "1.11.13",
@@ -84,7 +85,8 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-intersection-observer": "^9.13.1",
     "scroll-into-view-if-needed": "^3.1.0",
-    "semver": "^7.6.3"
+    "semver": "^7.6.3",
+    "sylvanas": "^0.6.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
@@ -96,7 +98,6 @@
     "@types/react": "~18.0.0",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@umijs/lint": "^4.0.0",
-    "chalk": "^5.0.0",
     "cross-env": "^7.0.3",
     "dumi": "^2.4.17",
     "eslint": "^8.23.0",
@@ -110,8 +111,7 @@
     "prettier-plugin-packagejson": "^2.2.18",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "stylelint": "^14.9.1",
-    "sylvanas": "^0.6.1"
+    "stylelint": "^14.9.1"
   },
   "peerDependencies": {
     "dumi": "^2.4.17",
