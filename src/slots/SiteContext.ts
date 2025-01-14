@@ -19,4 +19,6 @@ const SiteContext = React.createContext<SiteContextProps>({
   updateSiteConfig: () => {},
 });
 
+export const useSiteContext = () => React.useContext(SiteContext);
+
 export default SiteContext;

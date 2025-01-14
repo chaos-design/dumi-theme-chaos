@@ -1,6 +1,6 @@
 {
   "name": "dumi-theme-chaos",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "description": "chaos",
   "keywords": [
     "dumi",
@@ -103,7 +103,7 @@
     "father": "^4.5.1",
     "father-plugin-dumi-theme": "^1.0.0-rc.1",
     "husky": "^9.1.7",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.18",
@@ -113,8 +113,8 @@
   },
   "peerDependencies": {
     "dumi": "^2.4.17",
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "publishConfig": {
     "access": "public",

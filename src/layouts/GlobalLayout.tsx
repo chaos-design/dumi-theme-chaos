@@ -12,7 +12,12 @@ import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import { theme as antdTheme, App } from 'antd';
 import type { MappingAlgorithm } from 'antd';
 import type { DirectionType, ThemeConfig } from 'antd/es/config-provider';
-import { createSearchParams, useOutlet, useSearchParams, useServerInsertedHTML } from 'dumi';
+import {
+  createSearchParams,
+  useOutlet,
+  useSearchParams,
+  useServerInsertedHTML,
+} from 'dumi';
 
 import { DarkContext } from '../hooks/useDark';
 import useLayoutState from '../hooks/useLayoutState';
@@ -64,13 +69,15 @@ const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [{ theme = [], direction, isMobile, bannerVisible = false }, setSiteState] =
-    useLayoutState<SiteState>({
-      isMobile: false,
-      direction: 'ltr',
-      theme: [],
-      bannerVisible: false,
-    });
+  const [
+    { theme = [], direction, isMobile, bannerVisible = false },
+    setSiteState,
+  ] = useLayoutState<SiteState>({
+    isMobile: false,
+    direction: 'ltr',
+    theme: [],
+    bannerVisible: false,
+  });
 
   // TODO: This can be remove in v6
   const useCssVar = searchParams.get('cssVar') !== 'false';
@@ -83,25 +90,30 @@ const GlobalLayout: React.FC = () => {
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
-      (Object.entries(props) as Entries<SiteContextProps>).forEach(([key, value]) => {
-        if (key === 'direction') {
-          if (value === 'rtl') {
-            nextSearchParams.set('direction', 'rtl');
-          } else {
-            nextSearchParams.delete('direction');
+      (Object.entries(props) as Entries<SiteContextProps>).forEach(
+        ([key, value]) => {
+          if (key === 'direction') {
+            if (value === 'rtl') {
+              nextSearchParams.set('direction', 'rtl');
+            } else {
+              nextSearchParams.delete('direction');
+            }
           }
-        }
-        if (key === 'theme') {
-          nextSearchParams = createSearchParams({
-            ...nextSearchParams,
-            theme: value.filter((t) => t !== 'light'),
-          } as any);
+          if (key === 'theme') {
+            nextSearchParams = createSearchParams({
+              ...nextSearchParams,
+              theme: value.filter((t) => t !== 'light'),
+            } as any);
 
-          document
-            .querySelector('html')
-            ?.setAttribute('data-prefers-color', value.includes('dark') ? 'dark' : 'light');
-        }
-      });
+            document
+              .querySelector('html')
+              ?.setAttribute(
+                'data-prefers-color',
+                value.includes('dark') ? 'dark' : 'light',
+              );
+          }
+        },
+      );
 
       if (nextSearchParams.toString() !== oldSearchStr) {
         setSearchParams(nextSearchParams);
@@ -117,15 +129,10 @@ const GlobalLayout: React.FC = () => {
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
-    // const storedBannerVisibleLastTime =
-    //   localStorage && localStorage.getItem(ANT_DESIGN_NOT_SHOW_BANNER);
-    // const storedBannerVisible =
-    //   storedBannerVisibleLastTime && dayjs().diff(dayjs(storedBannerVisibleLastTime), 'day') >= 1;
 
     setSiteState({
       theme: _theme,
       direction: _direction === 'rtl' ? 'rtl' : 'ltr',
-      // bannerVisible: storedBannerVisibleLastTime ? !!storedBannerVisible : true,
     });
     document.documentElement.setAttribute(
       'data-prefers-color',
@@ -169,7 +176,12 @@ const GlobalLayout: React.FC = () => {
       types: 'style',
     });
     // biome-ignore lint/security/noDangerouslySetInnerHtml: only used in .dumi
-    return <style data-type="antd-cssinjs" dangerouslySetInnerHTML={{ __html: styleText }} />;
+    return (
+      <style
+        data-type="antd-cssinjs"
+        dangerouslySetInnerHTML={{ __html: styleText }}
+      />
+    );
   });
 
   useServerInsertedHTML(() => {

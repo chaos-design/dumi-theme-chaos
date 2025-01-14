@@ -1,9 +1,12 @@
-import { css } from "@emotion/react";
-import { Alert } from "antd";
-import { useCallback, useEffect, useState, type FC } from "react";
-import useUserThemeConfig from "../../hooks/useUserThemeConfig";
-import { AnnouncementBarProps } from "../../types";
-import { isLocalStorageNameSupported } from "../../utils";
+import React from 'react';
+import { css } from '@emotion/react';
+import { Alert, ConfigProvider } from 'antd';
+import { useCallback, useEffect, useState, type FC } from 'react';
+import useUserThemeConfig from '../../hooks/useUserThemeConfig';
+import { AnnouncementBarProps } from '../../types';
+import { isLocalStorageNameSupported } from '../../utils';
+import useSiteToken from '../../hooks/useSiteToken';
+import { useSiteContext } from '../SiteContext';
 // import useSiteToken from '../../hooks/useSiteToken';
 
 export const hexToHsl = (hex: string, decline = 0) => {
@@ -47,13 +50,21 @@ export const hexToHsl = (hex: string, decline = 0) => {
 };
 
 const useStyle = ({
-  backgroundColor = "#e8d7ff",
-  textColor = "#091E42",
-  align = "center",
-}: Pick<AnnouncementBarProps, "backgroundColor" | "textColor" | "align">) => {
-  // const { token } = useSiteToken();
+  backgroundColor = '#e8d7ff',
+  textColor = '#091E42',
+  align = 'center',
+}: Pick<AnnouncementBarProps, 'backgroundColor' | 'textColor' | 'align'>) => {
+  const { token } = useSiteToken();
 
   return {
+    link: css`
+      margin-inline-start: 4px;
+      font-size: ${token.fontSize}px;
+
+      @media only screen and (max-width: ${token.mobileMaxWidth}px) {
+        margin-inline-start: 0;
+      }
+    `,
     container: css`
       --site-announcement-bar-stripe-color1: ${hexToHsl(backgroundColor, 10)};
       --site-announcement-bar-stripe-color2: ${hexToHsl(backgroundColor, 15)};
@@ -80,23 +91,32 @@ const useStyle = ({
   };
 };
 
-const CHAOS_ANNOUNCEMENT_BAR_DISMISS = "chaos.announcement.dismiss";
+const CHAOS_ANNOUNCEMENT_BAR_DISMISS = 'chaos.announcement.dismiss';
 
 const AnnouncementBar: FC = () => {
   const [isClosed, setClosed] = useState(true);
   const { announcementBar } = useUserThemeConfig() || {};
+  const { updateSiteConfig } = useSiteContext();
   const s = useStyle(announcementBar || {});
 
   useEffect(() => {
+    let closed = false;
     if (
       announcementBar?.id &&
-      (!isLocalStorageNameSupported() ? true :
-        localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) === announcementBar.id)
+      (!isLocalStorageNameSupported()
+        ? true
+        : localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) ===
+          announcementBar.id)
     ) {
-      setClosed(true);
+      closed = true;
     } else {
-      setClosed(false);
+      closed = false;
     }
+
+    setClosed(closed);
+    updateSiteConfig({
+      bannerVisible: !closed,
+    });
   }, [announcementBar]);
 
   const handleClose = useCallback(() => {
@@ -112,16 +132,48 @@ const AnnouncementBar: FC = () => {
   }
 
   return (
-    <div className="announcement-bar">
-      <Alert
-        banner
-        type="info"
-        closable
-        {...announcementBar}
-        onClose={handleClose}
-        css={announcementBar?.backgroundColor ? [s.container] : []}
-      />
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorInfoBg:
+            announcementBar?.backgroundColor ||
+            'linear-gradient(90deg, #84fab0, #8fd3f4)',
+          colorTextBase: announcementBar?.textColor || '#000',
+        },
+      }}
+    >
+      <div className="announcement-bar">
+        <Alert
+          banner
+          type="info"
+          closable
+          {...announcementBar}
+          message={
+            <>
+              <span>{announcementBar?.message}</span>
+              {!announcementBar?.more || !announcementBar?.link ? null : (
+                <a
+                  css={[s.link]}
+                  href={announcementBar?.link.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => {
+                    window.gtag?.('event', '点击', {
+                      event_category: 'top_banner',
+                      event_label: announcementBar?.link,
+                    });
+                  }}
+                >
+                  {announcementBar?.more}
+                </a>
+              )}
+            </>
+          }
+          onClose={handleClose}
+          css={announcementBar?.backgroundColor ? [s.container] : []}
+        />
+      </div>
+    </ConfigProvider>
   );
 };
 

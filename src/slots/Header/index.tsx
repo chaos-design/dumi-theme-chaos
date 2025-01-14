@@ -1,4 +1,11 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import { Alert, Col, ConfigProvider, Popover, Row, Select } from 'antd';
 import { createStyles } from 'antd-style';
@@ -173,7 +180,7 @@ const Header: React.FC = () => {
     windowWidth: 1400,
     searching: false,
   });
-  const { direction, isMobile, bannerVisible, updateSiteConfig } =
+  const { direction, isMobile, updateSiteConfig } =
     useContext<SiteContextProps>(SiteContext);
 
   const pingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -193,13 +200,6 @@ const Header: React.FC = () => {
   }, []);
   const onDirectionChange = () => {
     updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });
-  };
-  const onBannerClose = () => {
-    updateSiteConfig({ bannerVisible: false });
-
-    if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem(ANT_DESIGN_NOT_SHOW_BANNER, dayjs().toISOString());
-    }
   };
 
   useEffect(() => {
@@ -223,7 +223,10 @@ const Header: React.FC = () => {
     if (/overview/.test(currentPathname) && /0?[1-39][0-3]?x/.test(url)) {
       window.location.href = currentUrl
         .replace(window.location.origin, url)
-        .replace(/\/components\/overview/, `/docs${/0(9|10)x/.test(url) ? '' : '/react'}/introduce`)
+        .replace(
+          /\/components\/overview/,
+          `/docs${/0(9|10)x/.test(url) ? '' : '/react'}/introduce`,
+        )
         .replace(/\/$/, '');
       return;
     }
@@ -242,14 +245,18 @@ const Header: React.FC = () => {
     const currentHref = window.location.href.slice(currentProtocol.length);
 
     if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
+      localStorage.setItem(
+        'locale',
+        utils.isZhCN(pathname) ? 'en-US' : 'zh-CN',
+      );
     }
 
     window.location.href =
       currentProtocol +
       currentHref.replace(
         window.location.pathname,
-        utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search).pathname,
+        utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search)
+          .pathname,
       );
   }, [location]);
 
@@ -269,10 +276,12 @@ const Header: React.FC = () => {
     ...themeConfig?.docVersions,
   };
 
-  const versionOptions = Object.keys(docVersions).filter(Boolean).map((version) => ({
-    value: docVersions[version],
-    label: version,
-  }));
+  const versionOptions = Object.keys(docVersions)
+    .filter(Boolean)
+    .map((version) => ({
+      value: docVersions[version],
+      label: version,
+    }));
 
   const isHome = ['', 'index', 'index-cn'].includes(pathname);
   const isZhCN = lang === 'cn';
@@ -335,13 +344,12 @@ const Header: React.FC = () => {
   const colProps = isHome
     ? [{ flex: 'none' }, { flex: 'auto' }]
     : [
-      { xxl: 4, xl: 5, lg: 6, md: 6, sm: 24, xs: 24 },
-      { xxl: 20, xl: 19, lg: 18, md: 18, sm: 0, xs: 0 },
-    ];
+        { xxl: 4, xl: 5, lg: 6, md: 6, sm: 24, xs: 24 },
+        { xxl: 20, xl: 19, lg: 18, md: 18, sm: 0, xs: 0 },
+      ];
 
   return (
     <header className={headerClassName}>
-      <AnnouncementBar />
       {isMobile && (
         <Popover
           classNames={{ root: styles.popoverMenu }}
@@ -355,44 +363,7 @@ const Header: React.FC = () => {
           <MenuOutlined className="nav-phone-icon" />
         </Popover>
       )}
-      {isZhCN && bannerVisible && (
-        <ConfigProvider
-          theme={{
-            token: {
-              colorInfoBg: 'linear-gradient(90deg, #84fab0, #8fd3f4)',
-              colorTextBase: '#000',
-            },
-          }}
-        >
-          <Alert
-            className={styles.banner}
-            message={
-              <>
-                <span>{isMobile ? locale.shortMessage : locale.message}</span>
-                <a
-                  className={styles.link}
-                  href={locale.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    window.gtag?.('event', '点击', {
-                      event_category: 'top_banner',
-                      event_label: locale.link,
-                    });
-                  }}
-                >
-                  {locale.more}
-                </a>
-              </>
-            }
-            type="info"
-            banner
-            closable
-            showIcon={false}
-            onClose={onBannerClose}
-          />
-        </ConfigProvider>
-      )}
+      <AnnouncementBar />
       <Row style={{ flexFlow: 'nowrap', height: 64 }}>
         <Col {...colProps[0]}>
           <Logo {...sharedProps} location={location} />

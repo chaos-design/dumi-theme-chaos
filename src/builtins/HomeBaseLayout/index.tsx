@@ -16,7 +16,7 @@ const bannerConfigDefault: IBannerConfig = {
   showBanner: true,
   bannerMobileImgUrl:
     'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JmlaR5oQn3MAAAAAAAAAAAAADrJ8AQ/original',
-  bannerImgUrl: ''
+  bannerImgUrl: '',
 };
 
 const useStyle = () => {
@@ -40,6 +40,38 @@ const useStyle = () => {
         font-family: AliPuHui, ${token.fontFamily};
       }
     `,
+    titleAnimation: css`
+      h1& {
+        b {
+          background-image: linear-gradient(
+            -45deg,
+            #ffb224,
+            #e34ba9,
+            #0072f5,
+            #95f3d9
+          );
+          background-size: 400% 400%;
+          border-radius: inherit;
+          animation: 5s animation-b 5s ease infinite;
+          position: relative;
+          z-index: 5;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes animation-b {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      }
+    `,
     title: isMobile
       ? css`
           h1& {
@@ -55,7 +87,7 @@ const useStyle = () => {
             font-weight: 900;
             font-size: 68px;
           }
-        `
+        `,
   };
 };
 
@@ -72,11 +104,15 @@ const HomeBaseLayout: FC = () => {
   // 如果配置了 bannerImgUrl 字段，展示配置图片，否则展示 ant-design 默认 banner 视频
   const { showBanner, bannerImgUrl, bannerMobileImgUrl } = Object.assign(
     bannerConfigDefault,
-    bannerConfig
+    bannerConfig,
   );
 
   const bannerContent = bannerImgUrl ? (
-    <img src={bannerImgUrl} style={{ width: '100%', maxWidth: '100%' }} alt="" />
+    <img
+      src={bannerImgUrl}
+      style={{ width: '100%', maxWidth: '100%' }}
+      alt=""
+    />
   ) : (
     <React.Fragment>
       <div
@@ -86,11 +122,16 @@ const HomeBaseLayout: FC = () => {
           flex: 'auto',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: '100% 0',
-          backgroundSize: 'auto 100%'
+          backgroundSize: 'auto 100%',
         }}
       />
 
-      <video style={{ height: '100%', objectFit: 'contain' }} autoPlay muted loop>
+      <video
+        style={{ height: '100%', objectFit: 'contain' }}
+        autoPlay
+        muted
+        loop
+      >
         <source
           src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*uYT7SZwhJnUAAAAAAAAAAAAADgCCAQ"
           type="video/webm"
@@ -109,7 +150,7 @@ const HomeBaseLayout: FC = () => {
           backgroundRepeat: 'repeat-x',
           backgroundPosition: '0 0',
           backgroundSize: 'auto 100%',
-          marginLeft: -1
+          marginLeft: -1,
         }}
       />
     </React.Fragment>
@@ -123,7 +164,7 @@ const HomeBaseLayout: FC = () => {
             width: '100%',
             maxWidth: '100%',
             display: `${showBanner ? 'inline-block' : 'none'} `,
-            opacity: `${theme.indexOf('dark') > -1 ? '0.8' : 1}`
+            opacity: `${theme.indexOf('dark') > -1 ? '0.8' : 1}`,
           }}
           alt=""
         />
@@ -135,7 +176,7 @@ const HomeBaseLayout: FC = () => {
             display: `${showBanner ? 'flex' : 'none'} `,
             flexWrap: 'nowrap',
             justifyContent: 'center',
-            opacity: `${theme.indexOf('dark') > -1 ? '0.8' : 1}`
+            opacity: `${theme.indexOf('dark') > -1 ? '0.8' : 1}`,
           }}
         >
           {bannerContent}
@@ -147,29 +188,44 @@ const HomeBaseLayout: FC = () => {
           style={{
             textAlign: 'center',
             paddingTop: token.marginFar - 16,
-            paddingBottom: token.marginFarSM
+            paddingBottom: token.marginFarSM,
           }}
         >
           {/* Image Left Top */}
           <img
-            style={{ pointerEvents: 'none', position: 'absolute', left: isMobile ? -120 : 0, top: 0, width: 240 }}
+            style={{
+              pointerEvents: 'none',
+              position: 'absolute',
+              left: isMobile ? -120 : 0,
+              top: 0,
+              width: 240,
+            }}
             src="https://gw.alipayobjects.com/zos/bmw-prod/49f963db-b2a8-4f15-857a-270d771a1204.svg"
             alt="bg"
           />
           {/* Image Right Top */}
           <img
-            style={{ pointerEvents: 'none', position: 'absolute', right: isMobile ? 0 : 120, top: 0, width: 240 }}
+            style={{
+              pointerEvents: 'none',
+              position: 'absolute',
+              right: isMobile ? 0 : 120,
+              top: 0,
+              width: 240,
+            }}
             src="https://gw.alipayobjects.com/zos/bmw-prod/e152223c-bcae-4913-8938-54fda9efe330.svg"
             alt="bg"
           />
-          <Typography.Title level={1} css={[style.titleBase, style.title]}>
-            {title || name}
+          <Typography.Title
+            level={1}
+            css={[style.titleBase, style.title, style.titleAnimation]}
+          >
+            <span dangerouslySetInnerHTML={{ __html: title || name }} />
           </Typography.Title>
           <Typography.Paragraph
             style={{
               fontSize: token.fontSizeHeading5,
               lineHeight: token.lineHeightHeading5,
-              marginBottom: token.marginMD * 2
+              marginBottom: token.marginMD * 2,
             }}
           >
             <div>{description}</div>
@@ -177,12 +233,19 @@ const HomeBaseLayout: FC = () => {
           <Space
             size="middle"
             style={{
-              marginBottom: token.marginFar
+              marginBottom: token.marginFar,
             }}
           >
             {actions?.map(({ link, text, type, shape = 'round' }) => {
               return isExternalLinks(link) ? (
-                <Button size="large" type={type} href={link} shape={shape} target="_blank" key={link}>
+                <Button
+                  size="large"
+                  type={type}
+                  href={link}
+                  shape={shape}
+                  target="_blank"
+                  key={link}
+                >
                   {text}
                 </Button>
               ) : (

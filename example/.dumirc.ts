@@ -1,5 +1,5 @@
 import { defineConfig } from 'dumi';
-// import { resolve } from 'path';
+import { resolve } from 'path';
 import pkgJSON from '../package.json';
 import { defineThemeConfig, rehypeAntd, remarkAntd } from './.dumi/theme';
 
@@ -34,14 +34,21 @@ export default defineConfig({
   },
   // pass theme config
   themeConfig: defineThemeConfig({
-    name: 'dumi-theme-chaos',
+    // name: 'Dumi Theme <b>Chaos</b>',
+    title: 'Dumi Theme <b>Chaos</b>',
+    description: {
+      'zh-CN': 'Chaos Design',
+      'en-US': 'Chaos Design',
+    },
     lastUpdated: true,
     announcementBar: {
       id: 'announcementBar',
       message: '🎉 欢迎使用 dumi-theme-chaos',
+      more: '查看更多',
+      link: 'https://github.com/chaos-design/dumi-theme-chaos',
       description: 'chaos description',
-      backgroundColor: '#69b1ff',
-      textColor: '#fff',
+      backgroundColor: '#86f4bd',
+      textColor: '#000000e0',
       showIcon: false,
       closable: true,
     },
@@ -69,11 +76,6 @@ export default defineConfig({
       { id: 'en-US', switchPrefix: 'en' },
     ],
     sidebarGroupModePath: ['/config', '/guide'],
-    title: 'Doc Theme',
-    description: {
-      'zh-CN': 'Chaos Design',
-      'en-US': 'Chaos Design',
-    },
     actions: {
       'zh-CN': [
         {

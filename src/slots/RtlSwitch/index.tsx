@@ -1,4 +1,4 @@
-import { useContext, type FC } from 'react';
+import React, { useContext, type FC } from 'react';
 import { css } from '@emotion/react';
 import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
@@ -13,12 +13,13 @@ const useStyle = createStyles(({ token, css }) => {
   return {
     dataDirectionIcon: css`
       width: 20px;
-    `
+    `,
   };
 });
 
 const RtlSwitch: FC = () => {
-  const { direction, updateSiteConfig } = useContext<SiteContextProps>(SiteContext);
+  const { direction, updateSiteConfig } =
+    useContext<SiteContextProps>(SiteContext);
   const { styles: s } = useStyle();
   const { rtl = true } = useUserThemeConfig();
 
@@ -29,7 +30,6 @@ const RtlSwitch: FC = () => {
   };
 
   return (
-
     <SwitchBtn
       key="direction"
       onClick={onDirectionChange}
@@ -41,7 +41,7 @@ const RtlSwitch: FC = () => {
       pure
       aria-label="RTL Switch Button"
     />
-  )
+  );
 };
 
 export default RtlSwitch;

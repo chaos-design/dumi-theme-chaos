@@ -22,13 +22,12 @@ import SidebarLayout from '../SidebarLayout';
 
 const locales = {
   cn: {
-    title: 'Ant Design - 一套企业级 UI 设计语言和 React 组件库',
-    description: '基于 Ant Design 设计体系的 React UI 组件库，用于研发企业级中后台产品。',
+    title: 'Chaos Design',
+    description: 'Doc',
   },
   en: {
-    title: "Ant Design - The world's second most popular React UI framework",
-    description:
-      'An enterprise-class UI design language and React UI library with a set of high-quality React components, one of best React UI library for enterprises',
+    title: 'Chaos Design',
+    description: 'Doc',
   },
 };
 
@@ -85,9 +84,11 @@ const DocLayout: React.FC = () => {
     if (pathname.startsWith('/docs/resource')) {
       return <ResourceLayout>{outlet}</ResourceLayout>;
     }
+
     if (pathname.startsWith('/theme-editor')) {
       return outlet;
     }
+
     return <SidebarLayout>{outlet}</SidebarLayout>;
   }, [pathname, outlet]);
 
@@ -101,16 +102,19 @@ const DocLayout: React.FC = () => {
         />
         <link
           sizes="144x144"
-          href="https://gw.alipayobjects.com/zos/antfincdn/UmVnt3t4T0/antd.png"
+          href="https://rain120.github.io/study-notes/img/chao.png"
         />
         <meta property="og:description" content={locale.description} />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
+          content="https://rain120.github.io/study-notes/img/chao.png"
         />
       </Helmet>
-      <ConfigProvider direction={direction} locale={lang === 'cn' ? zhCN : undefined}>
+      <ConfigProvider
+        direction={direction}
+        locale={lang === 'cn' ? zhCN : undefined}
+      >
         <GlobalStyles />
         <Header />
         {content}
