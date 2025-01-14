@@ -100,7 +100,7 @@ const AnnouncementBar: FC = () => {
   const s = useStyle(announcementBar || {});
 
   useEffect(() => {
-    let closed = false;
+    let closed = true;
     if (
       announcementBar?.id &&
       (!isLocalStorageNameSupported()
@@ -108,16 +108,19 @@ const AnnouncementBar: FC = () => {
         : localStorage.getItem(CHAOS_ANNOUNCEMENT_BAR_DISMISS) ===
           announcementBar.id)
     ) {
-      closed = true;
+      setClosed(true);
     } else {
-      closed = false;
+      setClosed(false);
     }
 
     setClosed(closed);
-    updateSiteConfig({
-      bannerVisible: !closed,
-    });
   }, [announcementBar]);
+
+  useEffect(() => {
+    updateSiteConfig({
+      bannerVisible: !isClosed,
+    });
+  }, [isClosed]);
 
   const handleClose = useCallback(() => {
     if (announcementBar?.id && isLocalStorageNameSupported()) {
