@@ -22,7 +22,7 @@
     "paths": {
       "@@/*": ["example/.dumi/tmp/*"],
       "antd": ["node_modules/antd/*"],
-      "dumi": ["node_modules/dumi/*"],
+      "dumi": ["node_modules/dumi/*"]
     }
   },
   "include": ["**/*", "./index.d.ts"],

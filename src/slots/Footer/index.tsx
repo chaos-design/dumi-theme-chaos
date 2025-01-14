@@ -1,3 +1,4 @@
+import React from 'react';
 import { TinyColor } from '@ctrl/tinycolor';
 import { css } from '@emotion/react';
 import RcFooter from 'rc-footer';
@@ -50,7 +51,9 @@ const useStyle = () => {
       }
 
       .rc-footer-container {
-        display: ${Array.isArray(footerLinks) && footerLinks.length > 0 ? 'block' : 'none'};
+        display: ${Array.isArray(footerLinks) && footerLinks.length > 0
+          ? 'block'
+          : 'none'};
         max-width: 1208px;
         margin-inline: auto;
         padding-inline: ${token.marginXXL}px;
@@ -62,7 +65,7 @@ const useStyle = () => {
           font-size: ${token.fontSize}px;
         }
       }
-    `
+    `,
   };
 };
 
@@ -79,7 +82,9 @@ const Footer: FC = () => {
           // eslint-disable-next-line no-param-reassign
           delete item.icon;
           // eslint-disable-next-line no-param-reassign
-          item.icon = <img src={String(iconUrl)} alt="" style={{ maxWidth: '100%' }} />;
+          item.icon = (
+            <img src={String(iconUrl)} alt="" style={{ maxWidth: '100%' }} />
+          );
         }
         if (Array.isArray(item.items)) {
           getFooterLinks(item.items);
@@ -97,7 +102,7 @@ const Footer: FC = () => {
       bottom={
         <span
           dangerouslySetInnerHTML={{
-            __html: footer
+            __html: footer,
           }}
         />
       }
