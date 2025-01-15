@@ -1,14 +1,14 @@
 {
   "assets": {
     "umi.css": "/dumi-theme-chaos/umi.c75d111f.css",
-    "umi.js": "/dumi-theme-chaos/umi.77c4bda1.js",
-    "meta__docs__en-US.js": "/dumi-theme-chaos/meta__docs__en-US.1cbdfecb.async.js",
+    "umi.js": "/dumi-theme-chaos/umi.707a04d1.js",
+    "meta__docs__en-US.js": "/dumi-theme-chaos/meta__docs__en-US.0b523408.async.js",
     "meta__docs__zh-CN.js": "/dumi-theme-chaos/meta__docs__zh-CN.552c3382.async.js",
     "nm__dumi__dist__client__pages__404.js": "/dumi-theme-chaos/nm__dumi__dist__client__pages__404.e2cbaf55.async.js",
     "dumi__theme__layouts__GlobalLayout.js": "/dumi-theme-chaos/dumi__theme__layouts__GlobalLayout.a74648ae.async.js",
     "dumi__tmp-production__dumi__theme__ContextWrapper.js": "/dumi-theme-chaos/dumi__tmp-production__dumi__theme__ContextWrapper.1d44b085.async.js",
-    "dumi__theme__layouts__DocLayout__index.js": "/dumi-theme-chaos/dumi__theme__layouts__DocLayout__index.e3dd0512.async.js",
-    "dumi__pages__index__WhoAreUsing.js": "/dumi-theme-chaos/dumi__pages__index__WhoAreUsing.494d051c.async.js",
+    "dumi__theme__layouts__DocLayout__index.js": "/dumi-theme-chaos/dumi__theme__layouts__DocLayout__index.cae30fdc.async.js",
+    "dumi__pages__index__WhoAreUsing.js": "/dumi-theme-chaos/dumi__pages__index__WhoAreUsing.b6e7fb55.async.js",
     "dumi__pages__index-en__index.js": "/dumi-theme-chaos/dumi__pages__index-en__index.5bcfe125.async.js",
     "dumi__pages__index__index.js": "/dumi-theme-chaos/dumi__pages__index__index.9a930959.async.js",
     "docs__demo__advanced-use__customize-theme.en-US.md.js": "/dumi-theme-chaos/docs__demo__advanced-use__customize-theme.en-US.md.eb75cf52.async.js",
