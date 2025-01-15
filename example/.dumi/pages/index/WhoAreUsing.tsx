@@ -9,23 +9,22 @@ const userList = [
   {
     name: 'Chaos Design Doc',
     site: 'https://chaos-design.github.io/dumi-theme-chaos/',
-    logoUrl:
-      'https://rain120.github.io/study-notes/img/chao.png'
+    logoUrl: 'https://rain120.github.io/study-notes/img/chao.png',
   },
   {
     name: '增加更多',
-    site: 'https://github.com/chaos-design/dumi-theme-chaos/issues/23',
-    logoUrl: addImage
-  }
+    site: 'https://github.com/chaos-design/dumi-theme-chaos/issues/1',
+    logoUrl: addImage,
+  },
 ];
 
 const localesConfig = {
   'zh-CN': {
-    'page.home.who-are-using': '谁在使用'
+    'page.home.who-are-using': '谁在使用',
   },
   'en-US': {
-    'page.home.who-are-using': 'Who are using'
-  }
+    'page.home.who-are-using': 'Who are using',
+  },
 };
 const useStyle = () => {
   const { token } = useSiteToken();
@@ -70,7 +69,7 @@ const useStyle = () => {
     userLogo: css`
       width: 42px;
       margin-right: ${token.marginSM}px;
-    `
+    `,
   };
 };
 
@@ -78,7 +77,7 @@ const WhoAreUsing: FC = () => {
   const style = useStyle();
   const { id } = useLocale();
   const {
-    token: {}
+    token: {},
   } = useSiteToken();
 
   const handleError = useCallback((e) => {
@@ -93,9 +92,21 @@ const WhoAreUsing: FC = () => {
             {localesConfig[id]?.['page.home.who-are-using']}
           </Typography.Title>
         </div>
-        <Row gutter={[20, 16]} style={{ width: '100%', justifyContent: 'center' }}>
+        <Row
+          gutter={[20, 16]}
+          style={{ width: '100%', justifyContent: 'center' }}
+        >
           {userList.map((item, index) => (
-            <Col span={6} xxl={6} xl={6} lg={8} md={12} sm={24} xs={24} key={index}>
+            <Col
+              span={6}
+              xxl={6}
+              xl={6}
+              lg={8}
+              md={12}
+              sm={24}
+              xs={24}
+              key={index}
+            >
               <Flex css={style.userItem} justify="center" align="center">
                 <a href={item.site} target="_blank" rel="noreferrer">
                   <Flex justify="center" align="center">

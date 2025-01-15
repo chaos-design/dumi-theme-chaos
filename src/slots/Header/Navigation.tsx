@@ -68,8 +68,8 @@ export interface NavigationProps extends SharedProps {
   isMobile: boolean;
   responsive: null | 'narrow' | 'crowded';
   directionText: string;
-  onLangChange: () => void;
-  onDirectionChange: () => void;
+  // onLangChange: () => void;
+  // onDirectionChange: () => void;
 }
 
 const HeaderNavigation: React.FC<NavigationProps> = (props) => {
@@ -78,8 +78,8 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
     isMobile,
     responsive,
     directionText,
-    onLangChange,
-    onDirectionChange,
+    // onLangChange,
+    // onDirectionChange,
   } = props;
   const { github } = useThemeGithubConfig();
   const { pathname, search } = useLocation();

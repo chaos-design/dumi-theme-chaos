@@ -154,14 +154,16 @@ const AnnouncementBar: FC = () => {
               {!announcementBar?.more || !announcementBar?.link ? null : (
                 <a
                   css={[s.link]}
-                  href={announcementBar?.link.link}
+                  href={announcementBar?.link}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {
-                    window.gtag?.('event', '点击', {
-                      event_category: 'top_banner',
-                      event_label: announcementBar?.link,
-                    });
+                    if (window?.gtag) {
+                      window.gtag?.('event', '点击', {
+                        event_category: 'top_banner',
+                        event_label: announcementBar?.link,
+                      });
+                    }
                   }}
                 >
                   {announcementBar?.more}
