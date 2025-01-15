@@ -17,6 +17,8 @@ import * as utils from '../../utils';
 
 const { Option } = Select;
 
+const CHAOS_LOCALE = 'chaos.locale';
+
 const LangSwitch: FC = () => {
   const [searchParams] = useSearchParams();
   const { localesEnhance } = useUserThemeConfig();
@@ -36,7 +38,7 @@ const LangSwitch: FC = () => {
 
       if (utils.isLocalStorageNameSupported()) {
         localStorage.setItem(
-          'locale',
+          CHAOS_LOCALE,
           utils.isZhCN(pathname) ? 'en-US' : 'zh-CN',
         );
       }

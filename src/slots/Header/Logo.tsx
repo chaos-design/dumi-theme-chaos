@@ -46,11 +46,12 @@ const useStyle = createStyles(({ token, css }) => {
     title: css`
       line-height: 40px;
     `,
-    logoImage: css`&:hover {
-      transform: rotate(666turn);
-      transition: 59s cubic-bezier(.34,0,.84,1) 1s;
-    }
-  `
+    logoImage: css`
+      &:hover {
+        transform: rotate(666turn);
+        transition: 59s cubic-bezier(0.34, 0, 0.84, 1) 1s;
+      }
+    `,
   };
 });
 
@@ -59,10 +60,10 @@ export interface LogoProps {
   location: any;
 }
 
-const CHAOS_LOGO_TOUR_DISMISS = "chaos.logo.tour.dismiss";
+const CHAOS_LOGO_TOUR_DISMISS = 'chaos.logo.tour.dismiss';
 
 const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
-  const [tour, setTour] = React.useState(!isLocalStorageNameSupported() ? true : !localStorage.getItem(CHAOS_LOGO_TOUR_DISMISS));
+  const [tour, setTour] = React.useState(true);
   const { themeConfig } = useSiteData();
   const { search } = useLocation();
   const { styles: s } = useStyle();
@@ -70,21 +71,43 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const logoSrc =
     themeConfig.logo || 'https://rain120.github.io/study-notes/img/chao.png';
 
+  React.useEffect(() => {
+    if (isLocalStorageNameSupported()) {
+      if (!localStorage.getItem(CHAOS_LOGO_TOUR_DISMISS)) {
+        setTour(true);
+      } else {
+        setTour(false);
+      }
+    }
+  }, [tour]);
+
   return (
     <h1>
-      <Link to={utils.getLocalizedPathname('/', isZhCN, search)} className={s.logo}>
+      <Link
+        to={utils.getLocalizedPathname('/', isZhCN, search)}
+        className={s.logo}
+      >
         <Tooltip
           title="Hover见证魔法 😉"
           placement="right"
           open={tour}
           onOpenChange={(v) => {
-            setTour(v);
-            if (v && isLocalStorageNameSupported()) {
-              localStorage.setItem(CHAOS_LOGO_TOUR_DISMISS, '1');
+            if (v) {
+              if (isLocalStorageNameSupported()) {
+                localStorage.setItem(CHAOS_LOGO_TOUR_DISMISS, '1');
+              }
+            } else {
+              setTour(v);
             }
           }}
         >
-          <img id="chaos-logo" className={s.logoImage} src={logoSrc} draggable={false} alt="logo" />
+          <img
+            id="chaos-logo"
+            className={s.logoImage}
+            src={logoSrc}
+            draggable={false}
+            alt="logo"
+          />
         </Tooltip>
         <span className={s.title}>Chaos</span>
       </Link>

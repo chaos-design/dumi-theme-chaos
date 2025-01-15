@@ -85,6 +85,7 @@ const useStyle = createStyles(({ token, css }) => {
         > input {
           height: 36px;
           border: 1px solid transparent;
+          min-width: 240px;
           max-width: calc(100vw - 768px);
           padding-inline-start: 32px;
           border-radius: 8px;
@@ -93,6 +94,7 @@ const useStyle = createStyles(({ token, css }) => {
           &:focus {
             box-shadow: none;
             background: rgba(0, 0, 0, 0.03);
+            border: 1px solid ${token.colorPrimary};
           }
 
           &::placeholder {
