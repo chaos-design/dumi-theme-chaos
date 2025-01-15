@@ -1,10 +1,19 @@
 // 多语言切换
+import React from 'react';
 import { Select } from 'antd';
-import { history, useIntl, useLocale, useLocation, useSearchParams, useSiteData } from 'dumi';
+import {
+  history,
+  useIntl,
+  useLocale,
+  useLocation,
+  useSearchParams,
+  useSiteData,
+} from 'dumi';
 import { useCallback, type FC } from 'react';
 import { getTargetLocalePath } from '../../utils';
 import SwitchBtn from '../Header/SwitchBtn';
 import useUserThemeConfig from '../../hooks/useUserThemeConfig';
+import * as utils from '../../utils';
 
 const { Option } = Select;
 
@@ -22,8 +31,15 @@ const LangSwitch: FC = () => {
         pathname,
         current,
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        target: locales.find(({ id }) => id === lang)!
+        target: locales.find(({ id }) => id === lang)!,
       });
+
+      if (utils.isLocalStorageNameSupported()) {
+        localStorage.setItem(
+          'locale',
+          utils.isZhCN(pathname) ? 'en-US' : 'zh-CN',
+        );
+      }
 
       // 多多语言首页做特殊处理 eg. /index-en
       if (path.startsWith('/-')) {
@@ -33,10 +49,10 @@ const LangSwitch: FC = () => {
       }
       history.push({
         pathname: path,
-        search: searchParams.toString()
+        search: searchParams.toString(),
       });
     },
-    [pathname, current, locales, searchParams]
+    [pathname, current, locales, searchParams],
   );
 
   const onLangChange = useCallback(() => {
@@ -51,7 +67,7 @@ const LangSwitch: FC = () => {
         {lang.name}
       </Option>
     ));
-    LangSwitchJSX = (
+    LangSwitchJSX = LangSwitchJSX = (
       <Select
         key="lang"
         className="version"
@@ -64,7 +80,11 @@ const LangSwitch: FC = () => {
         {langOptions}
       </Select>
     );
-  } else if (locales.length === 2 && Array.isArray(localesEnhance) && localesEnhance.length > 1) {
+  } else if (
+    locales.length === 2 &&
+    Array.isArray(localesEnhance) &&
+    localesEnhance.length > 1
+  ) {
     // 按 locales 顺序展示
     const switchValue = locales[0].id === locale ? 1 : 2;
     LangSwitchJSX = (

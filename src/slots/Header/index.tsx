@@ -57,9 +57,10 @@ const useStyle = createStyles(({ token, css }) => {
       top: 0;
       z-index: 1000;
       max-width: 100%;
-      background: ${token.colorBgContainer};
+      // background: ${token.colorBgContainer};
       box-shadow: ${token.boxShadowTertiary};
       backdrop-filter: blur(8px);
+      background-color: rgba(248, 248, 248, 0.4);
 
       @media only screen and (max-width: ${token.mobileMaxWidth}px) {
         text-align: center;
@@ -71,20 +72,27 @@ const useStyle = createStyles(({ token, css }) => {
         align-items: center;
         flex: auto;
         margin: 0;
-        border-inline-start: 1px solid rgba(0, 0, 0, 0.06);
+        // border-inline-start: 1px solid rgba(0, 0, 0, 0.06);
+        background-color: rgba(0, 0, 0, 0.03);
+        border-radius: 8px;
 
         > svg {
-          width: 14px;
+          width: 18px;
+          inset-inline-start: 8px;
           fill: ${searchIconColor};
         }
 
         > input {
-          height: 22px;
-          border: 0;
+          height: 36px;
+          border: 1px solid transparent;
           max-width: calc(100vw - 768px);
+          padding-inline-start: 32px;
+          border-radius: 8px;
+          background: rgba(0, 0, 0, 0.03);
 
           &:focus {
             box-shadow: none;
+            background: rgba(0, 0, 0, 0.03);
           }
 
           &::placeholder {
@@ -93,13 +101,13 @@ const useStyle = createStyles(({ token, css }) => {
         }
 
         .dumi-default-search-shortcut {
-          color: ${searchIconColor};
+          // color: ${searchIconColor};
           background-color: rgba(150, 150, 150, 0.06);
           border-color: rgba(100, 100, 100, 0.2);
           border-radius: ${token.borderRadiusSM}px;
-          position: static;
-          top: unset;
-          transform: unset;
+          // position: static;
+          // top: unset;
+          // transform: unset;
         }
 
         .dumi-default-search-popover {
@@ -116,6 +124,18 @@ const useStyle = createStyles(({ token, css }) => {
           }
         }
       }
+    `,
+    searchBarContainer: css`
+      display: inline-flex;
+      align-items: center;
+      flex: auto !important;
+      margin: 0;
+      border-radius: inherit;
+      transition: all 0.2s;
+    `,
+    searchBar: css`
+      background-color: rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
     `,
     menuRow: css`
       display: flex;
@@ -192,23 +212,31 @@ const Header: React.FC = () => {
   const handleHideMenu = useCallback(() => {
     setHeaderState((prev) => ({ ...prev, menuVisible: false }));
   }, []);
+
   const onWindowResize = useCallback(() => {
-    setHeaderState((prev) => ({ ...prev, windowWidth: window.innerWidth }));
+    setHeaderState((prev) => ({ ...prev, windowWidth: window?.innerWidth }));
   }, []);
+
   const onMenuVisibleChange = useCallback((visible: boolean) => {
     setHeaderState((prev) => ({ ...prev, menuVisible: visible }));
   }, []);
-  const onDirectionChange = () => {
-    updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });
-  };
+
+  // const onDirectionChange = () => {
+  //   updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });
+  // };
 
   useEffect(() => {
     handleHideMenu();
   }, [location]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return () => {};
+    }
+
     onWindowResize();
     window.addEventListener('resize', onWindowResize);
+
     return () => {
       window.removeEventListener('resize', onWindowResize);
       if (pingTimer.current) {
@@ -218,47 +246,40 @@ const Header: React.FC = () => {
   }, []);
 
   const handleVersionChange = useCallback((url: string) => {
-    const currentUrl = window.location.href;
-    const currentPathname = window.location.pathname;
-    if (/overview/.test(currentPathname) && /0?[1-39][0-3]?x/.test(url)) {
-      window.location.href = currentUrl
-        .replace(window.location.origin, url)
-        .replace(
-          /\/components\/overview/,
-          `/docs${/0(9|10)x/.test(url) ? '' : '/react'}/introduce`,
-        )
-        .replace(/\/$/, '');
+    if (typeof window === 'undefined') {
       return;
     }
+
+    const currentUrl = window.location.href;
+
     // Mirror url must have `/`, we add this for compatible
     const urlObj = new URL(currentUrl.replace(window.location.origin, url));
-    if (urlObj.host.includes('antgroup')) {
-      urlObj.pathname = `${urlObj.pathname.replace(/\/$/, '')}/`;
-      window.location.href = urlObj.toString();
-    } else {
-      window.location.href = urlObj.href.replace(/\/$/, '');
-    }
+    window.location.href = urlObj.href.replace(/\/$/, '');
   }, []);
 
-  const onLangChange = useCallback(() => {
-    const currentProtocol = `${window.location.protocol}//`;
-    const currentHref = window.location.href.slice(currentProtocol.length);
+  // const onLangChange = useCallback(() => {
+  //   if (typeof window === 'undefined') {
+  //     return;
+  //   }
 
-    if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem(
-        'locale',
-        utils.isZhCN(pathname) ? 'en-US' : 'zh-CN',
-      );
-    }
+  //   const currentProtocol = `${window.location.protocol}//`;
+  //   const currentHref = window.location.href.slice(currentProtocol.length);
 
-    window.location.href =
-      currentProtocol +
-      currentHref.replace(
-        window.location.pathname,
-        utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search)
-          .pathname,
-      );
-  }, [location]);
+  //   if (utils.isLocalStorageNameSupported()) {
+  //     localStorage.setItem(
+  //       'locale',
+  //       utils.isZhCN(pathname) ? 'en-US' : 'zh-CN',
+  //     );
+  //   }
+
+  //   window.location.href =
+  //     currentProtocol +
+  //     currentHref.replace(
+  //       window.location.pathname,
+  //       utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search)
+  //         .pathname,
+  //     );
+  // }, [location]);
 
   const nextDirectionText = useMemo<string>(
     () => (direction !== 'rtl' ? 'RTL' : 'LTR'),
@@ -309,8 +330,8 @@ const Header: React.FC = () => {
       responsive={responsive}
       isMobile={isMobile}
       directionText={nextDirectionText}
-      onLangChange={onLangChange}
-      onDirectionChange={onDirectionChange}
+      // onLangChange={onLangChange}
+      // onDirectionChange={onDirectionChange}
     />
   );
 
@@ -370,7 +391,11 @@ const Header: React.FC = () => {
         </Col>
         <Col {...colProps[1]}>
           <div className={styles.menuRow}>
-            <DumiSearchBar />
+            <div className={styles.searchBarContainer}>
+              <div className={styles.searchBar}>
+                <DumiSearchBar />
+              </div>
+            </div>
             {!isMobile && menu}
           </div>
         </Col>

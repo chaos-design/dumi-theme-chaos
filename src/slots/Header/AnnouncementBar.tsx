@@ -100,7 +100,6 @@ const AnnouncementBar: FC = () => {
   const s = useStyle(announcementBar || {});
 
   useEffect(() => {
-    let closed = true;
     if (
       announcementBar?.id &&
       (!isLocalStorageNameSupported()
@@ -112,8 +111,6 @@ const AnnouncementBar: FC = () => {
     } else {
       setClosed(false);
     }
-
-    setClosed(closed);
   }, [announcementBar]);
 
   useEffect(() => {

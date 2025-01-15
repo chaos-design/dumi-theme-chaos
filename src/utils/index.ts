@@ -29,7 +29,7 @@ type ILocaleItem = ReturnType<typeof useSiteData>['locales'][0];
 export function getTargetLocalePath({
   pathname,
   current,
-  target
+  target,
 }: {
   pathname: string;
   current: ILocaleItem;
@@ -44,7 +44,6 @@ export function getTargetLocalePath({
     ? `${target.base}${clearPath}`.replace(/^\/\//, '/')
     : `${clearPath}${target.suffix}`;
 }
-
 
 export function getMenuItems(
   moduleData: ModuleDataItem[],
@@ -141,7 +140,7 @@ export function getMenuItems(
 }
 
 export function isZhCN(pathname: string) {
-  return /-cn\/?$/.test(pathname);
+  return !/-en\/?$/.test(pathname);
 }
 
 export function getLocalizedPathname(
@@ -198,6 +197,10 @@ export function ping(callback: (status: string) => void) {
 }
 
 export function isLocalStorageNameSupported() {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   const testKey = 'test';
   const storage = window?.localStorage;
   try {

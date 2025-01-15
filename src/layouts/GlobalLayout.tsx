@@ -123,7 +123,7 @@ const GlobalLayout: React.FC = () => {
   );
 
   const updateMobileMode = () => {
-    updateSiteConfig({ isMobile: window.innerWidth < RESPONSIVE_MOBILE });
+    updateSiteConfig({ isMobile: window?.innerWidth < RESPONSIVE_MOBILE });
   };
 
   useEffect(() => {
@@ -140,6 +140,10 @@ const GlobalLayout: React.FC = () => {
     );
     // Handle isMobile
     updateMobileMode();
+
+    if (typeof window === 'undefined') {
+      return () => {};
+    }
 
     window.addEventListener('resize', updateMobileMode);
     return () => {

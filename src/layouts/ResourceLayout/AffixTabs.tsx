@@ -70,7 +70,10 @@ const AffixTabs: React.FC = () => {
     const targetNode = document.getElementById(id);
 
     if (targetNode) {
-      const newTop = targetNode.offsetTop - containerRef.current!.offsetHeight - VIEW_BALANCE;
+      const newTop =
+        targetNode.offsetTop -
+        containerRef.current!.offsetHeight -
+        VIEW_BALANCE;
       scrollTo(newTop);
     }
   }
@@ -111,15 +114,26 @@ const AffixTabs: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    listenerEvents.forEach((event) => window.addEventListener(event, onSyncAffix));
+    if (typeof window === 'undefined') {
+      return () => {};
+    }
+
+    listenerEvents.forEach((event) =>
+      window.addEventListener(event, onSyncAffix),
+    );
     onSyncAffix();
     return () => {
-      listenerEvents.forEach((event) => window.removeEventListener(event, onSyncAffix));
+      listenerEvents.forEach((event) =>
+        window.removeEventListener(event, onSyncAffix),
+      );
     };
   }, []);
 
   return (
-    <div className={classNames(affixTabs, fixedId && affixTabsFixed)} ref={containerRef}>
+    <div
+      className={classNames(affixTabs, fixedId && affixTabsFixed)}
+      ref={containerRef}
+    >
       <Tabs
         activeKey={fixedId}
         centered

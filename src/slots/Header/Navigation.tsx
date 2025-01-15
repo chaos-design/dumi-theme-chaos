@@ -3,7 +3,14 @@ import { MenuOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { createStyles, css } from 'antd-style';
-import { FormattedMessage, useFullSidebarData, useLocale, useLocation, useNavData, useSiteData } from 'dumi';
+import {
+  FormattedMessage,
+  useFullSidebarData,
+  useLocale,
+  useLocation,
+  useNavData,
+  useSiteData,
+} from 'dumi';
 
 import Link from '../../common/Link';
 import * as utils from '../../utils';
@@ -16,14 +23,17 @@ import { INavItem } from 'dumi/dist/client/theme-api/types';
 
 // ============================= Style =============================
 const useStyle = createStyles(({ token }) => {
-  const { antCls, iconCls, fontFamily, fontSize, headerHeight, colorPrimary } = token;
+  const { antCls, iconCls, fontFamily, fontSize, headerHeight, colorPrimary } =
+    token;
 
   return {
     nav: css`
       height: 100%;
+      max-width: 50%;
       font-size: ${fontSize}px;
       font-family: Avenir, ${fontFamily}, sans-serif;
       border: 0 !important;
+      background-color: transparent;
 
       &${antCls}-menu-horizontal {
         border-bottom: none;
@@ -62,9 +72,15 @@ export interface NavigationProps extends SharedProps {
   onDirectionChange: () => void;
 }
 
-
 const HeaderNavigation: React.FC<NavigationProps> = (props) => {
-  const { isZhCN, isMobile, responsive, directionText, onLangChange, onDirectionChange } = props;
+  const {
+    isZhCN,
+    isMobile,
+    responsive,
+    directionText,
+    onLangChange,
+    onDirectionChange,
+  } = props;
   const { github } = useThemeGithubConfig();
   const { pathname, search } = useLocation();
   const { locales } = useSiteData();
@@ -91,7 +107,10 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
 
   const createMenuItems = (navs: INavItem[]) => {
     return navs.map((navItem: INavItem) => {
-      const linkKeyValue = (navItem.link ?? '').split('/').slice(0, 2).join('/');
+      const linkKeyValue = (navItem.link ?? '')
+        .split('/')
+        .slice(0, 2)
+        .join('/');
 
       return {
         // eslint-disable-next-line no-nested-ternary
@@ -105,7 +124,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           <Link to={`${navItem.link}${search}`}>{navItem.title}</Link>
         ),
         key: isExternalLinks(navItem.link) ? navItem.link : linkKeyValue,
-        children: navItem.children ? createMenuItems(navItem.children) : null
+        children: navItem.children ? createMenuItems(navItem.children) : null,
       };
     });
   };
@@ -124,7 +143,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
       const nextPath = getTargetLocalePath({
         pathname,
         current: locale,
-        target: nextLang
+        target: nextLang,
       });
       return {
         label: (
@@ -132,7 +151,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
             {nextLang.name}
           </a>
         ),
-        key: nextLang.id
+        key: nextLang.id,
       };
     }
     return {
@@ -144,7 +163,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
           const nextPath = getTargetLocalePath({
             pathname,
             current: locale,
-            target: item
+            target: item,
           });
           return {
             label: (
@@ -152,9 +171,9 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
                 {item.name}
               </a>
             ),
-            key: item.id
+            key: item.id,
           };
-        })
+        }),
     };
   }, [locale, locales]);
 
@@ -162,26 +181,26 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
   const additionalItems: MenuProps['items'] = [
     github
       ? {
-        label: (
-          <a rel="noopener noreferrer" href={github} target="_blank">
-            GitHub
-          </a>
-        ),
-        key: 'github'
-      }
+          label: (
+            <a rel="noopener noreferrer" href={github} target="_blank">
+              GitHub
+            </a>
+          ),
+          key: 'github',
+        }
       : null,
-    getLangNode(),
-    {
-      label: <FormattedMessage id="app.header.lang" />,
-      onClick: onLangChange,
-      key: 'switch-lang',
-    },
-    {
-      label: directionText,
-      onClick: onDirectionChange,
-      key: 'switch-direction',
-    },
-    ...(getMoreLinksGroup(moreLinks) || [])
+    // getLangNode(),
+    // {
+    //   label: <FormattedMessage id="app.header.lang" />,
+    //   onClick: onLangChange,
+    //   key: 'switch-lang',
+    // },
+    // {
+    //   label: directionText,
+    //   onClick: onDirectionChange,
+    //   key: 'switch-direction',
+    // },
+    ...(getMoreLinksGroup(moreLinks) || []),
   ];
 
   if (isMobile) {
@@ -200,20 +219,21 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
     ...(menuItems ?? []),
     blogList.length
       ? {
-        label: (
-          <Link
-            to={utils.getLocalizedPathname(
-              blogList.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1))[0]
-                .link,
-              isZhCN,
-              search,
-            )}
-          >
-            {(locale as any)?.blog}
-          </Link>
-        ),
-        key: 'docs/blog',
-      }
+          label: (
+            <Link
+              to={utils.getLocalizedPathname(
+                blogList.sort((a, b) =>
+                  a.frontmatter?.date > b.frontmatter?.date ? -1 : 1,
+                )[0].link,
+                isZhCN,
+                search,
+              )}
+            >
+              {(locale as any)?.blog}
+            </Link>
+          ),
+          key: 'docs/blog',
+        }
       : null,
     ...(additional ?? []),
   ].filter(Boolean);
@@ -223,7 +243,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
       mode={menuMode}
       selectedKeys={[activeMenuItem]}
       className={styles.nav}
-      disabledOverflow
+      // disabledOverflow
       items={items}
     />
   );

@@ -1,7 +1,17 @@
 import React, { memo, useContext, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Affix, Card, Col, Divider, Flex, Input, Row, Tag, Typography } from 'antd';
+import {
+  Affix,
+  Card,
+  Col,
+  Divider,
+  Flex,
+  Input,
+  Row,
+  Tag,
+  Typography,
+} from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { useIntl, useLocation, useSidebarData } from 'dumi';
 import debounce from 'lodash/debounce';
@@ -62,7 +72,7 @@ const useStyle = createStyles(({ token, css }) => ({
 }));
 
 const onClickCard = (pathname: string) => {
-  if (window.gtag) {
+  if (window?.gtag) {
     window.gtag('event', '点击', {
       event_category: '组件总览卡片',
       event_label: pathname,
@@ -71,7 +81,7 @@ const onClickCard = (pathname: string) => {
 };
 
 const reportSearch = debounce<(value: string) => void>((value) => {
-  if (window.gtag) {
+  if (window?.gtag) {
     window.gtag('event', '搜索', {
       event_category: '组件总览卡片',
       event_label: value,
@@ -92,7 +102,8 @@ const Overview: React.FC = () => {
   const { borderRadius, colorBgContainer, fontSizeXL, anchorTop } = token;
 
   const affixedStyle: CSSProperties = {
-    boxShadow: 'rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px',
+    boxShadow:
+      'rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px',
     padding: 8,
     margin: -8,
     borderRadius,
@@ -114,7 +125,9 @@ const Overview: React.FC = () => {
 
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.keyCode === 13 && search.trim().length) {
-      sectionRef.current?.querySelector<HTMLElement>(`.${styles.componentsOverviewCard}`)?.click();
+      sectionRef.current
+        ?.querySelector<HTMLElement>(`.${styles.componentsOverviewCard}`)
+        ?.click();
     }
   };
 
@@ -138,7 +151,10 @@ const Overview: React.FC = () => {
             children:
               locale === 'zh-CN'
                 ? proComponentsList
-                : proComponentsList.map((component) => ({ ...component, subtitle: '' })),
+                : proComponentsList.map((component) => ({
+                    ...component,
+                    subtitle: '',
+                  })),
           },
         ]),
     [data, locale],
@@ -146,7 +162,10 @@ const Overview: React.FC = () => {
   return (
     <section className="markdown" ref={sectionRef}>
       <Divider />
-      <Affix offsetTop={anchorTop} onChange={(affixed) => setSearchBarAffixed(!!affixed)}>
+      <Affix
+        offsetTop={anchorTop}
+        onChange={(affixed) => setSearchBarAffixed(!!affixed)}
+      >
         <div
           className={styles.componentsOverviewAffix}
           style={searchBarAffixed ? affixedStyle : {}}
@@ -154,7 +173,9 @@ const Overview: React.FC = () => {
           <Input
             autoFocus
             value={search}
-            placeholder={formatMessage({ id: 'app.components.overview.search' })}
+            placeholder={formatMessage({
+              id: 'app.components.overview.search',
+            })}
             className={styles.componentsOverviewSearch}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -185,12 +206,19 @@ const Overview: React.FC = () => {
             const components = group?.children?.filter(
               (component) =>
                 !search.trim() ||
-                component?.title?.toLowerCase()?.includes(search.trim().toLowerCase()) ||
-                (component?.subtitle || '').toLowerCase().includes(search.trim().toLowerCase()),
+                component?.title
+                  ?.toLowerCase()
+                  ?.includes(search.trim().toLowerCase()) ||
+                (component?.subtitle || '')
+                  .toLowerCase()
+                  .includes(search.trim().toLowerCase()),
             );
             return components?.length ? (
               <div key={group?.title}>
-                <Title level={2} className={styles.componentsOverviewGroupTitle}>
+                <Title
+                  level={2}
+                  className={styles.componentsOverviewGroupTitle}
+                >
                   <Flex gap="small" align="center">
                     <span style={{ fontSize: 24 }}>{group?.title}</span>
                     <Tag style={{ display: 'block' }}>{components.length}</Tag>
