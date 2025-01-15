@@ -22,13 +22,9 @@ Install this theme into `devDependencies`:
 $ pnpm i dumi-theme-chaos -D
 ```
 
-
 ## Contributing
 
 ```bash
-# not found antd dumi execute it
-# pnpm add antd dumi --save-peer
-
 # install deps
 pnpm install
 
