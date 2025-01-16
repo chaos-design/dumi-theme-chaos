@@ -81,6 +81,7 @@ const DocLayout: React.FC = () => {
         </IndexLayout>
       );
     }
+
     if (pathname.startsWith('/docs/resource')) {
       return <ResourceLayout>{outlet}</ResourceLayout>;
     }

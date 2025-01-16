@@ -29,13 +29,20 @@ declare module 'antd-style' {
 }
 
 const headerHeight = 64;
-const bannerHeight = 38;
+const bannerHeight = 72;
 
-const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme, ...rest }) => {
-  const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
+const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({
+  children,
+  theme,
+  ...rest
+}) => {
+  const { getPrefixCls, iconPrefixCls } = useContext(
+    ConfigProvider.ConfigContext,
+  );
   const rootPrefixCls = getPrefixCls();
   const { token } = antdTheme.useToken();
   const { bannerVisible } = useContext(SiteContext);
+
   React.useEffect(() => {
     // 需要注意与 components/config-provider/demo/holderRender.tsx 配置冲突
     ConfigProvider.config({ theme: theme as ThemeConfig });
@@ -62,7 +69,8 @@ const SiteThemeProvider: React.FC<ThemeProviderProps<any>> = ({ children, theme,
         marginFar: token.marginXXL * 2,
         codeFamily: `'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace`,
         contentMarginTop: 40,
-        anchorTop: headerHeight + token.margin + (bannerVisible ? bannerHeight : 0),
+        anchorTop:
+          headerHeight + token.margin + (bannerVisible ? bannerHeight : 0),
       }}
     >
       {children}

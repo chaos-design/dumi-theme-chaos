@@ -134,8 +134,6 @@ const AnnouncementBar: FC = () => {
     return null;
   }
 
-  console.log('isClosed', isClosed);
-
   return (
     <ConfigProvider
       theme={{

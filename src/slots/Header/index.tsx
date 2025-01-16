@@ -34,21 +34,6 @@ import RtlSwitch from '../RtlSwitch';
 const RESPONSIVE_XS = 1120;
 const RESPONSIVE_SM = 1200;
 
-const locales = {
-  cn: {
-    message: '语雀征文 · 说说你和开源的故事，赢取 Ant Design 精美周边 🎁',
-    shortMessage: '语雀征文 · 说说你和开源的故事，赢取 Ant Design 精美周边 🎁',
-    more: '前往了解',
-    link: 'https://www.yuque.com/opensource2023',
-  },
-  en: {
-    message: '',
-    shortMessage: '',
-    more: '',
-    link: '',
-  },
-};
-
 const useStyle = createStyles(({ token, css }) => {
   const searchIconColor = '#ced4d9';
   return {
@@ -139,9 +124,14 @@ const useStyle = createStyles(({ token, css }) => {
       background-color: rgba(0, 0, 0, 0.03);
       border-radius: 8px;
     `,
+    menuCol: css`
+      display: flex;
+      align-items: center;
+    `,
     menuRow: css`
       display: flex;
       align-items: center;
+      flex: 1;
       margin: 0;
       column-gap: ${token.paddingSM}px;
       padding-inline-end: ${token.padding}px;
@@ -192,8 +182,6 @@ interface HeaderState {
 
 // ================================= Header =================================
 const Header: React.FC = () => {
-  const [locale, lang] = useLocale(locales);
-
   const { pkg } = useSiteData();
 
   const themeConfig = useUserThemeConfig();
@@ -307,7 +295,7 @@ const Header: React.FC = () => {
     }));
 
   const isHome = ['', 'index', 'index-cn'].includes(pathname);
-  const isZhCN = lang === 'cn';
+  const isZhCN = utils.isZhCN(pathname);
   const isRTL = direction === 'rtl';
   let responsive: null | 'narrow' | 'crowded' = null;
   if (windowWidth < RESPONSIVE_XS) {
@@ -391,7 +379,7 @@ const Header: React.FC = () => {
         <Col {...colProps[0]}>
           <Logo {...sharedProps} location={location} />
         </Col>
-        <Col {...colProps[1]}>
+        <Col {...colProps[1]} className={styles.menuCol}>
           <div className={styles.menuRow}>
             <div className={styles.searchBarContainer}>
               <div className={styles.searchBar}>

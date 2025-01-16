@@ -159,6 +159,7 @@ const Overview: React.FC = () => {
         ]),
     [data, locale],
   );
+
   return (
     <section className="markdown" ref={sectionRef}>
       <Divider />

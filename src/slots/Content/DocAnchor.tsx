@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Anchor } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import type { AnchorLinkItemProps } from 'antd/es/anchor/Anchor';
 import classNames from 'classnames';
 import { useRouteMeta, useTabMeta } from 'dumi';
+import SiteContext from '../SiteContext';
 
 export const useStyle = createStyles(({ token, css }) => {
   const { antCls } = token;
+  const { bannerVisible } = useContext(SiteContext);
 
   return {
     anchorToc: css`
@@ -20,7 +22,10 @@ export const useStyle = createStyles(({ token, css }) => {
     `,
     tocWrapper: css`
       position: fixed;
-      top: ${token.headerHeight + token.contentMarginTop - 4}px;
+      top: ${token.headerHeight +
+      token.contentMarginTop +
+      (bannerVisible ? token.bannerHeight : 0) -
+      4}px;
       inset-inline-end: 0;
       width: 148px;
       padding: 0;
@@ -37,7 +42,9 @@ export const useStyle = createStyles(({ token, css }) => {
       > div {
         box-sizing: border-box;
         width: 100%;
-        max-height: calc(100vh - ${token.headerHeight + token.contentMarginTop + 24}px) !important;
+        max-height: calc(
+          100vh - ${token.headerHeight + token.contentMarginTop + 24}px
+        ) !important;
         margin: auto;
         overflow: auto;
         padding: ${token.paddingXXS}px;
@@ -79,7 +86,10 @@ interface AnchorItem {
   children?: AnchorItem[];
 }
 
-const DocAnchor: React.FC<DocAnchorProps> = ({ showDebug, debugDemos = [] }) => {
+const DocAnchor: React.FC<DocAnchorProps> = ({
+  showDebug,
+  debugDemos = [],
+}) => {
   const { styles } = useStyle();
   const token = useTheme();
   const meta = useRouteMeta();
@@ -95,7 +105,11 @@ const DocAnchor: React.FC<DocAnchorProps> = ({ showDebug, debugDemos = [] }) => 
         key: child.id,
         href: `#${child.id}`,
         title: (
-          <span className={classNames({ 'toc-debug': debugDemos.includes(child.id) })}>
+          <span
+            className={classNames({
+              'toc-debug': debugDemos.includes(child.id),
+            })}
+          >
             {child?.title}
           </span>
         ),
