@@ -6,7 +6,8 @@ import { defineThemeConfig, rehypeAntd, remarkAntd } from './.dumi/theme';
 export default defineConfig({
   // mfsu: false,
   // mako: {},
-  ssr: process.env.NODE_ENV === 'development' ? false : {},
+  // ssr: process.env.NODE_ENV === 'development' ? false : {},
+  ssr: false,
   publicPath: process.env.DEPLOY_SITE === 'local' ? '/' : '/dumi-theme-chaos/',
   base: process.env.DEPLOY_SITE === 'local' ? '/' : '/dumi-theme-chaos',
   favicons: ['https://rain120.github.io/study-notes/img/chao.png'],
