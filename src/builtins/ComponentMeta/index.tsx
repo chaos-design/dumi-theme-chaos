@@ -1,5 +1,9 @@
 import React from 'react';
-import { EditOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  GithubOutlined,
+  HistoryOutlined,
+} from '@ant-design/icons';
 import type { GetProp } from 'antd';
 import { Descriptions, Flex, theme, Tooltip, Typography } from 'antd';
 import { createStyles, css } from 'antd-style';
@@ -33,7 +37,8 @@ const locales = {
   },
 };
 
-const getBranchUrlByUserInfo = (user: string, branch = 'main') => `https://github.com/${user}/edit/${branch}`;
+const getBranchUrlByUserInfo = (user: string, branch = 'main') =>
+  `https://github.com/${user}/edit/${branch}`;
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -90,7 +95,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
   const { component, source, filename, version } = props;
   const { token } = theme.useToken();
   const [locale, lang] = useLocale(locales);
-  const { user, repo, branch, docDir } = useThemeGithubConfig();
+  const { owner, repo, branch, docDir } = useThemeGithubConfig();
   const isZhCN = lang === 'cn';
   const { styles } = useStyle();
 
@@ -112,7 +117,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
       return [
-        `https://github.com/${user}/${repo}/blob/${branch}/components/${kebabComponent}`,
+        `https://github.com/${owner}/${repo}/blob/${branch}/components/${kebabComponent}`,
         `components/${kebabComponent}`,
       ];
     }
@@ -136,9 +141,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     <span key="import" className={styles.import}>
       import
     </span>,
-    <span key="component" className={styles.component}>{`{ ${transformComponentName(
-      component,
-    )} }`}</span>,
+    <span
+      key="component"
+      className={styles.component}
+    >{`{ ${transformComponentName(component)} }`}</span>,
     <span key="from" className={styles.from}>
       from
     </span>,
@@ -164,7 +170,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard text={`import { ${component} } from "antd";`} onCopy={onCopy}>
+              <CopyToClipboard
+                text={`import { ${component} } from "antd";`}
+                onCopy={onCopy}
+              >
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}
@@ -180,7 +189,11 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           filledSource && {
             label: locale.source,
             children: (
-              <Typography.Link className={styles.code} href={filledSource} target="_blank">
+              <Typography.Link
+                className={styles.code}
+                href={filledSource}
+                target="_blank"
+              >
                 <GithubOutlined className={styles.icon} />
                 <span>{abbrSource}</span>
               </Typography.Link>
@@ -192,7 +205,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
               <Flex justify="flex-start" align="center" gap="middle">
                 <Typography.Link
                   className={styles.code}
-                  href={`${getBranchUrlByUserInfo(`${user}/${repo}`, branch)}${docDir}${filename}`}
+                  href={`${getBranchUrlByUserInfo(`${owner}/${repo}`, branch)}${docDir}${filename}`}
                   target="_blank"
                 >
                   <EditOutlined className={styles.icon} />

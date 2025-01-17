@@ -14,7 +14,16 @@ const useUserThemeConfig: UserThemeConfig = () => {
   return additionalThemeConfig;
 };
 
-export const useThemeGithubConfig = () => {
+export interface UserGithubConfig {
+  owner: string;
+  repo: string;
+  github: string | undefined;
+  branch: string;
+  originDocDir: string;
+  docDir: string;
+}
+
+export const useThemeGithubConfig = (): UserGithubConfig => {
   const { github: origin, socialLinks } = useUserThemeConfig();
 
   const github =
@@ -22,21 +31,23 @@ export const useThemeGithubConfig = () => {
 
   // https://github.com/chaos-design/dumi-theme-chaos
   // 把上述GitHub地址中的user 和 repo 提取出来
-  const [, user, repo] =
+  const [, owner, repo] =
     github?.match(/https:\/\/github.com\/([^/]+)\/([^/]+)/) ?? [];
 
+  const originDocDir =
+    typeof origin === 'string'
+      ? ''
+      : origin?.docDir
+        ? `${origin?.docDir}/`
+        : '';
+
   return {
-    user,
+    owner,
     repo,
     github,
     branch: typeof origin === 'string' ? 'main' : (origin?.branch ?? 'main'),
-    docDir:
-      '/' +
-      (typeof origin === 'string'
-        ? ''
-        : origin?.docDir
-          ? `${origin?.docDir}/`
-          : ''),
+    originDocDir,
+    docDir: '/' + originDocDir,
   };
 };
 

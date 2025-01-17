@@ -1,7 +1,7 @@
-import type { SerializedStyles } from "@emotion/react";
-import type { IThemeConfig } from "dumi/dist/client/theme-api/types";
-import type { ThemeConfig } from "antd";
-import type { FooterColumn } from "rc-footer/lib/column";
+import type { SerializedStyles } from '@emotion/react';
+import type { IThemeConfig } from 'dumi/dist/client/theme-api/types';
+import type { ThemeConfig } from 'antd';
+import type { FooterColumn } from 'rc-footer/lib/column';
 
 export type ISidebarGroupModePathItem = string;
 
@@ -18,8 +18,8 @@ interface IAction {
   /** 按钮链接 */
   link: string;
   /** 按钮类型 */
-  type?: "primary" | "default";
-  shape?: "round" | "circle" | "default";
+  type?: 'primary' | 'default';
+  shape?: 'round' | 'circle' | 'default';
 }
 
 export interface IMoreLink {
@@ -30,6 +30,7 @@ export interface IMoreLink {
 }
 
 interface IFeature {
+  emoji?: string;
   /** 特性名称 */
   title: string;
   /** 特性具体描述 */
@@ -56,9 +57,12 @@ export type SidebarEnhanceSubType = {
 };
 
 // 增强模式的 sidebar 相关类型
-export type SidebarEnhanceGroupChildren = (SidebarEnhanceSubType | SidebarEnhanceChildrenType)[];
+export type SidebarEnhanceGroupChildren = (
+  | SidebarEnhanceSubType
+  | SidebarEnhanceChildrenType
+)[];
 export type SidebarEnhanceGroupType = {
-  type: "group";
+  type: 'group';
   title: string;
   children: SidebarEnhanceGroupChildren;
 };
@@ -83,11 +87,13 @@ export interface IBannerConfig {
 
 interface UserThemeConfig {
   /** github 链接 */
-  github?: string | {
-    url: string;
-    branch?: string;
-    docDir?: string;
-  };
+  github?:
+    | string
+    | {
+        url: string;
+        branch?: string;
+        docDir?: string;
+      };
   /** 首页链接 */
   homeLink?: string;
   /** 多语言额外配置，主要用于展示语言切换文字（只针对于两项多语言时） */
@@ -113,7 +119,7 @@ interface UserThemeConfig {
   /** 增强模式的 sidebar */
   sidebarEnhance?: Record<string, SidebarEnhanceItems>;
   /** antd 主题定制，同 `ConfigProvider` 中 `theme` */
-  theme?: Omit<ThemeConfig, "algorithm">;
+  theme?: Omit<ThemeConfig, 'algorithm'>;
   /** 是否展示页面加载状态 */
   loading?: ILoading;
   /** footer 上方展示友情链接 */
@@ -124,8 +130,8 @@ interface UserThemeConfig {
 
 export interface AnnouncementBarProps {
   id: string;
-  align?: "left" | "center" | "right";
-  type?: "info" | "success" | "warning" | "error";
+  align?: 'left' | 'center' | 'right';
+  type?: 'info' | 'success' | 'warning' | 'error';
   message: string;
   description?: string;
   backgroundColor?: string;

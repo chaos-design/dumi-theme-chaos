@@ -66,11 +66,12 @@ export const useStyle = createStyles(({ token, css }) => {
       }
     `,
     bottomEditContent: css`
+      min-width: 200px;
+      text-align: right;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 12px;
-      flex: 0;
+      flex-shrink: 0;
     `,
   };
 });

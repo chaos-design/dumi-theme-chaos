@@ -11,6 +11,7 @@ import DemoContext from '../DemoContext';
 import SiteContext from '../SiteContext';
 import InViewSuspense from './InViewSuspense';
 import { useStyle } from './DocAnchor';
+import { useThemeGithubConfig } from '../../hooks/useUserThemeConfig';
 
 const Contributors = React.lazy(() => import('./Contributors'));
 const DocAnchor = React.lazy(() => import('./DocAnchor'));
@@ -24,13 +25,15 @@ const LastUpdated = React.lazy(() => import('../../common/LastUpdated'));
 const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   const meta = useRouteMeta();
   const { pathname, hash } = useLocation();
+  const github = useThemeGithubConfig();
   const { direction } = useContext(SiteContext);
   const { styles } = useStyle();
 
   const [showDebug, setShowDebug] = useLayoutState(false);
   const [codeType, setCodeType] = useState('tsx');
   const debugDemos = useMemo(
-    () => meta.toc?.filter((item) => item._debug_demo).map((item) => item.id) || [],
+    () =>
+      meta.toc?.filter((item) => item._debug_demo).map((item) => item.id) || [],
     [meta],
   );
 
@@ -87,10 +90,22 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
                 version={meta.frontmatter.tag}
               />
             )}
-          <div style={{ minHeight: 'calc(100vh - 64px)' }}>{children}</div>
-          <div style={{ marginTop: 120 }}>
+          <div style={{ minHeight: 'calc(100vh - 64px)' }} className="clearfix">
+            {children}
+          </div>
+          <div
+            style={{
+              marginTop: 80,
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+            }}
+          >
             <InViewSuspense fallback={<div style={{ height: 50 }} />}>
-              <Contributors filename={meta.frontmatter.filename} />
+              <Contributors
+                {...github}
+                filename={`${github.originDocDir}${meta.frontmatter.filename}`}
+              />
             </InViewSuspense>
             <InViewSuspense fallback={null}>
               <div className={c(styles.bottomEditContent, { rtl: isRTL })}>
@@ -105,7 +120,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         </InViewSuspense>
         <Footer />
       </Col>
-    </DemoContext.Provider >
+    </DemoContext.Provider>
   );
 };
 

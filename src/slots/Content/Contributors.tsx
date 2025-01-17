@@ -6,6 +6,7 @@ import { useIntl } from 'dumi';
 
 import SiteContext from '../SiteContext';
 import ContributorAvatar from './ContributorAvatar';
+import { UserGithubConfig } from '../../hooks/useUserThemeConfig';
 
 const useStyle = createStyles(({ token, css }) => ({
   listMobile: css`
@@ -33,27 +34,34 @@ const useStyle = createStyles(({ token, css }) => ({
   `,
 }));
 
-interface ContributorsProps {
+interface ContributorsProps extends UserGithubConfig {
   filename?: string;
 }
 
-const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
+const Contributors: React.FC<ContributorsProps> = ({ filename, ...github }) => {
   const { formatMessage } = useIntl();
   const { styles } = useStyle();
   const { isMobile } = useContext(SiteContext);
 
-  if (!filename) {
+  if (!filename || !github.repo || !github.owner) {
     return null;
   }
 
   return (
-    <div className={classNames({ [styles.listMobile]: isMobile })}>
-      <div className={styles.title}>{formatMessage({ id: 'app.content.contributors' })}</div>
+    <div
+      className={classNames({
+        [styles.listMobile]: isMobile,
+      })}
+    >
+      <div className={styles.title}>
+        {formatMessage({ id: 'app.content.contributors' })}
+      </div>
       <ContributorsList
         cache
-        repo="chaos-design"
-        owner="dumi-theme-chaos"
+        repo={github.repo}
+        owner={github.owner}
         fileName={filename}
+        branch={github.branch}
         className={styles.list}
         renderItem={(item, loading) => (
           <ContributorAvatar item={item} loading={loading} key={item?.url} />

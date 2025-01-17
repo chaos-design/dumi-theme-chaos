@@ -1,7 +1,20 @@
 import React from 'react';
 import { css, Global } from '@emotion/react';
-import { useTheme } from 'antd-style';
+import { CSSObject, useTheme } from 'antd-style';
 import { updateCSS } from 'rc-util/lib/Dom/dynamicCSS';
+
+export const clearFix = (): CSSObject => ({
+  '&::before': {
+    display: 'table',
+    content: '""',
+  },
+
+  '&::after': {
+    display: 'table',
+    clear: 'both',
+    content: '""',
+  },
+});
 
 export default () => {
   const { anchorTop } = useTheme();

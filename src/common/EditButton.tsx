@@ -4,7 +4,8 @@ import { Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import { useThemeGithubConfig } from '../hooks/useUserThemeConfig';
 
-const getBranchUrlByUserInfo = (user: string, branch = 'main') => `https://github.com/${user}/edit/${branch}`;
+const getBranchUrlByUserInfo = (user: string, branch = 'main') =>
+  `https://github.com/${user}/edit/${branch}`;
 export interface EditButtonProps {
   title: React.ReactNode;
   filename?: string;
@@ -38,13 +39,13 @@ const useStyle = createStyles(({ token, css }) => {
 
 const EditButton: React.FC<EditButtonProps> = ({ title, filename }) => {
   const { styles } = useStyle();
-  const { user, repo, branch, docDir } = useThemeGithubConfig();
+  const { owner, repo, branch, docDir } = useThemeGithubConfig();
 
   return (
     <Tooltip title={title}>
       <a
         className={styles.editButton}
-        href={`${getBranchUrlByUserInfo(`${user}/${repo}`, branch)}${docDir}${filename}`}
+        href={`${getBranchUrlByUserInfo(`${owner}/${repo}`, branch)}${docDir}${filename}`}
         target="_blank"
         rel="noopener noreferrer"
       >

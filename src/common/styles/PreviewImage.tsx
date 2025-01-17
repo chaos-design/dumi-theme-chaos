@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, Global } from '@emotion/react';
 import { useTheme } from 'antd-style';
+import { clearFix } from './Common';
 
 export default () => {
   const token = useTheme();
@@ -8,6 +9,10 @@ export default () => {
   return (
     <Global
       styles={css`
+        .clearfix {
+          ${clearFix()}
+        }
+
         .preview-image-boxes {
           display: flex;
           float: right;

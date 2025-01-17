@@ -1,3 +1,4 @@
+import React from 'react';
 import { css } from '@emotion/react';
 import { Carousel, Typography } from 'antd';
 import { useContext, type FC } from 'react';
@@ -65,20 +66,33 @@ const useStyle = () => {
     sliderItem: css`
       margin: 0 ${token.margin}px;
       text-align: start;
-    `
+    `,
+    emoji: css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      background-color: rgba(142, 150, 170, 0.14);
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      transition: background-color 0.25s;
+    `,
   };
 };
 
-const RecommendItem = ({ title, details, itemCss }: IFeature) => {
+const RecommendItem = ({ emoji, title, details, itemCss }: IFeature) => {
   const style = useStyle();
 
   return (
     <div css={[style.itemBase, itemCss]}>
+      {!emoji ? null : <div css={[style.emoji]}>{emoji}</div>}
       <Typography.Title level={5}>{title}</Typography.Title>
       <Typography.Paragraph
         type="secondary"
         style={{
-          flex: 'auto'
+          flex: 'auto',
         }}
       >
         {details}
@@ -98,7 +112,11 @@ const Features: FC = () => {
         <Carousel css={styles.carousel}>
           {Array.isArray(features) &&
             features?.map((item, index) => (
-              <RecommendItem key={index} {...item} itemCss={styles.sliderItem} />
+              <RecommendItem
+                key={index}
+                {...item}
+                itemCss={styles.sliderItem}
+              />
             ))}
         </Carousel>
       ) : (
