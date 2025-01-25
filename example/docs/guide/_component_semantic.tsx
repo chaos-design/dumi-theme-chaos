@@ -1,11 +1,14 @@
 import React from 'react';
 import { Avatar, Card } from 'antd';
 
-
 import useLocale from '../../.dumi/theme/hooks/useLocale';
 import SemanticPreview from '../../../src/components/SemanticPreview';
 
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -70,7 +73,9 @@ const App: React.FC = () => {
     >
       <BlockCard>
         <Meta
-          avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
+          avatar={
+            <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
+          }
           title="Card Meta title"
           description="This is the description"
         />

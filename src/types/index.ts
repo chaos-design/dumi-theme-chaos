@@ -40,6 +40,7 @@ interface IFeature {
 }
 
 interface ILoading {
+  icon?: string;
   skeleton?: Array<string>;
 }
 // 分组类型，将 children 换位字符串数组

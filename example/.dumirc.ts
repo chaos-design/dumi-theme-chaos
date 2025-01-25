@@ -34,11 +34,14 @@ export default defineConfig({
   },
   // pass theme config
   themeConfig: defineThemeConfig({
-    // name: 'Dumi Theme <b>Chaos</b>',
+    name: 'Chaos',
     title: 'Dumi Theme <b>Chaos</b>',
     description: {
       'zh-CN': 'Chaos Design',
       'en-US': 'Chaos Design',
+    },
+    loading: {
+      skeleton: ['/guide', '/config'],
     },
     lastUpdated: true,
     announcementBar: {

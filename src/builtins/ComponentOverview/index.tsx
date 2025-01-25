@@ -19,8 +19,15 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 
 import Link from '../../common/Link';
 import SiteContext from '../../slots/SiteContext';
-import type { Component } from './ProComponentsList';
-import proComponentsList from './ProComponentsList';
+
+export type Component = {
+  title: string;
+  subtitle?: string;
+  cover: string;
+  coverDark?: string;
+  link: string;
+  tag?: string;
+};
 
 const useStyle = createStyles(({ token, css }) => ({
   componentsOverviewGroupTitle: css`
@@ -91,7 +98,12 @@ const reportSearch = debounce<(value: string) => void>((value) => {
 
 const { Title } = Typography;
 
-const Overview: React.FC = () => {
+const Overview: React.FC<{
+  listLocale?: {
+    [k: string]: string;
+  };
+  list?: Component[];
+}> = ({ list, listLocale }) => {
   const { styles } = useStyle();
   const { theme } = useContext(SiteContext);
 
@@ -140,23 +152,31 @@ const Overview: React.FC = () => {
           children: item.children.map((child) => ({
             title: child.frontmatter?.title || '',
             subtitle: child.frontmatter?.subtitle,
-            cover: child.frontmatter?.cover,
-            coverDark: child.frontmatter?.coverDark,
+            cover:
+              child.frontmatter?.cover ||
+              'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*uae3QbkNCm8AAAAAAAAAAAAADrJ8AQ/original',
+            coverDark:
+              child.frontmatter?.coverDark ||
+              'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*VcjGQLSrYdcAAAAAAAAAAAAADrJ8AQ/original',
             link: child.link,
           })),
         }))
-        .concat([
-          {
-            title: locale === 'zh-CN' ? '重型组件' : 'Others',
-            children:
-              locale === 'zh-CN'
-                ? proComponentsList
-                : proComponentsList.map((component) => ({
-                    ...component,
-                    subtitle: '',
-                  })),
-          },
-        ]),
+        .concat(
+          !list?.length
+            ? []
+            : [
+                {
+                  title: listLocale?.[locale || 'zh-CN'] ?? 'Others',
+                  children:
+                    locale === 'zh-CN'
+                      ? list
+                      : list.map((component) => ({
+                          ...component,
+                          subtitle: '',
+                        })),
+                },
+              ],
+        ),
     [data, locale],
   );
 

@@ -29,8 +29,8 @@ title: Getting Started
 Install using `pnpm` or `npm` or `yarn`
 
 <InstallDependencies
-  pnpm='$ pnpm install dumi-theme-chaos'
-  npm='$ npm install dumi-theme-chaos'
+  pnpm='$ pnpm add dumi-theme-chaos'
+  npm='$ npm add dumi-theme-chaos'
   yarn='$ yarn add dumi-theme-chaos'
 />
 

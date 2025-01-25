@@ -4,11 +4,11 @@ order: 2
 title: Development
 ---
 
-## development status
+## Development Status
 
 The first version of `dumi-theme-chaos` has been developed, but it is not yet fully adapted to some features of the Antd Design 5.0 official website. This is a continuous process. If you have any questions, please contact [issues](https://github .com/chaos-design/dumi-theme-chaos/issues) form feedback.
 
-## contribute
+## Contribute
 
 ### Development Process
 
@@ -22,7 +22,7 @@ After you clone the dumi-theme-chaos code and use:
   yarn='$ yarn'
 />
 
-After installing the dependencies, run the following command to start the development mode. 
+After installing the dependencies, run the following command to start the development mode.
 
 <InstallDependencies
   pnpm='$ pnpm run start'
@@ -32,7 +32,7 @@ After installing the dependencies, run the following command to start the develo
 
 Modify `/src` to debug the files in the directory.
 
-### Welcome to PRS
+### Welcome to PullRequest
 
 Thanks to the students who have contributed~
 

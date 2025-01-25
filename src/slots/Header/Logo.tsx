@@ -75,7 +75,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { styles: s } = useStyle();
 
   const logoSrc =
-    themeConfig.logo || 'https://rain120.github.io/study-notes/img/chao.png';
+    themeConfig?.logo || 'https://rain120.github.io/study-notes/img/chao.png';
 
   React.useEffect(() => {
     if (isLocalStorageNameSupported()) {
@@ -128,7 +128,12 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
             }}
           />
         </Popover>
-        <span className={s.title}>Chaos</span>
+        {!themeConfig?.name ? null : (
+          <span
+            className={s.title}
+            dangerouslySetInnerHTML={{ __html: themeConfig?.name ?? '' }}
+          />
+        )}
       </Link>
     </h1>
   );

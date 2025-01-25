@@ -5,7 +5,7 @@ import {
   HistoryOutlined,
 } from '@ant-design/icons';
 import type { GetProp } from 'antd';
-import { Descriptions, Flex, theme, Tooltip, Typography } from 'antd';
+import { Descriptions, Flex, Tag, theme, Tooltip, Typography } from 'antd';
 import { createStyles, css } from 'antd-style';
 import kebabCase from 'lodash/kebabCase';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -73,7 +73,7 @@ const useStyle = createStyles(({ token }) => ({
     color: ${token.magenta8};
     margin-inline-end: 0.5em;
   `,
-  antd: css`
+  pkg: css`
     color: ${token.green8};
   `,
   semicolon: css`
@@ -89,10 +89,11 @@ export interface ComponentMetaProps {
   source: string | true;
   filename?: string;
   version?: string;
+  pkg: string;
 }
 
 const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
-  const { component, source, filename, version } = props;
+  const { component, source, pkg, filename, version } = props;
   const { token } = theme.useToken();
   const [locale, lang] = useLocale(locales);
   const { owner, repo, branch, docDir } = useThemeGithubConfig();
@@ -148,8 +149,8 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     <span key="from" className={styles.from}>
       from
     </span>,
-    <span key="antd" className={styles.antd}>
-      {`"antd"`}
+    <span key="pkg" className={styles.pkg}>
+      {`"${pkg}"`}
     </span>,
     <span key="semicolon" className={styles.semicolon}>
       ;
@@ -167,11 +168,11 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
       }}
       items={
         [
-          {
+          pkg && {
             label: locale.import,
             children: (
               <CopyToClipboard
-                text={`import { ${component} } from "antd";`}
+                text={`import { ${component} } from "${pkg}";`}
                 onCopy={onCopy}
               >
                 <Tooltip
@@ -224,7 +225,22 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
             label: locale.version,
             children: (
               <Typography.Text className={styles.code}>
-                {isZhCN ? `自 ${version} 后支持` : `supported since ${version}`}
+                {isZhCN ? (
+                  <>
+                    自
+                    <Tag color="processing" style={{ marginRight: 0 }}>
+                      {version}
+                    </Tag>
+                    后支持
+                  </>
+                ) : (
+                  <>
+                    supported since{' '}
+                    <Tag color="processing" style={{ marginRight: 0 }}>
+                      {version}
+                    </Tag>
+                  </>
+                )}
               </Typography.Text>
             ),
           },

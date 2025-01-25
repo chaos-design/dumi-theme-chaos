@@ -38,7 +38,7 @@ const DocLayout: React.FC = () => {
   const [locale, lang] = useLocale(locales);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
   const { direction } = useContext(SiteContext);
-  const { loading } = useSiteData();
+  const { loading, themeConfig } = useSiteData();
 
   useLayoutEffect(() => {
     if (lang === 'cn') {
@@ -103,13 +103,19 @@ const DocLayout: React.FC = () => {
         />
         <link
           sizes="144x144"
-          href="https://rain120.github.io/study-notes/img/chao.png"
+          href={
+            themeConfig?.logo ||
+            'https://rain120.github.io/study-notes/img/chao.png'
+          }
         />
         <meta property="og:description" content={locale.description} />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://rain120.github.io/study-notes/img/chao.png"
+          content={
+            themeConfig?.logo ||
+            'https://rain120.github.io/study-notes/img/chao.png'
+          }
         />
       </Helmet>
       <ConfigProvider

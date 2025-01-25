@@ -5,7 +5,8 @@ import type { IAllThemeConfig } from '../../types';
 import useUserThemeConfig from '../../hooks/useUserThemeConfig';
 
 const defaultLoadingConfig: IAllThemeConfig['loading'] = {
-  skeleton: []
+  icon: 'https://rain120.github.io/study-notes/img/chao.png',
+  skeleton: [],
 };
 
 const Loading: React.FC = () => {
@@ -26,9 +27,18 @@ const Loading: React.FC = () => {
 
   if (skeletonLoadingRenderRule()) {
     return (
-      <div style={{ maxWidth: '70vw', width: '100%', margin: '80px auto 0', textAlign: 'center' }}>
+      <div
+        style={{
+          maxWidth: '70vw',
+          width: '100%',
+          margin: '80px auto 0',
+          textAlign: 'center',
+        }}
+      >
         <img
-          src="https://rain120.github.io/study-notes/img/chao.png"
+          src={
+            loading.icon ?? 'https://rain120.github.io/study-notes/img/chao.png'
+          }
           width={40}
           alt="loading"
           style={{ marginBottom: 24, filter: 'grayscale(1)', opacity: 0.33 }}
@@ -40,7 +50,10 @@ const Loading: React.FC = () => {
   }
 
   return (
-    <Space style={{ width: '100%', margin: '120px 0', justifyContent: 'center' }} align="center">
+    <Space
+      style={{ width: '100%', margin: '120px 0', justifyContent: 'center' }}
+      align="center"
+    >
       <Spin size="large" />
     </Space>
   );

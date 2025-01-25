@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import { Anchor } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import type { AnchorLinkItemProps } from 'antd/es/anchor/Anchor';
-import classNames from 'classnames';
+import c from 'classnames';
 import { useRouteMeta, useTabMeta } from 'dumi';
 import SiteContext from '../SiteContext';
 
 export const useStyle = createStyles(({ token, css }) => {
   const { antCls } = token;
-  const { bannerVisible } = useContext(SiteContext);
 
   return {
     anchorToc: css`
@@ -22,10 +21,7 @@ export const useStyle = createStyles(({ token, css }) => {
     `,
     tocWrapper: css`
       position: fixed;
-      top: ${token.headerHeight +
-      token.contentMarginTop +
-      (bannerVisible ? token.bannerHeight : 0) -
-      4}px;
+      top: ${token.headerHeight + token.contentMarginTop - 4}px;
       inset-inline-end: 0;
       width: 148px;
       padding: 0;
@@ -54,6 +50,12 @@ export const useStyle = createStyles(({ token, css }) => {
       @media only screen and (max-width: ${token.screenLG}px) {
         display: none;
       }
+    `,
+    tocBannerWrapper: css`
+      top: ${token.headerHeight +
+      token.contentMarginTop +
+      token.bannerHeight -
+      4}px;
     `,
     articleWrapper: css`
       padding-inline: 48px 164px;
@@ -91,6 +93,8 @@ const DocAnchor: React.FC<DocAnchorProps> = ({
   showDebug,
   debugDemos = [],
 }) => {
+  const { bannerVisible } = useContext(SiteContext);
+
   const { styles } = useStyle();
   const token = useTheme();
   const meta = useRouteMeta();
@@ -107,7 +111,7 @@ const DocAnchor: React.FC<DocAnchorProps> = ({
         href: `#${child.id}`,
         title: (
           <span
-            className={classNames({
+            className={c({
               'toc-debug': debugDemos.includes(child.id),
             })}
           >
@@ -139,7 +143,9 @@ const DocAnchor: React.FC<DocAnchorProps> = ({
   }
 
   return (
-    <section className={styles.tocWrapper}>
+    <section
+      className={c(styles.tocWrapper, bannerVisible && styles.tocBannerWrapper)}
+    >
       <Anchor
         affix={false}
         className={styles.anchorToc}

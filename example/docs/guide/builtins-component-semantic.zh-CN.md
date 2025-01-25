@@ -1,29 +1,27 @@
 ---
 group:
-  title: Builtins Components
+  title: 内置组件
   order: 4
 order: 4
-title: Semantics DOM
-description: Component configuration corresponding position prompt, suitable for component development scenarios.
-
+title: 语义化 DOM
+description: 组件配置对应位置提示, 适用于组件开发的场景。
 ---
 
 # Demo
 
-<code src="./_semantic.tsx" simplify="true"></code>
+<code src="./_component_semantic.tsx" simplify="true"></code>
 
-## About Semantics DOM
+## 关于语义化 DOM
 
 :::info
-Please follow the specifications below to implement the component, otherwise it will not take effect, understanding the design concept is sufficient.
+请务必遵循下面规范实现组件，否则无法生效, 了解设计思路即可。
 :::
 
 ### 设计思路
 
-`SemanticsPreview` configures the attributes `header`, `body`, `extra`, `title`, `actions`, and `cover` using the semantics attribute, which will determine how they are displayed within the components.
+`SemanticsPreview` 通过属性`semantics` 配置对应的属性 `header`、`body`、`extra`、`title`、`actions`、`cover` 会被渲染到组件对应的位置。
 
-Therefore, the component needs to accept the class name configured through `SemanticsPreview`.
-
+即，组件需要接受通过 `SemanticsPreview` 配置的类名
 
 :::code-group
 

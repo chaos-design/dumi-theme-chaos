@@ -4,7 +4,9 @@ title: ImagePreview
 order: 2
 ---
 
-Image preview component, used when images need to be displayed. This component supports two parameters `float` and `pure`, which are used to control the image display effect.
+## ImagePreview Component
+
+Used when images need to be displayed. This component supports two parameters `float` and `pure`, which are used to control the image display effect.
 
 ### Basic usage
 

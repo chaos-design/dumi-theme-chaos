@@ -84,10 +84,15 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
           {meta.frontmatter.category === 'Components' &&
             String(meta.frontmatter.showImport) !== 'false' && (
               <ComponentMeta
-                source
+                source={meta.frontmatter.source}
+                pkg={
+                  meta.frontmatter.package ||
+                  meta.frontmatter.packageName ||
+                  meta.frontmatter.pkg
+                }
                 component={meta.frontmatter.title}
                 filename={meta.frontmatter.filename}
-                version={meta.frontmatter.tag}
+                version={meta.frontmatter.version || meta.frontmatter.tag}
               />
             )}
           <div style={{ minHeight: 'calc(100vh - 64px)' }} className="clearfix">

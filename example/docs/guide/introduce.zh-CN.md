@@ -29,8 +29,8 @@ title: 快速上手
 使用 `pnpm` 或 `npm` 或 `yarn` 安装
 
 <InstallDependencies
-  pnpm='$ pnpm install dumi-theme-chaos'
-  npm='$ npm install dumi-theme-chaos'
+  pnpm='$ pnpm add dumi-theme-chaos'
+  npm='$ npm add dumi-theme-chaos'
   yarn='$ yarn add dumi-theme-chaos'
 />
 
