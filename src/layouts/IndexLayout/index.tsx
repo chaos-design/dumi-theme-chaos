@@ -24,7 +24,9 @@ const IndexLayout: React.FC<PropsWithChildren<IndexLayoutProps>> = (props) => {
       </Helmet>
       <DumiHero />
       <DumiFeatures />
-      <div style={{ minHeight: '200px' }}>{children}</div>
+      <div className="index-layout" style={{ minHeight: '600px' }}>
+        {children}
+      </div>
       <Footer />
     </>
   );

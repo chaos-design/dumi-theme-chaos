@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   analytics: {
     // google analytics 的 key (GA 4)
-    ga_v2: 'G-D3DFGG9BYK',
+    ga_v2: 'G-72DCRMPDSM',
   },
   extraBabelPresets: ['@emotion/babel-preset-css-prop'],
   extraRehypePlugins: [rehypeAntd],
