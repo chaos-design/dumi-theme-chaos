@@ -10,7 +10,8 @@ import { UserGithubConfig } from '../../hooks/useUserThemeConfig';
 
 const useStyle = createStyles(({ token, css }) => ({
   listMobile: css`
-    margin: 1em 0 !important;
+    // margin: 1em 0 !important;
+    margin-bottom: 1em !important;
   `,
   title: css`
     font-size: ${token.fontSizeSM}px;

@@ -40,10 +40,6 @@ export default defineConfig({
       'zh-CN': 'Chaos Design',
       'en-US': 'Chaos Design',
     },
-    loading: {
-      skeleton: ['/guide', '/config'],
-    },
-    lastUpdated: true,
     announcementBar: {
       id: 'announcementBar',
       message: '🎉 欢迎使用 dumi-theme-chaos',
@@ -59,15 +55,14 @@ export default defineConfig({
       'zh-CN': [
         { title: '指南', link: '/guide/introduce' },
         { title: '配置', link: '/config/base' },
-        { title: '示例', link: '/demo/secondary-sidebar-colors' },
+        { title: '示例', link: '/demo/lv2-sidebar-layout' },
       ],
       'en-US': [
         { title: 'Guide', link: '/guide/introduce-en' },
         { title: 'Config', link: '/config/base-en' },
-        { title: 'Demo', link: '/demo/secondary-sidebar-colors-en' },
+        { title: 'Demo', link: '/demo/lv2-sidebar-layout-en' },
       ],
     },
-    footer: `Made with <span style="color: rgb(255, 255, 255);">❤</span>by <span>chaos-design | Copyright © 2025-${new Date().getFullYear()}</span>`,
     github: {
       url: 'https://github.com/chaos-design/dumi-theme-chaos',
       branch: 'main',
@@ -184,7 +179,7 @@ export default defineConfig({
       skeleton: ['/guide', '/config', '/demo'],
     },
     docVersions: {
-      [pkgJSON.version]: 'https://rain120.github.io/dumi-theme-chaos/',
+      [pkgJSON.version]: 'https://github.com/chaos-design/dumi-theme-chaos/',
     },
     footerLinks: [
       {
@@ -227,6 +222,9 @@ export default defineConfig({
         ],
       },
     ],
+    socialLinks: {
+      zhihu: 'https://www.zhihu.com/people/yan-yang-nian-hua-120',
+    },
     moreLinks: [
       {
         text: 'Chaos Design',

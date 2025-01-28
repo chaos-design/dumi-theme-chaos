@@ -1,7 +1,12 @@
 import type { ReactElement } from 'react';
 import React, { useContext, useMemo } from 'react';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import type { GetProp, MenuProps } from 'antd';
+import {
+  DownOutlined,
+  LeftOutlined,
+  RightOutlined,
+  UpOutlined,
+} from '@ant-design/icons';
+import { Flex, type GetProp, type MenuProps } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 
@@ -9,12 +14,48 @@ import useMenu from '../hooks/useMenu';
 import SiteContext from '../slots/SiteContext';
 import type { SiteContextProps } from '../slots/SiteContext';
 
-type MenuItemType = Extract<GetProp<MenuProps, 'items'>[number], { type?: 'item' }>;
+type MenuItemType = Extract<
+  GetProp<MenuProps, 'items'>[number],
+  { type?: 'item' }
+>;
 
 const useStyle = createStyles(({ token, css }) => {
   const { colorSplit, iconCls, fontSizeIcon } = token;
 
   return {
+    prevNextNavMobile: css`
+      position: fixed;
+      top: 40%;
+      right: 10px;
+      z-index: 2;
+      cursor: pointer;
+    `,
+    verticalText: css`
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: ${token.fontSize}px;
+      background: ${token.colorPrimary};
+      padding: 12px 6px;
+      border-radius: 40px;
+
+      a {
+        height: auto;
+        line-height: unset;
+        color: #fff;
+
+        .anticon {
+          color: #fff;
+        }
+
+        .anticon-up {
+          margin-bottom: 4px;
+        }
+
+        .anticon-down {
+          margin-top: 4px;
+        }
+      }
+    `,
     prevNextNav: css`
       width: calc(100% - 234px);
       margin-inline-end: 170px;
@@ -90,17 +131,22 @@ const useStyle = createStyles(({ token, css }) => {
   };
 });
 
-const flattenMenu = (menuItems: MenuProps['items']): MenuProps['items'] | null => {
+const flattenMenu = (
+  menuItems: MenuProps['items'],
+): MenuProps['items'] | null => {
   if (Array.isArray(menuItems)) {
-    return menuItems.reduce<Exclude<MenuProps['items'], undefined>>((acc, item) => {
-      if (!item) {
-        return acc;
-      }
-      if ('children' in item && item.children) {
-        return acc.concat(flattenMenu(item.children) ?? []);
-      }
-      return acc.concat(item);
-    }, []);
+    return menuItems.reduce<Exclude<MenuProps['items'], undefined>>(
+      (acc, item) => {
+        if (!item) {
+          return acc;
+        }
+        if ('children' in item && item.children) {
+          return acc.concat(flattenMenu(item.children) ?? []);
+        }
+        return acc.concat(item);
+      },
+      [],
+    );
   }
   return null;
 };
@@ -110,18 +156,39 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
   const beforeProps = { className: 'footer-nav-icon-before' };
   const afterProps = { className: 'footer-nav-icon-after' };
 
-  const before = rtl ? <RightOutlined {...beforeProps} /> : <LeftOutlined {...beforeProps} />;
-  const after = rtl ? <LeftOutlined {...afterProps} /> : <RightOutlined {...afterProps} />;
+  const { isMobile } = useContext<SiteContextProps>(SiteContext);
+
+  const before = rtl ? (
+    isMobile ? (
+      <DownOutlined {...beforeProps} />
+    ) : (
+      <RightOutlined {...beforeProps} />
+    )
+  ) : isMobile ? (
+    <UpOutlined {...beforeProps} />
+  ) : (
+    <LeftOutlined {...beforeProps} />
+  );
+  const after = rtl ? (
+    isMobile ? (
+      <UpOutlined {...afterProps} />
+    ) : (
+      <LeftOutlined {...afterProps} />
+    )
+  ) : isMobile ? (
+    <DownOutlined {...afterProps} />
+  ) : (
+    <RightOutlined {...afterProps} />
+  );
 
   const [menuItems, selectedKey] = useMenu({ before, after });
-
-  const { isMobile } = useContext<SiteContextProps>(SiteContext);
 
   const [prev, next] = useMemo(() => {
     const flatMenu = flattenMenu(menuItems);
     if (!flatMenu) {
       return [null, null];
     }
+
     let activeMenuItemIndex = -1;
     flatMenu.forEach((menuItem, i) => {
       if (menuItem && menuItem.key === selectedKey) {
@@ -135,7 +202,42 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
   }, [menuItems, selectedKey]);
 
   if (isMobile) {
-    return null;
+    return (
+      <Flex vertical className={styles.prevNextNavMobile} gap={16}>
+        {prev && (
+          <div className={styles.verticalText}>
+            {React.cloneElement(
+              prev.label as ReactElement<{
+                className: string;
+              }>,
+              {
+                className: classNames(
+                  styles.pageNav,
+                  styles.prevNav,
+                  prev.className,
+                ),
+              },
+            )}
+          </div>
+        )}
+        {next && (
+          <div className={styles.verticalText}>
+            {React.cloneElement(
+              next.label as ReactElement<{
+                className: string;
+              }>,
+              {
+                className: classNames(
+                  styles.pageNav,
+                  styles.nextNav,
+                  next.className,
+                ),
+              },
+            )}
+          </div>
+        )}
+      </Flex>
+    );
   }
 
   return (
@@ -146,7 +248,11 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
             className: string;
           }>,
           {
-            className: classNames(styles.pageNav, styles.prevNav, prev.className),
+            className: classNames(
+              styles.pageNav,
+              styles.prevNav,
+              prev.className,
+            ),
           },
         )}
       {next &&
@@ -155,7 +261,11 @@ const PrevAndNext: React.FC<{ rtl?: boolean }> = ({ rtl }) => {
             className: string;
           }>,
           {
-            className: classNames(styles.pageNav, styles.nextNav, next.className),
+            className: classNames(
+              styles.pageNav,
+              styles.nextNav,
+              next.className,
+            ),
           },
         )}
     </section>

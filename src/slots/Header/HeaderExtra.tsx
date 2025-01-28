@@ -1,9 +1,13 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
-import { Tooltip } from 'antd';
-import { type FC } from 'react';
-import { useThemeGithubConfig } from '../../hooks/useUserThemeConfig';
+import { Flex, Tooltip } from 'antd';
+import { useMemo, type FC } from 'react';
+import useUserThemeConfig, {
+  useThemeGithubConfig,
+} from '../../hooks/useUserThemeConfig';
 import useSiteToken from '../../hooks/useSiteToken';
+import { SocialTypes } from 'dumi/dist/client/theme-api/types';
+import SocialIcon from 'dumi/theme-default/slots/SocialIcon';
 
 const BASE_SIZE = '1.2em';
 
@@ -12,57 +16,58 @@ const useStyle = () => {
   const { controlHeight, motionDurationMid } = token;
 
   return {
-    btn: css`
-      color: ${token.colorText};
-      border-color: ${token.colorBorder};
-      padding: 0 !important;
-      width: ${controlHeight}px;
-      height: ${controlHeight}px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      background: transparent;
-      border-radius: ${token.borderRadius}px;
-      transition: all ${motionDurationMid};
-      cursor: pointer;
-
-      .btn-inner {
-        transition: all ${motionDurationMid};
+    extra: css`
+      .dumi-default-icon + .dumi-default-icon {
+        margin-inline-start: 12px;
       }
 
-      &:hover {
-        background: ${token.colorBgTextHover};
+      .dumi-default-icon {
+        font-size: 16px;
       }
 
-      img {
-        width: ${BASE_SIZE};
+      .dumi-default-icon > svg {
         height: ${BASE_SIZE};
       }
-
-      .anticon {
-        font-size: ${BASE_SIZE};
-      }
-    `
+    `,
   };
 };
 
 const HeaderExtra: FC = () => {
+  const { socialLinks } = useUserThemeConfig();
   const { github } = useThemeGithubConfig();
   const style = useStyle();
 
+  const socialIcons = useMemo(
+    () =>
+      [
+        github
+          ? {
+              icon: 'github' as SocialTypes,
+              link: github,
+            }
+          : null,
+        ...(socialLinks
+          ? Object.keys(socialLinks)
+              .slice(0, github ? 4 : 5)
+              .map((key) => ({
+                icon: key as SocialTypes,
+                link: socialLinks[key as SocialTypes],
+              }))
+          : []),
+      ].filter(Boolean),
+    [socialLinks],
+  );
+
+  if (!socialIcons.length) {
+    return null;
+  }
+
   return (
-    <div>
-      {github ? (
-        <Tooltip title="Github">
-          <a key="github" href={github} target="_blank" rel="noreferrer">
-            <button css={[style.btn]} type="button">
-              <GithubOutlined />
-            </button>
-          </a>
-        </Tooltip>
-      ) : null}
-    </div>
+    <Flex gap={4} align="center" css={style.extra}>
+      {socialIcons.map((item: { icon: SocialTypes; link: string }) => (
+        <SocialIcon icon={item.icon} link={item.link || ''} key={item.link} />
+      ))}
+    </Flex>
   );
 };
 

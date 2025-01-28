@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Col, ConfigProvider, Menu } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
-import { useSidebarData } from 'dumi';
+import { useRouteMeta, useSidebarData } from 'dumi';
 import MobileMenu from 'rc-drawer';
 
 import useMenu from '../../hooks/useMenu';
@@ -95,7 +95,9 @@ const useStyle = createStyles(({ token, css }) => {
       position: sticky;
       top: ${token.headerHeight + token.contentMarginTop}px;
       width: 100%;
-      max-height: calc(100vh - ${token.headerHeight + token.contentMarginTop}px);
+      max-height: calc(
+        100vh - ${token.headerHeight + token.contentMarginTop}px
+      );
       overflow: hidden;
       scrollbar-width: thin;
       scrollbar-gutter: stable;
@@ -111,6 +113,7 @@ const Sidebar: React.FC = () => {
   const sidebarData = useSidebarData();
   const { isMobile, theme } = useContext(SiteContext);
   const { styles } = useStyle();
+  const meta = useRouteMeta();
 
   const [menuItems, selectedKey] = useMenu();
   const isDark = theme.includes('dark');
@@ -118,7 +121,11 @@ const Sidebar: React.FC = () => {
 
   const menuChild = (
     <ConfigProvider
-      theme={{ components: { Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer } } }}
+      theme={{
+        components: {
+          Menu: { itemBg: colorBgContainer, darkItemBg: colorBgContainer },
+        },
+      }}
     >
       <Menu
         items={menuItems}
@@ -127,15 +134,29 @@ const Sidebar: React.FC = () => {
         mode="inline"
         theme={isDark ? 'dark' : 'light'}
         selectedKeys={[selectedKey]}
-        defaultOpenKeys={sidebarData?.map<string>(({ title }) => title!).filter(Boolean)}
+        defaultOpenKeys={sidebarData
+          ?.map<string>(({ title }) => title!)
+          .filter(Boolean)}
       />
     </ConfigProvider>
   );
 
+  if (meta.frontmatter?.sidebar === false) {
+    return null;
+  }
+
   return isMobile ? (
     <MobileMenu key="Mobile-menu">{menuChild}</MobileMenu>
   ) : (
-    <Col xxl={4} xl={5} lg={6} md={6} sm={24} xs={24} className={styles.mainMenu}>
+    <Col
+      xxl={4}
+      xl={5}
+      lg={6}
+      md={6}
+      sm={24}
+      xs={24}
+      className={styles.mainMenu}
+    >
       {menuChild}
     </Col>
   );

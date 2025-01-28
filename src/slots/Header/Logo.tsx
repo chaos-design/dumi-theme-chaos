@@ -94,7 +94,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
         className={s.logo}
       >
         <Popover
-          title="震惊🎉🎉🎉"
+          title="🎉🎉🎉"
           content="Hover见证魔法 😉"
           placement="bottomRight"
           classNames={{

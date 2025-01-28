@@ -2,14 +2,20 @@
 import { useSiteData } from 'dumi';
 
 import type { IAllThemeConfig } from '../types';
+import { merge } from 'lodash';
 
-interface UserThemeConfig {
+export interface UserThemeConfig {
   (): IAllThemeConfig;
 }
 
+export const defaultThemeConfig = {
+  lastUpdated: true,
+  footer: `Made with <span style="color: rgb(255, 255, 255);">❤</span>by <span>chaos-design | Copyright © 2025-${new Date().getFullYear()}</span>`,
+};
+
 const useUserThemeConfig: UserThemeConfig = () => {
   const { themeConfig } = useSiteData();
-  const additionalThemeConfig = themeConfig;
+  const additionalThemeConfig = merge(defaultThemeConfig, themeConfig);
 
   return additionalThemeConfig;
 };
