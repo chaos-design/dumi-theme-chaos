@@ -270,7 +270,7 @@ export const handleFullSidebarData = (
       }
 
       // 找找二级菜单名称以及顺序
-      const _levelTwoNavInfo = _levelTwoNav?.frontmatter?.nav;
+      const _levelTwoNavInfo: any = _levelTwoNav?.frontmatter?.nav;
       const frontmatterNavSecond: { order: number; title?: string } = {
         order: 0,
         title: undefined,
