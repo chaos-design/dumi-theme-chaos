@@ -1,5 +1,4 @@
 ---
-nav: Demo
 group: Secondary Sidebar
 title: Layout
 order: 3
@@ -14,3 +13,4 @@ While defining the layout system in a visual system, we propose to start from th
 3. Grid Unit
 4. Raster
 5. Common Scales
+6. [Customize Theme](./advanced-use/customize-theme)

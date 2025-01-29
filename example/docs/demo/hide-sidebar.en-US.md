@@ -5,12 +5,50 @@ title: Hide Sidebar
 order: 3
 ---
 
-<div style="text-align:center;margin:40px 0;">
-  <img src="https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*P0S-QIRUbsUAAAAAAAAAAABkARQnAQ">
-</div>
+## 水调歌头·明月几时有
 
-Ant Financial has a large number of enterprise-level products. With complex scenarios, designers and developers often need to respond fast due to frequent changes in product demands and concurrent R & D workflow. Many similar contents exist in the process. Through abstraction, we could obtain some stable and highly reusable components and pages.
+> 宋代 ：苏轼
 
-On the other hand, with the trend of commercialization, more and more enterprise products begin to pursue better user experiences. Under this situation, Ant User-Experience Design Team builds a design system for enterprise products based on four design values of Natural, Certain, Meaningful, and Growing. It aims to uniform the user interface specs and reduce redundancies and excessive production costs, helping product designers to focus on better user experience.
+丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。
 
----
+明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间？(何似一作：何时；又恐一作：惟/唯恐)
+
+## 水龙吟·登建康赏心亭
+
+> 宋代 ：辛弃疾
+
+楚天千里清秋，水随天去秋无际。遥岑远目，献愁供恨，玉簪螺髻。落日楼头，断鸿声里，江南游子。把吴钩看了，栏杆拍遍，无人会，登临意。
+
+休说鲈鱼堪脍，尽西风，季鹰归未？求田问舍，怕应羞见，刘郎才气。可惜流年，忧愁风雨，树犹如此！倩何人唤取，红巾翠袖，揾英雄泪！
+
+## 望江南·幽州九日
+
+> 宋代 ：汪元量
+
+官舍悄，坐到月西斜。永夜角声悲自语，客心愁破正思家。南北各天涯。
+
+肠断裂，搔首一长嗟。绮席象床寒玉枕，美人何处醉黄花。和泪捻琵琶。
+
+## 点绛唇·闺思
+
+> 宋代 ：李清照
+
+寂寞深闺，柔肠一寸愁千缕。惜春春去。几点催花雨。
+
+倚遍阑干，只是无情绪。人何处。连天衰草，望断归来路。(衰草一作：芳)
+
+## 醉桃源·赠卢长笛
+
+> 宋代 ：吴文英
+
+沙河塘上旧游嬉。卢郎年少时。一声长笛月中吹。和云和雁飞。
+
+惊物换，叹星移。相看两鬓丝。断肠吴苑草凄凄。倚楼人未归。
+
+## 蝶恋花·梦入江南烟水路
+
+> 宋代 ：晏几道
+
+梦入江南烟水路，行尽江南，不与离人遇。睡里消魂无说处，觉来惆怅消魂误。
+
+欲尽此情书尺素，浮雁沉鱼，终了无凭据。却倚缓弦歌别绪，断肠移破秦筝柱。

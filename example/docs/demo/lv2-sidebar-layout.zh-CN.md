@@ -14,3 +14,4 @@ order: 3
 3. 网格单位
 4. 栅格
 5. 常用模度
+6. [自定义主题](./advanced-use/customize-theme)

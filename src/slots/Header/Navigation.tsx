@@ -99,12 +99,6 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
   const module = pathname.split('/').filter(Boolean).slice(0, -1).join('/');
   let activeMenuItem = `/${module || 'home'}`;
 
-  if (pathname.startsWith('/changelog')) {
-    activeMenuItem = '/docs/react';
-  } else if (pathname.startsWith('/docs/resources')) {
-    activeMenuItem = '/docs/resources';
-  }
-
   const createMenuItems = (navs: INavItem[]) => {
     return navs.map((navItem: INavItem) => {
       const linkKeyValue = (navItem.link ?? '')
@@ -113,7 +107,6 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
         .join('/');
 
       return {
-        // eslint-disable-next-line no-nested-ternary
         label: navItem.children ? (
           navItem.title
         ) : isExternalLinks(navItem.link) ? (
@@ -243,7 +236,7 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
       mode={menuMode}
       selectedKeys={[activeMenuItem]}
       className={styles.nav}
-      // disabledOverflow
+      disabledOverflow
       items={items}
     />
   );

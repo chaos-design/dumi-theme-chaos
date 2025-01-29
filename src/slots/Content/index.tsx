@@ -49,10 +49,18 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   );
 
   const isRTL = direction === 'rtl';
+  const fullContent = meta.frontmatter?.sidebar === false;
 
   return (
     <DemoContext.Provider value={contextValue}>
-      <Col xxl={20} xl={19} lg={18} md={18} sm={24} xs={24}>
+      <Col
+        xxl={fullContent ? 24 : 20}
+        xl={fullContent ? 24 : 19}
+        lg={fullContent ? 24 : 18}
+        md={fullContent ? 24 : 18}
+        sm={24}
+        xs={24}
+      >
         <InViewSuspense fallback={null}>
           <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>

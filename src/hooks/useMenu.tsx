@@ -3,10 +3,23 @@ import type { MenuProps } from 'antd';
 import { Space, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import classnames from 'classnames';
-import { useFullSidebarData, useSidebarData } from 'dumi';
+import { useFullSidebarData, useLocale, useSidebarData } from 'dumi';
 
 import Link from '../common/Link';
 import useLocation from './useLocation';
+import { handleFullSidebarData, removeTitleCode } from '../utils';
+import {
+  ISidebarGroupModePathItem,
+  SidebarEnhanceGroupType,
+  SidebarEnhanceItems,
+  SidebarEnhanceItemType,
+  SidebarEnhanceSubType,
+  SidebarEnhanceType,
+} from '../types';
+
+import pkgJSON from '../../package.json';
+import { ItemType } from 'antd/es/menu/interface';
+import useUserThemeConfig from './useUserThemeConfig';
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -41,14 +54,27 @@ interface MenuItemLabelProps {
 
 const MenuItemLabelWithTag: React.FC<MenuItemLabelProps> = (props) => {
   const { styles } = useStyle();
-  const { before, after, link, title, subtitle, search, tag: baseTag, className } = props;
+  const {
+    before,
+    after,
+    link,
+    title,
+    subtitle,
+    search,
+    tag: baseTag,
+    className,
+  } = props;
 
   const tag = (typeof baseTag === 'string' ? baseTag : baseTag?.title) ?? '';
-  const tagColor = (typeof baseTag === 'string' ? baseTag : baseTag?.color) ?? '';
+  const tagColor =
+    (typeof baseTag === 'string' ? baseTag : baseTag?.color) ?? '';
 
   if (!before && !after) {
     return (
-      <Link to={`${link}${search}`} className={classnames(className, { [styles.link]: tag })}>
+      <Link
+        to={`${link}${search}`}
+        className={classnames(className, { [styles.link]: tag })}
+      >
         <Space>
           <span>{title}</span>
           {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
@@ -57,7 +83,11 @@ const MenuItemLabelWithTag: React.FC<MenuItemLabelProps> = (props) => {
           <Tag
             bordered={false}
             className={classnames(styles.tag)}
-            color={isVersionNumber(tagColor) || tagColor === 'New' ? 'success' : 'processing'}
+            color={
+              isVersionNumber(tagColor) || tagColor === 'New'
+                ? 'success'
+                : 'processing'
+            }
           >
             {tag}
           </Tag>
@@ -80,71 +110,234 @@ export interface UseMenuOptions {
   after?: React.ReactNode;
 }
 
-const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], string] => {
-  const fullData = useFullSidebarData();
+const useMenu = (
+  options: UseMenuOptions = {},
+): [MenuProps['items'], string] => {
   const { pathname, search } = useLocation();
-  const sidebarData = useSidebarData();
+  const { sidebarGroupModePath, sidebarEnhance = {} } = useUserThemeConfig();
   const { before, after } = options;
 
+  const fullSidebarData = useFullSidebarData();
+  const navSecondSidebarData = handleFullSidebarData(fullSidebarData);
+  const locale = useLocale();
+
+  // 提取一级导航下侧边栏数据
+  const currentNavKey = `/${pathname.split('/')?.[1]}`;
+  const sidebarData = navSecondSidebarData[currentNavKey];
+  const linkTitleMap = useMemo(() => {
+    return Object.values(fullSidebarData).reduce<Record<string, string>>(
+      (res, sidebar) => {
+        const sidebarItems = sidebar.map((item) => item.children).flat();
+        sidebarItems.forEach((item) => {
+          res[item.link] = item.title;
+        });
+        return res;
+      },
+      {},
+    );
+  }, [fullSidebarData]);
+
+  const currentSidebarEnhanceData = useMemo<
+    SidebarEnhanceItems | undefined
+  >(() => {
+    const currentLink = Object.keys(sidebarEnhance).find((link) =>
+      pathname.startsWith(link),
+    );
+    if (!currentLink) return undefined;
+    return sidebarEnhance[currentLink];
+  }, [pathname, sidebarEnhance]);
+  const sidebarEnhanceMenuItems = useMemo<MenuProps['items']>(() => {
+    const isItemMenu = (v: any): v is SidebarEnhanceItemType => {
+      return v && typeof v === 'object' && 'link' in v && 'title' in v;
+    };
+    const isGroupMenu = (v: any): v is SidebarEnhanceGroupType => {
+      return v && typeof v === 'object' && v.type === 'group';
+    };
+    const isSubMenu = (v: any): v is SidebarEnhanceSubType => {
+      return v && typeof v === 'object' && 'children' in v;
+    };
+    function processMenu(menu: SidebarEnhanceType): ItemType {
+      if (typeof menu === 'string') {
+        // menu: '/introduction'
+        return {
+          key: menu,
+          label: (
+            <Link to={`${menu}${search}`}>
+              {before}
+              {linkTitleMap[menu]}
+              {after}
+            </Link>
+          ),
+        };
+      }
+      if (isGroupMenu(menu)) {
+        // menu: { type: 'group', title: '组件', children: ['/components/button', { title: 'Installation', children: ['/aaa'] }] }
+        return {
+          type: 'group',
+          label: menu.title,
+          key: menu.title,
+          children: menu.children.map(processMenu),
+        };
+      }
+      if (isSubMenu(menu)) {
+        return {
+          key: menu.title,
+          label: <span style={{ paddingLeft: 10 }}>{menu.title}</span>,
+          children: menu.children.map(processMenu),
+        };
+      }
+      if (isItemMenu(menu)) {
+        // { title: 'aaa', link: '/xxx' }
+        return {
+          label: (
+            // @ts-ignore
+            <Link target={menu.target} to={menu.link}>
+              {menu.title}
+            </Link>
+          ),
+          key: menu.link,
+        };
+      }
+      return null;
+    }
+
+    if (!currentSidebarEnhanceData) return undefined;
+    return currentSidebarEnhanceData.map(processMenu);
+  }, [after, before, currentSidebarEnhanceData, linkTitleMap, search]);
+
+  // @ts-ignore
   const menuItems = useMemo<MenuProps['items']>(() => {
+    const suffixRegExp = new RegExp(`${(locale as any)?.suffix ?? ''}$`, 'g');
     const sidebarItems = [...(sidebarData ?? [])];
 
-    // 将设计文档未分类的放在最后
-    if (pathname.startsWith('/docs/spec')) {
-      const notGrouped = sidebarItems.splice(0, 1);
-      sidebarItems.push(...notGrouped);
-    }
-
-    // 把 /changelog 拼到开发文档中
-    if (pathname.startsWith('/docs/react')) {
-      const changelogData = Object.entries(fullData).find(([key]) =>
-        key.startsWith('/changelog'),
-      )?.[1];
-      if (changelogData) {
-        sidebarItems.splice(1, 0, changelogData[0]);
-      }
-    }
-    if (pathname.startsWith('/changelog')) {
-      const reactDocData = Object.entries(fullData).find(([key]) =>
-        key.startsWith('/docs/react'),
-      )?.[1];
-      if (reactDocData) {
-        sidebarItems.unshift(reactDocData[0]);
-        sidebarItems.push(...reactDocData.slice(1));
-      }
-    }
+    const getItemTag = (
+      tag: string | { color: string; title: string },
+      show = true,
+    ) =>
+      tag &&
+      show && (
+        <Tag
+          color={typeof tag === 'string' ? 'processing' : tag.color}
+          bordered={false}
+          style={{
+            marginInlineStart: 'auto',
+            marginInlineEnd: 0,
+            marginTop: -2,
+          }}
+        >
+          {(typeof tag === 'string' ? tag : tag.title).replace(
+            'VERSION',
+            `v${pkgJSON.version}`,
+          )}
+        </Tag>
+      );
 
     return (
-      sidebarItems?.reduce<Exclude<MenuProps['items'], undefined>>((result, group) => {
+      sidebarItems?.reduce<
+        Exclude<MenuProps['items'] | { order?: number }[], undefined>
+      >((result, group) => {
         if (group?.title) {
-          // 设计文档特殊处理二级分组
-          if (pathname.startsWith('/docs/spec')) {
-            const childrenGroup = group.children.reduce<
-              Record<string, ReturnType<typeof useSidebarData>[number]['children']>
-            >((childrenResult, child) => {
-              const type = child.frontmatter?.type ?? 'default';
-              if (!childrenResult[type]) {
-                childrenResult[type] = [];
-              }
-              childrenResult[type].push(child);
-              return childrenResult;
-            }, {});
+          // sideBar menu group 模式, 默认以非 group 模式渲染
+          const isSideBarGroupMode =
+            sidebarGroupModePath === true
+              ? true
+              : (sidebarGroupModePath ?? []).filter(
+                  (rule: ISidebarGroupModePathItem) => {
+                    return pathname.startsWith(rule);
+                  },
+                ).length > 0;
 
-            const childItems: any[] = [];
-
-            childItems.push(
-              ...(childrenGroup.default?.map((item) => ({
+          if (isSideBarGroupMode) {
+            result.push({
+              type: 'group',
+              label: group?.title,
+              order: group?.order,
+              key: group?.title,
+              children: group.children?.map((item) => ({
                 label: (
-                  <Link to={`${item.link}${search}`}>
+                  <Link
+                    to={`${item.link}${search}`}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
                     {before}
-                    {item?.title}
+                    <span key="english">{removeTitleCode(item?.title)}</span>
+                    <span className="chinese" key="chinese">
+                      {removeTitleCode(item.frontmatter?.subtitle)}
+                    </span>
+                    {getItemTag(item.frontmatter?.tag, !before && !after)}
                     {after}
                   </Link>
                 ),
-                key: item.link.replace(/(-cn$)/g, ''),
+                key: item.link.replace(suffixRegExp, ''),
+              })),
+            });
+          } else {
+            const childrenResultTypeOrder = {};
+            const childrenGroup = group.children.reduce<
+              Record<
+                string,
+                ReturnType<typeof useSidebarData>[number]['children']
+              >
+            >((childrenResult, child) => {
+              const nextChildrenResult = childrenResult;
+              const childType = child?.frontmatter?.type;
+              // 兼容 type 为字符串 && object，object 支持排序
+              const type =
+                typeof childType === 'string'
+                  ? childType
+                  : (childType?.title ?? 'default');
+
+              if (!nextChildrenResult[type]) {
+                nextChildrenResult[type] = [];
+              }
+              if (!childrenResultTypeOrder[type]) {
+                childrenResultTypeOrder[type] = {
+                  title: type,
+                  order: childType?.order ?? -1,
+                };
+              } else if (childType?.order) {
+                childrenResultTypeOrder[type].order = childType.order;
+              }
+
+              nextChildrenResult[type].push(child);
+              return nextChildrenResult;
+            }, {});
+
+            const childrenGroupOrdered = Object.keys(childrenGroup)
+              .sort(
+                (a, b) =>
+                  childrenResultTypeOrder[a].order -
+                  childrenResultTypeOrder[b].order,
+              )
+              .reduce<
+                Record<
+                  string,
+                  ReturnType<typeof useSidebarData>[number]['children']
+                >
+              >((obj, key) => {
+                const _obj = obj;
+                _obj[key] = childrenGroup[key];
+                return _obj;
+              }, {});
+
+            const childItems: any[] = [];
+            childItems.push(
+              ...(childrenGroupOrdered.default?.map((item) => ({
+                label: (
+                  <Link
+                    to={`${item.link}${search}`}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    {before}
+                    {removeTitleCode(item?.title)}
+                    {getItemTag(item.frontmatter?.tag, !before && !after)}
+                    {after}
+                  </Link>
+                ),
+                key: item.link.replace(suffixRegExp, ''),
               })) ?? []),
             );
-            Object.entries(childrenGroup).forEach(([type, children]) => {
+            Object.entries(childrenGroupOrdered).forEach(([type, children]) => {
               if (type !== 'default') {
                 childItems.push({
                   type: 'group',
@@ -152,13 +345,17 @@ const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], st
                   key: type,
                   children: children?.map((item) => ({
                     label: (
-                      <Link to={`${item.link}${search}`}>
+                      <Link
+                        to={`${item.link}${search}`}
+                        style={{ display: 'flex', alignItems: 'center' }}
+                      >
                         {before}
-                        {item?.title}
+                        {removeTitleCode(item?.title)}
+                        {getItemTag(item.frontmatter?.tag, !before && !after)}
                         {after}
                       </Link>
                     ),
-                    key: item.link.replace(/(-cn$)/g, ''),
+                    key: item.link.replace(suffixRegExp, ''),
                   })),
                 });
               }
@@ -166,57 +363,58 @@ const useMenu = (options: UseMenuOptions = {}): readonly [MenuProps['items'], st
             result.push({
               label: group?.title,
               key: group?.title,
+              order: group?.order,
               children: childItems,
-            });
-          } else {
-            result.push({
-              type: 'group',
-              label: group?.title,
-              key: group?.title,
-              children: group.children?.map((item) => ({
-                label: (
-                  <MenuItemLabelWithTag
-                    before={before}
-                    after={after}
-                    link={item.link}
-                    title={item?.title}
-                    subtitle={item.frontmatter?.subtitle}
-                    search={search}
-                    tag={item.frontmatter?.tag || ''}
-                  />
-                ),
-                key: item.link.replace(/(-cn$)/g, ''),
-              })),
             });
           }
         } else {
           const list = group.children || [];
           // 如果有 date 字段，我们就对其进行排序
           if (list.every((info) => info?.frontmatter?.date)) {
-            list.sort((a, b) => (a.frontmatter?.date > b.frontmatter?.date ? -1 : 1));
+            list.sort((a, b) =>
+              a?.frontmatter?.date > b?.frontmatter?.date ? -1 : 1,
+            );
           }
+
           result.push(
             ...list.map((item) => ({
+              order: item?.order,
               label: (
-                <MenuItemLabelWithTag
-                  before={before}
-                  after={after}
-                  link={item.link}
-                  title={item?.title}
-                  search={search}
-                  tag={item.frontmatter?.tag || ''}
-                />
+                <Link
+                  to={`${item.link}${search}`}
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
+                  {before}
+                  {removeTitleCode(item?.title)}
+                  {getItemTag(item.frontmatter?.tag, !before && !after)}
+                  {after}
+                </Link>
               ),
-              key: item.link.replace(/(-cn$)/g, ''),
+              key: item.link.replace(suffixRegExp, ''),
             })),
           );
         }
+
+        // group 模式与 single 模式混合排序
+        result.sort((a, b) => (a?.order < b?.order ? -1 : 1));
         return result;
       }, []) ?? []
     );
-  }, [sidebarData, fullData, pathname, search, options]);
+  }, [
+    sidebarData,
+    sidebarGroupModePath,
+    pathname,
+    search,
+    before,
+    after,
+    locale,
+  ]);
 
-  return [menuItems, pathname] as const;
+  const selectedKey = pathname.replace(
+    new RegExp(`${(locale as any)?.suffix ?? ''}$`, 'g'),
+    '',
+  );
+  return [sidebarEnhanceMenuItems || menuItems, selectedKey];
 };
 
 export default useMenu;

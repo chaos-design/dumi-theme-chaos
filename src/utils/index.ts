@@ -2,6 +2,7 @@ import flatten from 'lodash/flatten';
 import { flattenDeep } from 'lodash';
 
 import { useSiteData } from 'dumi';
+import { ISidebarGroup } from 'dumi/dist/client/theme-api/types';
 
 interface Meta {
   skip?: boolean;
@@ -174,28 +175,6 @@ export function getLocalizedPathname(
   return { pathname: fullPath, search };
 }
 
-export function ping(callback: (status: string) => void) {
-  const url =
-    'https://private-a' +
-    'lipay' +
-    'objects.alip' +
-    'ay.com/alip' +
-    'ay-rmsdeploy-image/rmsportal/RKuAiriJqrUhyqW.png';
-  const img = new Image();
-  let done: boolean;
-  const finish = (status: string) => {
-    if (!done) {
-      done = true;
-      img.src = '';
-      callback(status);
-    }
-  };
-  img.onload = () => finish('responded');
-  img.onerror = () => finish('error');
-  img.src = url;
-  return setTimeout(() => finish('timeout'), 1500);
-}
-
 export function isLocalStorageNameSupported() {
   if (typeof window === 'undefined') {
     return false;
@@ -260,4 +239,71 @@ export function getMetaDescription(jml?: any[] | null) {
 
 export const isExternalLinks = (link?: string): boolean => {
   return /^(\w+:)\/\/|^(mailto|tel):/.test(link ?? '');
+};
+
+export const removeTitleCode = (title = '') => {
+  return title.replace(/<\w+>.*<\/\w+>/g, '');
+};
+
+export const handleFullSidebarData = (
+  fullSidebarData: Record<string, ISidebarGroup[]>,
+): Record<string, ISidebarGroup[]> => {
+  const nextFullSidebarData: Record<string, ISidebarGroup[]> = {};
+
+  Object.entries(fullSidebarData).forEach(([key, value]) => {
+    const existedLevelOneNavList = Object.keys(nextFullSidebarData);
+
+    if (key.split('/').length === 3) {
+      // 二级目录
+      const levelOneNavKey = `/${key.split('/')[1]}`;
+      let _levelTwoNav = value[0]?.children?.find((item) => {
+        const _frontmatterInfo = item.frontmatter?.nav;
+        return (
+          typeof _frontmatterInfo === 'object' &&
+          typeof _frontmatterInfo?.second === 'object'
+        );
+      });
+
+      // 如果是 second 配置不为对象，直接获取其值即可
+      if (!_levelTwoNav) {
+        _levelTwoNav = value[0]?.children[0];
+      }
+
+      // 找找二级菜单名称以及顺序
+      const _levelTwoNavInfo = _levelTwoNav?.frontmatter?.nav;
+      const frontmatterNavSecond: { order: number; title?: string } = {
+        order: 0,
+        title: undefined,
+      };
+
+      if (typeof _levelTwoNavInfo !== 'string') {
+        // @ts-ignore
+        frontmatterNavSecond.order = _levelTwoNavInfo?.second?.order ?? 0;
+        // @ts-ignore
+        frontmatterNavSecond.title =
+          _levelTwoNavInfo?.second?.title ?? _levelTwoNavInfo?.second;
+      }
+
+      if (existedLevelOneNavList.includes(levelOneNavKey)) {
+        // 已存在，直接 push 为 children
+        nextFullSidebarData[levelOneNavKey].push({
+          title: frontmatterNavSecond.title,
+          order: frontmatterNavSecond.order,
+          children: value[0]?.children,
+        });
+      } else {
+        nextFullSidebarData[levelOneNavKey] = value.map((item) => ({
+          ...item,
+          title: frontmatterNavSecond.title,
+          order: frontmatterNavSecond.order,
+        }));
+      }
+    } else if (existedLevelOneNavList.includes(key)) {
+      nextFullSidebarData[key] = nextFullSidebarData[key].concat(value);
+    } else {
+      nextFullSidebarData[key] = value;
+    }
+  });
+
+  return nextFullSidebarData;
 };

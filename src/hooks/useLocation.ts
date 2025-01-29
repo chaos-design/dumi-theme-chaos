@@ -16,8 +16,8 @@ export default function useLocation() {
     (path: string, hash?: string | { cn: string; en: string }) => {
       let pathname = clearPath(path);
 
-      if (localeType === 'cn') {
-        pathname = `${pathname}-cn`;
+      if (localeType === 'en') {
+        pathname = `${pathname}-en`;
       }
 
       if (search) {

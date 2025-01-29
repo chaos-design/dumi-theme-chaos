@@ -157,7 +157,7 @@ const Sidebar: React.FC = () => {
       xs={24}
       className={styles.mainMenu}
     >
-      {menuChild}
+      <section className="main-menu-inner">{menuChild}</section>
     </Col>
   );
 };

@@ -1,6 +1,15 @@
 import React, { cloneElement, isValidElement } from 'react';
 import { BugOutlined } from '@ant-design/icons';
-import { Button, Drawer, Flex, Grid, Popover, Tag, Timeline, Typography } from 'antd';
+import {
+  Button,
+  Drawer,
+  Flex,
+  Grid,
+  Popover,
+  Tag,
+  Timeline,
+  Typography,
+} from 'antd';
 import type { TimelineItemProps } from 'antd';
 import { createStyles } from 'antd-style';
 import semver from 'semver';
@@ -28,7 +37,8 @@ function matchDeprecated(v: string): MatchDeprecatedResult {
   const match = Object.keys(deprecatedVersions).find((depreciated) =>
     semver.satisfies(v, depreciated),
   );
-  const reason = deprecatedVersions[match as keyof typeof deprecatedVersions] || [];
+  const reason =
+    deprecatedVersions[match as keyof typeof deprecatedVersions] || [];
   return {
     match,
     reason: Array.isArray(reason) ? reason : [reason],
@@ -166,7 +176,13 @@ const RefLinks: React.FC<{ refs: string[] }> = ({ refs }) => {
   return (
     <>
       {refs?.map((ref) => (
-        <a className={styles.linkRef} key={ref} href={ref} target="_blank" rel="noreferrer">
+        <a
+          className={styles.linkRef}
+          key={ref}
+          href={ref}
+          target="_blank"
+          rel="noreferrer"
+        >
           #{ref.match(/^.*\/(\d+)$/)?.[1]}
         </a>
       ))}
@@ -174,15 +190,23 @@ const RefLinks: React.FC<{ refs: string[] }> = ({ refs }) => {
   );
 };
 
-const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[] }> = ({ changelogList }) => {
+const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[] }> = ({
+  changelogList,
+}) => {
   const elements: React.ReactNode[] = [];
   const { styles } = useStyle();
   const len = changelogList.length;
   for (let i = 0; i < len; i += 1) {
     const { refs, changelog } = changelogList[i];
     // Check if the next line is an image link and append it to the current line
-    if (i + 1 < len && changelogList[i + 1].changelog.trim().startsWith('<img')) {
-      const imgDom = new DOMParser().parseFromString(changelogList[i + 1].changelog, 'text/html');
+    if (
+      i + 1 < len &&
+      changelogList[i + 1].changelog.trim().startsWith('<img')
+    ) {
+      const imgDom = new DOMParser().parseFromString(
+        changelogList[i + 1].changelog,
+        'text/html',
+      );
       const imgElement = imgDom.querySelector<HTMLImageElement>('img');
       elements.push(
         <li key={i}>
@@ -209,7 +233,10 @@ const RenderChangelogList: React.FC<{ changelogList: ChangelogInfo[] }> = ({ cha
   return <ul className={styles.listWrap}>{elements}</ul>;
 };
 
-const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[] => {
+const useChangelog = (
+  componentPath: string,
+  lang: 'cn' | 'en',
+): ChangelogInfo[] => {
   const data = {};
 
   return React.useMemo(() => {
@@ -221,7 +248,9 @@ const useChangelog = (componentPath: string, lang: 'cn' | 'en'): ChangelogInfo[]
   }, [data, componentPath]);
 };
 
-const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) => {
+const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (
+  props,
+) => {
   const { children } = props;
   const [locale, lang] = useLocale(locales);
   const [show, setShow] = React.useState(false);
@@ -247,35 +276,51 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
       return {
         children: (
           <Typography>
-            <Flex className={styles.versionWrap} justify="flex-start" align="center" gap="middle">
+            <Flex
+              className={styles.versionWrap}
+              justify="flex-start"
+              align="center"
+              gap="middle"
+            >
               <Button
                 color="default"
                 className={styles.versionTitle}
                 variant="link"
-                href={`/changelog${lang === 'cn' ? '-cn' : ''}/#${version.replace(/\./g, '').replace(/\s.*/g, '-')}`}
+                href={`/changelog${lang === 'cn' ? '' : '-en'}/#${version.replace(/\./g, '').replace(/\s.*/g, '-')}`}
               >
                 {version}
                 {bugVersionInfo.match && (
                   <Popover
                     destroyTooltipOnHide
                     placement="right"
-                    title={<span className={styles.bugReasonTitle}>{locale.bugList}</span>}
+                    title={
+                      <span className={styles.bugReasonTitle}>
+                        {locale.bugList}
+                      </span>
+                    }
                     content={
                       <ul className={styles.bugReasonList}>
-                        {bugVersionInfo.reason.map<React.ReactNode>((reason, index) => (
-                          <li key={`reason-${index}`}>
-                            <a type="link" target="_blank" rel="noreferrer" href={reason}>
-                              <BugOutlined />
-                              {/* TODO:  user repo 待配置 */}
-                              {reason
-                                ?.replace(/#.*$/, '')
-                                ?.replace(
-                                  /^https:\/\/github\.com\/user\/repo\/(issues|pull)\//,
-                                  '#',
-                                )}
-                            </a>
-                          </li>
-                        ))}
+                        {bugVersionInfo.reason.map<React.ReactNode>(
+                          (reason, index) => (
+                            <li key={`reason-${index}`}>
+                              <a
+                                type="link"
+                                target="_blank"
+                                rel="noreferrer"
+                                href={reason}
+                              >
+                                <BugOutlined />
+                                {/* TODO:  user repo 待配置 */}
+                                {reason
+                                  ?.replace(/#.*$/, '')
+                                  ?.replace(
+                                    /^https:\/\/github\.com\/user\/repo\/(issues|pull)\//,
+                                    '#',
+                                  )}
+                              </a>
+                            </li>
+                          ),
+                        )}
                       </ul>
                     }
                   >
@@ -312,7 +357,10 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
         className={styles.drawerContent}
         title={locale.changelog}
         extra={
-          <Link className={styles.extraLink} to={`/changelog${lang === 'cn' ? '-cn' : ''}`}>
+          <Link
+            className={styles.extraLink}
+            to={`/changelog${lang === 'cn' ? '' : '-en'}`}
+          >
             {locale.full}
           </Link>
         }
