@@ -113,7 +113,7 @@ order: 3
 ---
 ```
 
-## Menu bar Tag configuration <Badge>+0.3.4</Badge>
+## Menu bar Tag configuration <Badge>+0.0.1</Badge>
 
 In order to display the menu bar update or identify the status, the menu supports tag configuration:
 

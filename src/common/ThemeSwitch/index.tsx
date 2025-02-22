@@ -9,8 +9,14 @@ import useThemeAnimation from '../../hooks/useThemeAnimation';
 import { getLocalizedPathname, isZhCN } from '../../utils';
 import Link from '../Link';
 import ThemeIcon from './ThemeIcon';
+import { useUserThemeEnableConfig } from '../../hooks/useUserThemeConfig';
 
-export type ThemeName = 'light' | 'dark' | 'compact' | 'motion-off' | 'happy-work';
+export type ThemeName =
+  | 'light'
+  | 'dark'
+  | 'compact'
+  | 'motion-off'
+  | 'happy-work';
 
 export interface ThemeSwitchProps {
   value?: ThemeName[];
@@ -24,6 +30,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
   // const isMotionOff = value.includes('motion-off');
   const isHappyWork = value.includes('happy-work');
   const isDark = value.includes('dark');
+  const { backTop } = useUserThemeEnableConfig();
 
   const toggleAnimationTheme = useThemeAnimation();
 
@@ -61,6 +68,12 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props) => {
         }}
         tooltip={<FormattedMessage id="app.theme.switch.compact" />}
       />
+      {!backTop ? null : (
+        <FloatButton.BackTop
+          visibilityHeight={400}
+          tooltip={<FormattedMessage id="app.theme.switch.back.top" />}
+        />
+      )}
     </FloatButton.Group>
   );
 };

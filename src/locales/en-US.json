@@ -3,6 +3,7 @@
   "app.not-found.subTitle": "Sorry, the page you visited does not exist.",
   "app.theme.switch.dark": "Dark theme",
   "app.theme.switch.compact": "Compact theme",
+  "app.theme.switch.back.top": "Back Top",
   "app.header.lang": "English",
   "app.header.menu.more": "More",
   "app.content.edit-page": "Edit this page on GitHub!",

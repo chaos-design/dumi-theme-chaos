@@ -15,8 +15,8 @@ import { defineThemeConfig } from 'dumi-theme-chaos/dist/defineThemeConfig';
 
 export default defineConfig({
   themeConfig: defineThemeConfig({
-    title: 'Chaos Design Doc'
-  })
+    title: 'Chaos Design Doc',
+  }),
 });
 ```
 
@@ -24,7 +24,22 @@ export default defineConfig({
 
 ### github
 
-- 类型：`string`
+- 类型：`string` | `GithubConfig`
+
+```ts
+interface GithubConfig {
+  // github 链接
+  url: string;
+  // github 分支，默认为 main
+  branch?: string;
+  // 文档目录
+  docDir?: string;
+  // 是否使用 blob 模式, 默认为 false
+  // false => link url xxx/edit/xxx, true => link url xxx/blob/xxx
+  blob?: boolean;
+}
+```
+
 - 默认值：`null`
 
 导航栏 Github 图标链接，如不配置该字段，则不展示，同时兼容官方`socialLinks.github`配置。
@@ -47,7 +62,7 @@ export interface IBannerConfig {
 const bannerConfigDefault: IBannerConfig = {
   showBanner: true,
   bannerMobileImgUrl: 'xx', // antd v5 官网自带 banner 图
-  bannerImgUrl: 'xx' // antd v5 官网自带 banner 图
+  bannerImgUrl: 'xx', // antd v5 官网自带 banner 图
 };
 ```
 
@@ -215,12 +230,38 @@ moreLinks: {
 
 在导航栏中配置更多生态系统链接。
 
-### rtl
+### enable
 
-- 类型：`boolean`
-- 默认值：`true`
+- 类型: `UserThemeConfigEnable`
 
-是否展示 rtl 导航按钮，默认展示。
+```ts
+interface UserThemeConfigEnable {
+  /** 是否展示 rtl 导航按钮，默认展示 */
+  rtl?: boolean;
+  /** 是否展示 doc Version */
+  docVersions?: boolean;
+  /** 是否展示 backTop */
+  backTop?: boolean;
+  /** 是否展示 editButton */
+  editButton?: boolean;
+  /** 是否展示 lastUpdated */
+  lastUpdated?: boolean;
+}
+```
+
+- 默认值:
+
+```json
+{
+  "rtl": true,
+  "backTop": true,
+  "docVersions": true,
+  "editButton": true,
+  "lastUpdated": true
+}
+```
+
+配置能力开启或关闭
 
 ### actions
 
@@ -283,10 +324,10 @@ export default {
       // sidebarGroupModePath: true, // 当为 true 时，全部都以分组形式展示
       sidebarGroupModePath: [
         // 匹配以 /config 开头的路由
-        '/config'
-      ]
-    }
-  }
+        '/config',
+      ],
+    },
+  },
 };
 ```
 
@@ -311,26 +352,26 @@ export default {
               title: '安装',
               children: [
                 '/welcome/getting-started/installation', // 支持仅填写链接，title 自动根据 `# xxx` 生成
-                '/welcome/getting-started/installation/docker'
-              ]
+                '/welcome/getting-started/installation/docker',
+              ],
             },
             {
               title: '升级',
               children: [
                 '/welcome/getting-started/upgrading',
-                '/welcome/getting-started/upgrading/docker-compose'
-              ]
-            }
-          ]
+                '/welcome/getting-started/upgrading/docker-compose',
+              ],
+            },
+          ],
         },
         // 支持对象的方式
         {
           title: '更新记录',
-          link: 'https://github.com/xx/xx/changelog.md'
-        }
-      ]
-    }
-  }
+          link: 'https://github.com/xx/xx/changelog.md',
+        },
+      ],
+    },
+  },
 };
 ```
 
@@ -374,9 +415,12 @@ export { Loading as default } from 'dumi-theme-chaos';
 export default {
   themeConfig: {
     loading: {
-      skeleton: ['/guide', '/config'] /* /guide 以及 /config 开头的路由加载组件为 skeleton 形式 */
-    }
-  }
+      skeleton: [
+        '/guide',
+        '/config',
+      ] /* /guide 以及 /config 开头的路由加载组件为 skeleton 形式 */,
+    },
+  },
 };
 ```
 

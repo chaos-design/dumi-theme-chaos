@@ -37,8 +37,10 @@ const locales = {
   },
 };
 
-const getBranchUrlByUserInfo = (user: string, branch = 'main') =>
-  `https://github.com/${user}/edit/${branch}`;
+const getBranchUrlByUserInfo = (
+  user: string,
+  { branch = 'main', blob = false },
+) => `https://github.com/${user}/${blob ? 'blob' : 'edit'}/${branch}`;
 
 function isVersionNumber(value?: string) {
   return value && /^\d+\.\d+\.\d+$/.test(value);
@@ -96,7 +98,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
   const { component, source, pkg, filename, version } = props;
   const { token } = theme.useToken();
   const [locale, lang] = useLocale(locales);
-  const { owner, repo, branch, docDir } = useThemeGithubConfig();
+  const { owner, repo, branch, docDir, blob } = useThemeGithubConfig();
   const isZhCN = lang === 'cn';
   const { styles } = useStyle();
 
@@ -206,7 +208,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
               <Flex justify="flex-start" align="center" gap="middle">
                 <Typography.Link
                   className={styles.code}
-                  href={`${getBranchUrlByUserInfo(`${owner}/${repo}`, branch)}${docDir}${filename}`}
+                  href={`${getBranchUrlByUserInfo(`${owner}/${repo}`, { branch, blob })}${docDir}${filename}`}
                   target="_blank"
                 >
                   <EditOutlined className={styles.icon} />

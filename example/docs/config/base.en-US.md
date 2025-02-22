@@ -15,8 +15,8 @@ import { defineThemeConfig } from 'dumi-theme-chaos/dist/defineThemeConfig';
 
 export default defineConfig({
   themeConfig: defineThemeConfig({
-    title: 'Chaos Design Doc'
-  })
+    title: 'Chaos Design Doc',
+  }),
 });
 ```
 
@@ -24,7 +24,22 @@ export default defineConfig({
 
 ### github
 
-- type：`string`
+- type：`string` | `GithubConfig`
+
+```ts
+interface GithubConfig {
+  // github url
+  url: string;
+  // github branch, default main
+  branch?: string;
+  // doc directory, default ''
+  docDir?: string;
+  // github blob, default false
+  // false => link url xxx/edit/xxx, true => link url xxx/blob/xxx
+  blob?: boolean;
+}
+```
+
 - default：`null`
 
 The Github icon link in the navigation bar. If this field is not configured, it will not be displayed, and it is compatible with the official `socialLinks.github` configuration.
@@ -47,7 +62,7 @@ export interface IBannerConfig {
 const bannerConfigDefault: IBannerConfig = {
   showBanner: true,
   bannerMobileImgUrl: 'xx', // antd v5 official website comes with banner image
-  bannerImgUrl: 'xx' // antd v5 official website comes with banner image
+  bannerImgUrl: 'xx', // antd v5 official website comes with banner image
 };
 ```
 
@@ -145,7 +160,6 @@ announcementBar: {
 
 Site announcement bar.
 
-
 ### footerLinks <Badge>0.0.1+</Badge>
 
 - Type: `FooterColumn[] | Record<string, FooterColumn[]>`
@@ -216,12 +230,38 @@ moreLinks: {
 
 Configure more ecosystem links in the navigation bar.
 
-### rtl
+### enable
 
-- type：`boolean`
-- default：`true`
+- type: `UserThemeConfigEnable`
 
-Whether to display the rtl navigation button, it is displayed by default.
+```ts
+interface UserThemeConfigEnable {
+  /** Whether to display the rtl navigation button, displayed by default */
+  rtl?: boolean;
+  /** Whether to display doc Version */
+  docVersions?: boolean;
+  /** Whether to display backTop */
+  backTop?: boolean;
+  /** Whether to display editButton */
+  editButton?: boolean;
+  /** Whether to display lastUpdated */
+  lastUpdated?: boolean;
+}
+```
+
+- default
+
+```json
+{
+  "rtl": true,
+  "backTop": true,
+  "docVersions": true,
+  "editButton": true,
+  "lastUpdated": true
+}
+```
+
+Configure feature switches to enable or disable capabilities
 
 ### actions
 
@@ -284,10 +324,10 @@ export default {
       // sidebarGroupModePath: true, // when true, all routes will be treated as a group
       sidebarGroupModePath: [
         // Matches routes starting with `/config`
-        '/config'
-      ]
-    }
-  }
+        '/config',
+      ],
+    },
+  },
 };
 ```
 
@@ -312,26 +352,26 @@ export default {
               title: '安装',
               children: [
                 '/welcome/getting-started/installation', // 支持仅填写链接，title 自动根据 `# xxx` 生成
-                '/welcome/getting-started/installation/docker'
-              ]
+                '/welcome/getting-started/installation/docker',
+              ],
             },
             {
               title: '升级',
               children: [
                 '/welcome/getting-started/upgrading',
-                '/welcome/getting-started/upgrading/docker-compose'
-              ]
-            }
-          ]
+                '/welcome/getting-started/upgrading/docker-compose',
+              ],
+            },
+          ],
         },
         // 支持对象的方式
         {
           title: '更新记录',
-          link: 'https://github.com/xx/xx/changelog.md'
-        }
-      ]
-    }
-  }
+          link: 'https://github.com/xx/xx/changelog.md',
+        },
+      ],
+    },
+  },
 };
 ```
 
@@ -377,10 +417,10 @@ export default {
     loading: {
       Skeleton: [
         '/guide',
-        ' /config'
-      ] /* the route loading component at the beginning of /config or /guide are in skeleton form. */
-    }
-  }
+        ' /config',
+      ] /* the route loading component at the beginning of /config or /guide are in skeleton form. */,
+    },
+  },
 };
 ```
 

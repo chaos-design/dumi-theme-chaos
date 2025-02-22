@@ -116,7 +116,10 @@ const HeaderNavigation: React.FC<NavigationProps> = (props) => {
         ) : (
           <Link to={`${navItem.link}${search}`}>{navItem.title}</Link>
         ),
-        key: isExternalLinks(navItem.link) ? navItem.link : linkKeyValue,
+        key:
+          isExternalLinks(navItem.link) || Boolean(navItem?.original)
+            ? navItem.link
+            : linkKeyValue,
         children: navItem.children ? createMenuItems(navItem.children) : null,
       };
     });

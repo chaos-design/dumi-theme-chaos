@@ -2,7 +2,7 @@ import React, { useContext, type FC } from 'react';
 import { css } from '@emotion/react';
 import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
-import useUserThemeConfig from '../../hooks/useUserThemeConfig';
+import { useUserThemeEnableConfig } from '../../hooks/useUserThemeConfig';
 import SwitchBtn from '../Header/SwitchBtn';
 import LTRIcon from '../../icons/LTRIcon';
 import RTLIcon from '../../icons/RTLIcon';
@@ -21,9 +21,11 @@ const RtlSwitch: FC = () => {
   const { direction, updateSiteConfig } =
     useContext<SiteContextProps>(SiteContext);
   const { styles: s } = useStyle();
-  const { rtl = true } = useUserThemeConfig();
+  const { rtl = true } = useUserThemeEnableConfig();
 
-  if (!rtl) return null;
+  if (!rtl) {
+    return null;
+  }
 
   const onDirectionChange = () => {
     updateSiteConfig({ direction: direction !== 'rtl' ? 'rtl' : 'ltr' });

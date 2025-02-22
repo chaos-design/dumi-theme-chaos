@@ -27,7 +27,9 @@ import SwitchBtn from './SwitchBtn';
 import More from './More';
 import HeaderExtra from './HeaderExtra';
 import AnnouncementBar from './AnnouncementBar';
-import useUserThemeConfig from '../../hooks/useUserThemeConfig';
+import useUserThemeConfig, {
+  useUserThemeEnableConfig,
+} from '../../hooks/useUserThemeConfig';
 import LangSwitch from '../LangSwitch';
 import RtlSwitch from '../RtlSwitch';
 
@@ -281,6 +283,7 @@ const Header: React.FC = () => {
     [direction],
   );
 
+  const { docVersions: showDocVersions } = useUserThemeEnableConfig();
   const { menuVisible, windowWidth, searching } = headerState;
   const docVersions: Record<string, string> = {
     ...(pkg.version ? { [pkg.version]: pkg.version } : {}),
@@ -327,7 +330,7 @@ const Header: React.FC = () => {
 
   let menu = [
     navigationNode,
-    versionOptions.length > 0 ? (
+    showDocVersions && versionOptions.length > 0 ? (
       <Select
         key="version"
         size="small"

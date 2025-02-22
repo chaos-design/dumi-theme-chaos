@@ -178,6 +178,11 @@ export default defineConfig({
     loading: {
       skeleton: ['/guide', '/config', '/demo'],
     },
+    enable: {
+      backTop: true,
+      docVersions: true,
+      rtl: true,
+    },
     docVersions: {
       [pkgJSON.version]: 'https://github.com/chaos-design/dumi-theme-chaos/',
     },

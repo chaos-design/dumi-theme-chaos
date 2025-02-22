@@ -3,6 +3,7 @@
   "app.not-found.subTitle": "你访问的页面貌似不存在？",
   "app.theme.switch.dark": "暗黑主题",
   "app.theme.switch.compact": "紧凑主题",
+  "app.theme.switch.back.top": "回到顶部",
   "app.header.lang": "中文",
   "app.header.menu.more": "更多",
   "app.content.edit-page": "在 GitHub 上编辑此页！",

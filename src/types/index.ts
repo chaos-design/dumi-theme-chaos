@@ -86,14 +86,32 @@ export interface IBannerConfig {
   bannerMobileImgUrl?: string;
 }
 
+interface UserThemeConfigEnable {
+  /** 是否展示 rtl */
+  rtl?: boolean;
+  /** 是否展示 doc Version */
+  docVersions?: boolean;
+  /** 是否展示 backTop */
+  backTop?: boolean;
+  /** 是否展示 editButton */
+  editButton?: boolean;
+  /** 是否展示 lastUpdated */
+  lastUpdated?: boolean;
+}
+
 interface UserThemeConfig {
   /** github 链接 */
   github?:
     | string
     | {
+        // github 链接
         url: string;
+        // github 分支，默认为 main
         branch?: string;
+        // 文档目录
         docDir?: string;
+        // 是否使用 blob 模式
+        blob?: boolean;
       };
   /** 首页链接 */
   homeLink?: string;
@@ -115,8 +133,6 @@ interface UserThemeConfig {
   moreLinks?: IMoreLink[] | Record<string, IMoreLink[]>;
   /** banner 配置 */
   bannerConfig?: IBannerConfig;
-  /** 是否展示 rtl */
-  rtl?: boolean;
   /** 增强模式的 sidebar */
   sidebarEnhance?: Record<string, SidebarEnhanceItems>;
   /** antd 主题定制，同 `ConfigProvider` 中 `theme` */
@@ -127,6 +143,8 @@ interface UserThemeConfig {
   footerLinks?: FooterColumn[] | Record<string, FooterColumn[]>;
   /** SSR, plugin 自动注入，无需设置 */
   ssr?: boolean | Record<string, unknown>;
+  /** 开启主题功能 */
+  enable?: UserThemeConfigEnable;
 }
 
 export interface AnnouncementBarProps {

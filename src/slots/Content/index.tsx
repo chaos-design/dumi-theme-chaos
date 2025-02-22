@@ -11,7 +11,10 @@ import DemoContext from '../DemoContext';
 import SiteContext from '../SiteContext';
 import InViewSuspense from './InViewSuspense';
 import { useStyle } from './DocAnchor';
-import { useThemeGithubConfig } from '../../hooks/useUserThemeConfig';
+import {
+  useThemeGithubConfig,
+  useUserThemeEnableConfig,
+} from '../../hooks/useUserThemeConfig';
 
 const Contributors = React.lazy(() => import('./Contributors'));
 const DocAnchor = React.lazy(() => import('./DocAnchor'));
@@ -38,6 +41,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
   );
 
   const isDebugDemo = debugDemos.includes(hash.slice(1));
+  const { editButton = true } = useUserThemeEnableConfig();
 
   useLayoutEffect(() => {
     setShowDebug(process.env.NODE_ENV === 'development' || isDebugDemo);
@@ -71,14 +75,21 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
                 <Space>
                   <span>{meta.frontmatter?.title}</span>
                   <span>{meta.frontmatter?.subtitle}</span>
-                  {!pathname.startsWith('/components/overview') && (
-                    <InViewSuspense fallback={null}>
-                      <EditButton
-                        title={<FormattedMessage id="app.content.edit-page" />}
-                        filename={meta.frontmatter.filename}
-                      />
-                    </InViewSuspense>
-                  )}
+                  {!pathname.startsWith('/components/overview') &&
+                    editButton && (
+                      <InViewSuspense fallback={null}>
+                        <EditButton
+                          title={
+                            !github?.isGithub ? (
+                              'Edit'
+                            ) : (
+                              <FormattedMessage id="app.content.edit-page" />
+                            )
+                          }
+                          filename={meta.frontmatter.filename}
+                        />
+                      </InViewSuspense>
+                    )}
                 </Space>
               </Typography.Title>
             </Flex>

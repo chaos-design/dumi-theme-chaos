@@ -9,7 +9,6 @@ export interface UserThemeConfig {
 }
 
 export const defaultThemeConfig = {
-  lastUpdated: true,
   footer: `Made with <span style="color: rgb(255, 255, 255);">❤</span>by <span>chaos-design | Copyright © 2025-${new Date().getFullYear()}</span>`,
 };
 
@@ -20,6 +19,26 @@ const useUserThemeConfig: UserThemeConfig = () => {
   return additionalThemeConfig;
 };
 
+export const useUserThemeEnableConfig: UserThemeConfig = () => {
+  const { themeConfig } = useSiteData();
+  const additionalThemeConfig = merge(defaultThemeConfig, themeConfig);
+
+  return merge(
+    {
+      rtl: true,
+      backTop: true,
+      docVersions: true,
+      editButton: true,
+      lastUpdated: true,
+    },
+    {
+      rtl: additionalThemeConfig?.rtl,
+      lastUpdated: additionalThemeConfig?.lastUpdated,
+    },
+    additionalThemeConfig.enable,
+  );
+};
+
 export interface UserGithubConfig {
   owner: string;
   repo: string;
@@ -27,6 +46,8 @@ export interface UserGithubConfig {
   branch: string;
   originDocDir: string;
   docDir: string;
+  isGithub?: boolean;
+  blob?: boolean;
 }
 
 export const useThemeGithubConfig = (): UserGithubConfig => {
@@ -34,6 +55,9 @@ export const useThemeGithubConfig = (): UserGithubConfig => {
 
   const github =
     typeof origin === 'string' ? origin : origin?.url || socialLinks?.github;
+
+  const isGithub =
+    /https:\/\/github.com\/([^/]+)\/([^/]+)/.test(github!) ?? false;
 
   // https://github.com/chaos-design/dumi-theme-chaos
   // 把上述GitHub地址中的user 和 repo 提取出来
@@ -47,14 +71,15 @@ export const useThemeGithubConfig = (): UserGithubConfig => {
         ? `${origin?.docDir}/`
         : '';
 
-  return {
+  return merge(typeof origin === 'string' ? {} : origin, {
     owner,
     repo,
     github,
+    isGithub,
     branch: typeof origin === 'string' ? 'main' : (origin?.branch ?? 'main'),
     originDocDir,
     docDir: '/' + originDocDir,
-  };
+  });
 };
 
 export default useUserThemeConfig;

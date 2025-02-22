@@ -246,7 +246,6 @@ const useMenu = (
                     return pathname.startsWith(rule);
                   },
                 ).length > 0;
-
           if (isSideBarGroupMode) {
             result.push({
               type: 'group',

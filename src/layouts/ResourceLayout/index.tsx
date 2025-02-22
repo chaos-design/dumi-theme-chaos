@@ -9,6 +9,10 @@ import CommonHelmet from '../../common/CommonHelmet';
 import EditButton from '../../common/EditButton';
 import Footer from '../../slots/Footer';
 import AffixTabs from './AffixTabs';
+import {
+  useThemeGithubConfig,
+  useUserThemeEnableConfig,
+} from '../../hooks/useUserThemeConfig';
 
 export type ResourceLayoutProps = PropsWithChildren<NonNullable<any>>;
 
@@ -58,11 +62,9 @@ const useStyle = () => {
       banner: css`
         padding: 0 ${resourcePadding}px;
         overflow: hidden;
-        ${
-          isRootDark
-            ? ``
-            : `background: url('https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*y_r7RogIG1wAAAAAAAAAAABkARQnAQ');`
-        }
+        ${isRootDark
+          ? ``
+          : `background: url('https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*y_r7RogIG1wAAAAAAAAAAABkARQnAQ');`}
         background-size: cover;
 
         h1 {
@@ -94,6 +96,8 @@ const ResourceLayout: React.FC<ResourceLayoutProps> = ({ children }) => {
   const { styles } = useStyle();
   const meta = useRouteMeta();
   const isRootDark = useDark();
+  const { editButton = true } = useUserThemeEnableConfig();
+  const github = useThemeGithubConfig();
 
   const node = (
     <Layout>
@@ -103,10 +107,18 @@ const ResourceLayout: React.FC<ResourceLayoutProps> = ({ children }) => {
         <div className={styles.banner}>
           <Typography.Title style={{ fontSize: 30 }}>
             {meta.frontmatter?.title}
-            <EditButton
-              title={<FormattedMessage id="app.content.edit-page" />}
-              filename={meta.frontmatter.filename}
-            />
+            {editButton && (
+              <EditButton
+                title={
+                  !github?.isGithub ? (
+                    'Edit'
+                  ) : (
+                    <FormattedMessage id="app.content.edit-page" />
+                  )
+                }
+                filename={meta.frontmatter.filename}
+              />
+            )}
           </Typography.Title>
           <section>{meta.frontmatter.description}</section>
         </div>
@@ -117,7 +129,11 @@ const ResourceLayout: React.FC<ResourceLayoutProps> = ({ children }) => {
   );
 
   if (!isRootDark) {
-    return <ConfigProvider theme={{ token: { colorBgLayout: '#fff' } }}>{node}</ConfigProvider>;
+    return (
+      <ConfigProvider theme={{ token: { colorBgLayout: '#fff' } }}>
+        {node}
+      </ConfigProvider>
+    );
   }
 
   return node;

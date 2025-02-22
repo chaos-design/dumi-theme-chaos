@@ -294,7 +294,7 @@ export const handleFullSidebarData = (
       } else {
         nextFullSidebarData[levelOneNavKey] = value.map((item) => ({
           ...item,
-          title: frontmatterNavSecond.title,
+          title: frontmatterNavSecond.title || item.title,
           order: frontmatterNavSecond.order,
         }));
       }
